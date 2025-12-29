@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,234 +7,675 @@
     <title>Titanic Pharma | Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-nav: #0f172a;
-            --accent: #3b82f6;
-            --success: #10b981;
-            --warning: #f59e0b;
-        }
+  <style>
+    :root {
+        --primary-nav: #0f172a;
+        --accent: #3b82f6;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --danger: #ef4444;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-900: #111827;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            background: #f8fafc;
-            font-family: 'Segoe UI', sans-serif;
-        }
+    body {
+        background: var(--gray-50);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--gray-900);
+    }
 
+    /* ==================== SIDEBAR ==================== */
+    .sidebar {
+        background: var(--primary-nav);
+        color: white;
+        min-height: 100vh;
+        width: 280px;
+        position: fixed;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .logo-section {
+        padding: 30px 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: #0a0f1a;
+    }
+
+    .logo-section h4 {
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 5px;
+    }
+
+    .logo-section .text-secondary {
+        color: #94a3b8 !important;
+        font-size: 13px;
+    }
+
+    .nav-link {
+        color: #94a3b8;
+        padding: 14px 25px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-left: 4px solid transparent;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 2px 0;
+    }
+
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: white;
+        border-left-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .nav-link.active {
+        color: white;
+        background: rgba(59, 130, 246, 0.12);
+        border-left-color: var(--accent);
+    }
+
+    .nav-link i {
+        font-size: 16px;
+    }
+
+    /* ==================== MAIN CONTENT ==================== */
+    .main {
+        margin-left: 280px;
+        padding: 30px 40px;
+        min-height: 100vh;
+    }
+
+    .section {
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ==================== STAT CARDS ==================== */
+    .stat-card {
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+        border-left: 4px solid transparent;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-card .icon-bg {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        font-size: 70px;
+        opacity: 0.08;
+    }
+
+    .stat-card h6 {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+    }
+
+    .stat-card h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    /* ==================== SECTION HEADER ==================== */
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-header h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--gray-900);
+        margin: 0;
+    }
+
+    .search-box {
+        max-width: 300px;
+        min-width: 250px;
+    }
+
+    /* ==================== TABLE STYLES ==================== */
+    .table-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .table {
+        margin: 0;
+    }
+
+    .table thead {
+        background: var(--gray-100);
+    }
+
+    .table thead th {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--gray-700);
+        padding: 16px;
+        border: none;
+    }
+
+    .table tbody td {
+        padding: 16px;
+        vertical-align: middle;
+        border-top: 1px solid var(--gray-200);
+        font-size: 14px;
+    }
+
+    .table tbody tr:hover {
+        background: var(--gray-50);
+    }
+
+    .serial-col {
+        width: 50px;
+        text-align: center;
+        font-weight: 600;
+        color: var(--gray-500);
+    }
+
+    /* ==================== FORM CONTROLS ==================== */
+    .form-control,
+    .form-select {
+        border-radius: 8px;
+        border: 1px solid var(--gray-300);
+        padding: 10px 15px;
+        font-size: 14px;
+        transition: all 0.2s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        outline: none;
+    }
+
+    .form-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--gray-700);
+        margin-bottom: 8px;
+    }
+
+    /* ==================== BUTTONS ==================== */
+    .btn-custom {
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        border: none;
+    }
+
+    .btn-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-gradient-primary {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+    }
+
+    .btn-gradient-primary:hover {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    }
+
+    .btn-gradient-success {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+    }
+
+    .btn-gradient-success:hover {
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+
+    .btn-gradient-warning {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: white;
+    }
+
+    .btn-gradient-warning:hover {
+        background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    }
+
+    /* ==================== BADGES ==================== */
+    .badge-custom {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    /* ==================== MODALS ==================== */
+    .modal-header {
+        background: var(--primary-nav);
+        color: white;
+        padding: 20px 24px;
+        border: none;
+    }
+
+    .modal-header .modal-title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .modal-header .btn-close {
+        filter: invert(1);
+        opacity: 0.8;
+    }
+
+    .modal-body {
+        padding: 24px;
+    }
+
+    .modal-footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--gray-200);
+    }
+
+    /* ==================== ALERTS ==================== */
+    .alert-custom {
+        border: none;
+        border-radius: 10px;
+        padding: 16px 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid;
+    }
+
+    /* ==================== TARGET ASSIGNMENT ==================== */
+    .target-status-card {
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        background: white;
+    }
+
+    .target-status-card:hover {
+        border-color: var(--accent);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
+        transform: translateY(-2px);
+    }
+
+    .target-status-card.has-targets {
+        border-left: 5px solid var(--success);
+        background: linear-gradient(to right, #f0fdf4, white);
+    }
+
+    .target-status-card.no-targets {
+        border-left: 5px solid var(--warning);
+        background: linear-gradient(to right, #fffbeb, white);
+    }
+
+    .target-status-card h5 {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--gray-900);
+        margin-bottom: 8px;
+    }
+
+    .summary-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        margin-bottom: 20px;
+        border-left: 4px solid var(--accent);
+    }
+
+    .summary-card h6 {
+        color: var(--gray-600);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+    }
+
+    .summary-card .value {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent);
+    }
+
+    .summary-card .value.text-success {
+        color: var(--success);
+    }
+
+    .summary-card .value.text-warning {
+        color: var(--warning);
+    }
+
+    /* ==================== MONTH TARGET TABLE ==================== */
+    .month-target-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 20px 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .month-target-table thead {
+        background: var(--primary-nav);
+    }
+
+    .month-target-table th {
+        padding: 14px 10px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 12px;
+        color: white;
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .month-target-table th:last-child {
+        border-right: none;
+    }
+
+    .month-target-table tbody tr {
+        background: white;
+        transition: background 0.2s ease;
+    }
+
+    .month-target-table tbody tr:hover {
+        background: var(--gray-50);
+    }
+
+    .month-target-table td {
+        padding: 10px;
+        border-bottom: 1px solid var(--gray-200);
+        border-right: 1px solid var(--gray-200);
+    }
+
+    .month-target-table td:last-child {
+        border-right: none;
+    }
+
+    .month-target-table .product-info {
+        padding: 14px;
+        background: var(--gray-50);
+        font-weight: 600;
+        min-width: 220px;
+        border-right: 2px solid var(--gray-300);
+    }
+
+    .month-input {
+        width: 68px;
+        padding: 8px 6px;
+        border: 1px solid var(--gray-300);
+        border-radius: 6px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.2s ease;
+    }
+
+    .month-input:focus {
+        border-color: var(--accent);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        transform: scale(1.03);
+    }
+
+    .month-input:hover {
+        border-color: var(--gray-400);
+    }
+
+    .total-cell {
+        background: var(--gray-100);
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    /* ==================== STATUS BADGES ==================== */
+    .status-badge {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .status-achieved {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .status-behind {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .status-progress {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+
+    /* ==================== QUICK ACTION BUTTONS ==================== */
+    .quick-action-btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        border: none;
+    }
+
+    .quick-action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ==================== PRODUCT BADGE ==================== */
+    .product-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        margin-left: 6px;
+    }
+
+    /* ==================== SCROLLBAR ==================== */
+    .table-scroll-container {
+        max-height: calc(100vh - 320px);
+        overflow-y: auto;
+        border-radius: 12px;
+    }
+
+    .table-scroll-container::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .table-scroll-container::-webkit-scrollbar-track {
+        background: var(--gray-100);
+        border-radius: 10px;
+    }
+
+    .table-scroll-container::-webkit-scrollbar-thumb {
+        background: var(--gray-400);
+        border-radius: 10px;
+    }
+
+    .table-scroll-container::-webkit-scrollbar-thumb:hover {
+        background: var(--gray-500);
+    }
+
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    /* ==================== YEARLY TOTAL BANNER ==================== */
+    .yearly-total-banner {
+        background: linear-gradient(135deg, var(--primary-nav) 0%, #1e293b 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        margin: 24px 0;
+    }
+
+    .yearly-total-banner h4 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 17px;
+    }
+
+    .yearly-total-banner .value {
+        font-size: 34px;
+        font-weight: 800;
+    }
+
+    .yearly-total-banner .opacity-75 {
+        opacity: 0.75;
+    }
+
+    /* ==================== TOAST NOTIFICATIONS ==================== */
+    .toast {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 768px) {
         .sidebar {
-            background: var(--primary-nav);
-            color: white;
-            min-height: 100vh;
-            width: 280px;
-            position: fixed;
-            overflow-y: auto;
-            z-index: 1000;
+            width: 100%;
+            position: relative;
+            min-height: auto;
         }
 
         .main {
-            margin-left: 280px;
-            padding: 30px 40px;
-            min-height: 100vh;
-        }
-
-        .stat-card {
-            border: none;
-            border-radius: 12px;
-            transition: all 0.3s;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-        }
-
-        .stat-card .icon-bg {
-            position: absolute;
-            right: -10px;
-            top: -10px;
-            font-size: 80px;
-            opacity: 0.1;
-        }
-
-        .nav-link {
-            color: #94a3b8;
-            padding: 14px 25px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-left: 4px solid transparent;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-        }
-
-        .nav-link.active {
-            color: white;
-            background: rgba(59, 130, 246, 0.15);
-            border-left: 4px solid var(--accent);
-        }
-
-        .section {
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .table-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .table thead {
-            background: #f1f5f9;
-        }
-
-        .badge-custom {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 12px;
-        }
-
-        .btn-custom {
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .logo-section {
-            padding: 30px 25px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo-section h4 {
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .form-control,
-        .form-select {
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            padding: 10px 15px;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            margin-left: 0;
+            padding: 20px;
         }
 
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .search-box {
-            max-width: 300px;
+            max-width: 100%;
+            width: 100%;
         }
 
-        .action-buttons {
-            display: flex;
-            gap: 5px;
-        }
-
-        .modal-header {
-            background: var(--primary-nav);
-            color: white;
-        }
-
-        .modal-header .btn-close {
-            filter: invert(1);
-        }
-
-        .serial-col {
-            width: 50px;
-            text-align: center;
-            font-weight: bold;
-            color: #64748b;
-        }
-
-        /* Performance Card Styles */
-        .performance-card {
-            /* background: linear-gradient(135deg, #667eea6c 0%, #764ba2 100%); */
-            background: linear-gradient(135deg, #272727 20%, gray 100%);
-            border-radius: 16px;
-            padding: 20px;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .performance-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .performance-stat {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-        }
-
-        .performance-stat-value {
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .performance-stat-label {
+        .month-input {
+            width: 55px;
+            padding: 6px 4px;
             font-size: 12px;
-            opacity: 0.9;
-            margin-top: 5px;
         }
 
-        .progress-bar-custom {
-            height: 10px;
-            border-radius: 10px;
-            overflow: hidden;
+        .month-target-table th,
+        .month-target-table td {
+            padding: 8px 5px;
+            font-size: 11px;
         }
+    }
 
-        /* Target Assignment Styles */
-        .target-assign-card {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border-radius: 16px;
-            padding: 25px;
-            color: white;
-        }
+    /* ==================== UTILITY CLASSES ==================== */
+    .fw-semibold {
+        font-weight: 600;
+    }
 
-        .target-input-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-    </style>
+    .text-muted {
+        color: var(--gray-500);
+    }
+
+    .bg-light {
+        background-color: var(--gray-100) !important;
+    }
+
+    /* ==================== ADDITIONAL REFINEMENTS ==================== */
+    h3 i, h4 i, h5 i {
+        margin-right: 8px;
+        opacity: 0.9;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    code {
+        background: var(--gray-100);
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #e83e8c;
+    }
+
+    small {
+        font-size: 12px;
+    }
+
+    strong {
+        font-weight: 600;
+    }
+</style>
 </head>
 
 <body>
@@ -247,21 +685,21 @@
             <span class="text-secondary small">Pharma Distribution System</span>
         </div>
         <nav class="nav flex-column mt-3">
-            <a class="nav-link active" onclick="showSection('dashboard')"><i class="bi bi-speedometer2 me-2"></i>
-                Dashboard</a>
+            <a class="nav-link active" onclick="showSection('dashboard')"><i
+                    class="bi bi-speedometer2 me-2"></i>Dashboard</a>
             <a class="nav-link" onclick="showSection('hq')"><i class="bi bi-building me-2"></i> Headquarter</a>
             <a class="nav-link" onclick="showSection('employee')"><i class="bi bi-people me-2"></i> Employee</a>
             <a class="nav-link" onclick="showSection('wholesaler')"><i class="bi bi-shop me-2"></i> Wholesaler</a>
             <a class="nav-link" onclick="showSection('products')"><i class="bi bi-box-seam me-2"></i> Products</a>
             <a class="nav-link" onclick="showSection('sales')"><i class="bi bi-cart-plus me-2"></i> Sales</a>
-            <a class="nav-link" onclick="showSection('performance')"><i class="bi bi-graph-up me-2"></i> Performance</a>
+            <a class="nav-link" onclick="showSection('target-assignment')"><i class="bi bi-clipboard-check me-2"></i>
+                Target Assignment</a>
         </nav>
     </div>
 
     <div class="main">
-        <!-- Dashboard -->
         <div id="dashboard" class="section">
-            <h3 class="fw-bold mb-4">Dashboard</h3>
+            <h3 class="fw-bold mb-4"><i class="bi bi-grid-fill me-2"></i>Dashboard Overview</h3>
             <div class="row g-4">
                 <div class="col-md-3">
                     <div class="stat-card p-4">
@@ -294,13 +732,13 @@
             </div>
         </div>
 
-        <!-- HQ Section -->
         <div id="hq" class="section" style="display:none;">
             <div class="section-header">
-                <h3 class="fw-bold mb-0">Headquarter Management</h3>
+                <h3 class="fw-bold mb-0"><i class="bi bi-building me-2"></i>Headquarter Management</h3>
                 <div class="d-flex gap-2">
-                    <input type="text" id="hqSearch" class="form-control search-box" placeholder="Search...">
-                    <button class="btn btn-primary btn-custom" data-bs-toggle="modal" data-bs-target="#hqModal">
+                    <input type="text" id="hqSearch" class="form-control search-box" placeholder="🔍 Search...">
+                    <button class="btn btn-gradient-primary btn-custom" data-bs-toggle="modal"
+                        data-bs-target="#hqModal">
                         <i class="bi bi-plus-circle me-2"></i>Add HQ
                     </button>
                 </div>
@@ -322,13 +760,13 @@
             </div>
         </div>
 
-        <!-- Employee Section - WITH EDIT -->
         <div id="employee" class="section" style="display:none;">
             <div class="section-header">
-                <h3 class="fw-bold mb-0">Employee Management</h3>
+                <h3 class="fw-bold mb-0"><i class="bi bi-people me-2"></i>Employee Management</h3>
                 <div class="d-flex gap-2">
-                    <input type="text" id="employeeSearch" class="form-control search-box" placeholder="Search...">
-                    <button class="btn btn-success btn-custom" data-bs-toggle="modal" data-bs-target="#employeeModal" onclick="resetEmployeeModal()">
+                    <input type="text" id="employeeSearch" class="form-control search-box" placeholder="🔍 Search...">
+                    <button class="btn btn-gradient-success btn-custom" data-bs-toggle="modal"
+                        data-bs-target="#employeeModal" onclick="resetEmployeeModal()">
                         <i class="bi bi-person-plus me-2"></i>Add Employee
                     </button>
                 </div>
@@ -354,13 +792,13 @@
             </div>
         </div>
 
-        <!-- Wholesaler Section - WITH EDIT -->
         <div id="wholesaler" class="section" style="display:none;">
             <div class="section-header">
-                <h3 class="fw-bold mb-0">Wholesaler Management</h3>
+                <h3 class="fw-bold mb-0"><i class="bi bi-shop me-2"></i>Wholesaler Management</h3>
                 <div class="d-flex gap-2">
-                    <input type="text" id="wholesalerSearch" class="form-control search-box" placeholder="Search...">
-                    <button class="btn btn-info btn-custom" data-bs-toggle="modal" data-bs-target="#wholesalerModal" onclick="resetWholesalerModal()">
+                    <input type="text" id="wholesalerSearch" class="form-control search-box" placeholder="🔍 Search...">
+                    <button class="btn btn-info btn-custom" data-bs-toggle="modal" data-bs-target="#wholesalerModal"
+                        onclick="resetWholesalerModal()">
                         <i class="bi bi-shop-window me-2"></i>Add Wholesaler
                     </button>
                 </div>
@@ -384,14 +822,13 @@
             </div>
         </div>
 
-        <!-- Products Section -->
         <div id="products" class="section" style="display:none;">
             <div class="section-header">
-                <h3 class="fw-bold mb-0">Product Catalog</h3>
+                <h3 class="fw-bold mb-0"><i class="bi bi-box-seam me-2"></i>Product Catalog</h3>
                 <div class="d-flex gap-2">
-                    <input type="text" id="productSearch" class="form-control search-box" placeholder="Search...">
-                    <button class="btn btn-warning btn-custom" data-bs-toggle="modal" data-bs-target="#productModal"
-                        onclick="resetProductModal()">
+                    <input type="text" id="productSearch" class="form-control search-box" placeholder="🔍 Search...">
+                    <button class="btn btn-gradient-warning btn-custom" data-bs-toggle="modal"
+                        data-bs-target="#productModal" onclick="resetProductModal()">
                         <i class="bi bi-plus-circle me-2"></i>Add Product
                     </button>
                 </div>
@@ -414,13 +851,14 @@
             </div>
         </div>
 
-        <!-- Sales Section -->
         <div id="sales" class="section" style="display:none;">
             <div class="container" style="max-width: 900px;">
-                <div class="card">
+                <div class="card shadow-lg border-0" style="border-radius: 20px;">
                     <div class="card-body p-4">
-                        <h4 class="mb-4"><i class="bi bi-cart-check-fill text-success me-2"></i>Record Purchase Transaction</h4>
-                        
+                        <h4 class="mb-4">
+                            <i class="bi bi-cart-check-fill me-2" style="color: #10b981;"></i>Record Purchase
+                            Transaction
+                        </h4>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Transaction Date</label>
@@ -455,7 +893,7 @@
                                 <input id="saleQty" type="number" class="form-control" placeholder="Enter quantity">
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-success w-100 py-3" onclick="recordSale()">
+                                <button class="btn btn-gradient-success w-100 py-3 btn-custom" onclick="recordSale()">
                                     <i class="bi bi-check-circle-fill me-2"></i>RECORD PURCHASE
                                 </button>
                             </div>
@@ -465,26 +903,30 @@
             </div>
         </div>
 
-        <!-- Performance Section - NEW -->
-        <div id="performance" class="section" style="display:none;">
+        <div id="target-assignment" class="section" style="display:none;">
             <div class="section-header">
-                <h3 class="fw-bold mb-0"><i class="bi bi-graph-up me-2"></i>Employee Performance Tracking</h3>
+                <h3 class="fw-bold mb-0"><i class="bi bi-clipboard-check me-2"></i>Product Target Assignment</h3>
                 <div class="d-flex gap-2">
-                    <select id="performanceHQ" class="form-select" style="width: 250px;" onchange="loadEmployeesForPerformance()">
-                        <option value="">All Headquarters</option>
+                    <select id="targetYear" class="form-select" style="width: 150px;" onchange="loadTargetOverview()">
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
                     </select>
-                    <select id="performanceMonth" class="form-select" style="width: 200px;" onchange="loadPerformanceData()">
-                        <option value="">Current Month</option>
+                    <select id="targetHQ" class="form-select" style="width: 250px;" onchange="loadTargetOverview()">
+                        <option value="">All Headquarters</option>
                     </select>
                 </div>
             </div>
-
-            <div id="performanceContainer"></div>
+            <div class="alert alert-custom bg-light">
+                <i class="bi bi-info-circle me-2 text-primary"></i>
+                <strong class="text-dark">Season-based Targeting:</strong>
+                <span class="text-muted">Assign different monthly targets based on weather, seasons, and area-specific
+                    demand patterns.</span>
+            </div>
+            <div id="targetOverviewContainer"></div>
         </div>
     </div>
 
-    <!-- Modals -->
-    <!-- HQ Modal -->
     <div class="modal fade" id="hqModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -506,12 +948,12 @@
         </div>
     </div>
 
-    <!-- Employee Modal - WITH EDIT SUPPORT -->
     <div class="modal fade" id="employeeModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-person-plus me-2"></i><span id="employeeModalTitle">Add Employee</span></h5>
+                    <h5 class="modal-title"><i class="bi bi-person-plus me-2"></i><span id="employeeModalTitle">Add
+                            Employee</span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -559,12 +1001,12 @@
         </div>
     </div>
 
-    <!-- Wholesaler Modal - WITH EDIT SUPPORT -->
     <div class="modal fade" id="wholesalerModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-shop me-2"></i><span id="wholesalerModalTitle">Add Wholesaler</span></h5>
+                    <h5 class="modal-title"><i class="bi bi-shop me-2"></i><span id="wholesalerModalTitle">Add
+                            Wholesaler</span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -610,22 +1052,22 @@
         </div>
     </div>
 
-    <!-- Product Modal -->
     <div class="modal fade" id="productModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i><span id="productModalTitle">Add Product</span></h5>
+                    <h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i><span id="productModalTitle">Add
+                            Product</span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="prodId">
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Product Name <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold">Product Name</label>
                         <input id="prodName" class="form-control" placeholder="e.g., topvet-fm">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Type <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold">Type</label>
                         <select id="prodType" class="form-select">
                             <option value="">Select Type</option>
                             <option value="Bolus">Bolus</option>
@@ -636,7 +1078,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Packing <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold">Packing</label>
                         <select id="prodMeasure" class="form-select">
                             <option value="">Select Packing</option>
                             <option value="ml">ml (mililiter)</option>
@@ -648,11 +1090,11 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Quantity <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold">Quantity</label>
                         <input id="prodQuantity" type="number" class="form-control" placeholder="e.g., 4">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Rate <span class="text-danger">*</span></label>
+                        <label class="form-label fw-semibold">Rate</label>
                         <input id="prodMRP" type="number" step="0.01" class="form-control" placeholder="Enter price">
                     </div>
                 </div>
@@ -666,35 +1108,128 @@
         </div>
     </div>
 
-    <!-- Target Assignment Modal -->
-    <div class="modal fade" id="targetModal" tabindex="-1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="assignTargetModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="bi bi-bullseye me-2"></i>Assign Target</h5>
+                    <div>
+                        <h5 class="modal-title mb-1"><i class="bi bi-calendar3-week me-2"></i>Assign Monthly Targets
+                        </h5>
+                        <small class="text-white-50" id="targetModalSubtitle">Employee Name • Year 2025</small>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <input type="hidden" id="targetHbpId">
-                    <input type="hidden" id="targetMonth">
-                    <input type="hidden" id="targetYear">
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Employee</label>
-                        <input id="targetHbpName" class="form-control" readonly>
+                <div class="modal-body p-4" style="background: #f8fafc;">
+                    <input type="hidden" id="assignTargetHbpId">
+                    <input type="hidden" id="assignTargetYear">
+
+                    <!-- <div class="alert alert-custom bg-warning bg-opacity-10">
+                        <h6 class="fw-bold mb-2 text-warning"><i class="bi bi-lightbulb-fill me-2"></i>How to Set
+                            Monthly Targets</h6>
+                        <ul class="mb-0 text-dark" style="font-size: 13px;">
+                            <li>Set <strong>different targets for each month</strong> based on seasonal demand</li>
+                            <li><strong>Winter months (Nov-Feb):</strong> Higher targets for cold-related medicines</li>
+                            <li><strong>Monsoon (Jun-Sep):</strong> Increase anti-fungal and respiratory products</li>
+                            <li><strong>Summer (Mar-May):</strong> Adjust for lower demand periods</li>
+                            <li>Consider <strong>local festivals, weather patterns, and area-specific needs</strong>
+                            </li>
+                        </ul>
+                    </div> -->
+
+                    <div class="table-scroll-container">
+                        <table class="month-target-table" id="monthTargetTable">
+                            <thead class="sticky-header">
+                                <tr>
+                                    <th rowspan="2" style="min-width: 250px;">Product Details</th>
+                                    <th colspan="12">Monthly Targets (Units)</th>
+                                    <th rowspan="2" style="min-width: 100px;">Yearly Total</th>
+                                </tr>
+                                <tr>
+                                    <th style="background: #dc2626;">JAN</th>
+                                    <th style="background: #ea580c;">FEB</th>
+                                    <th style="background: #d97706;">MAR</th>
+                                    <th style="background: #ca8a04;">APR</th>
+                                    <th style="background: #65a30d;">MAY</th>
+                                    <th style="background: #16a34a;">JUN</th>
+                                    <th style="background: #059669;">JUL</th>
+                                    <th style="background: #0d9488;">AUG</th>
+                                    <th style="background: #0891b2;">SEP</th>
+                                    <th style="background: #0284c7;">OCT</th>
+                                    <th style="background: #2563eb;">NOV</th>
+                                    <th style="background: #4f46e5;">DEC</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productTargetTableBody"></tbody>
+                            <tfoot>
+                                <tr style="background: #f1f5f9;">
+                                    <td class="total-cell" style="font-size: 14px;"><i
+                                            class="bi bi-calculator me-2"></i>MONTHLY TOTALS</td>
+                                    <td class="total-cell" id="total-month-1">0</td>
+                                    <td class="total-cell" id="total-month-2">0</td>
+                                    <td class="total-cell" id="total-month-3">0</td>
+                                    <td class="total-cell" id="total-month-4">0</td>
+                                    <td class="total-cell" id="total-month-5">0</td>
+                                    <td class="total-cell" id="total-month-6">0</td>
+                                    <td class="total-cell" id="total-month-7">0</td>
+                                    <td class="total-cell" id="total-month-8">0</td>
+                                    <td class="total-cell" id="total-month-9">0</td>
+                                    <td class="total-cell" id="total-month-10">0</td>
+                                    <td class="total-cell" id="total-month-11">0</td>
+                                    <td class="total-cell" id="total-month-12">0</td>
+                                    <td class="total-cell" id="grand-total" style="font-size: 16px; font-weight: 800;">0
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Period</label>
-                        <input id="targetPeriod" class="form-control" readonly>
+
+                    <div class="yearly-total-banner mt-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h4><i class="bi bi-trophy-fill me-2"></i>Yearly Target Summary</h4>
+                                <p class="mb-0 opacity-75">Total targets across all products for the year</p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="opacity-75" style="font-size: 14px;">Total Units</div>
+                                <div class="value" id="totalYearlyUnits">0</div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="opacity-75" style="font-size: 14px;">Total Value</div>
+                                <div class="value" id="totalYearlyValue">₹0</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Target Amount (Units)</label>
-                        <input id="targetAmount" type="number" class="form-control" placeholder="Enter target units">
+
+                    <div class="card mt-4 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-magic me-2"></i>Quick Fill Options</h6>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-primary w-100" onclick="fillAllMonths()">
+                                        <i class="bi bi-calendar-fill me-2"></i>Same for All Months
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-success w-100" onclick="fillSeasonalPattern()">
+                                        <i class="bi bi-snow me-2"></i>Seasonal Pattern
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-outline-danger w-100" onclick="clearAllTargets()">
+                                        <i class="bi bi-x-circle me-2"></i>Clear All
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" onclick="saveTarget()">
-                        <i class="bi bi-check-circle me-2"></i>Assign Target
+                <div class="modal-footer" style="background: #f8fafc; padding: 20px 30px;">
+                    <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </button>
+                    <button type="button" class="btn btn-gradient-success btn-custom" style="padding: 14px 40px;"
+                        onclick="saveYearlyTargets()">
+                        <i class="bi bi-check-circle-fill me-2"></i>Save Yearly Targets
                     </button>
                 </div>
             </div>
@@ -702,7 +1237,8 @@
     </div>
 
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
-        <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert">
+        <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert"
+            style="border-radius: 8px;">
             <div class="d-flex">
                 <div class="toast-body" id="toastMessage">Success!</div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
@@ -712,85 +1248,79 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</body>
+    <script>
+        const API = "https://titanicadminbackend.onrender.com/api";
+        // const API = "http://192.168.2.102:5000/api";
+        let toast, hqModal, employeeModal, wholesalerModal, productModal, assignTargetModal;
+        let allHQs = [], allEmployees = [], allWholesalers = [], allProducts = [], allProductsForTarget = [];
 
-<script>
-    const API = "https://titanicadminbackend.onrender.com/api";
-let toast, hqModal, employeeModal, wholesalerModal, productModal, targetModal;
-let allHQs = [], allEmployees = [], allWholesalers = [], allProducts = [];
+        document.addEventListener('DOMContentLoaded', function () {
+            toast = new bootstrap.Toast(document.getElementById('successToast'));
+            assignTargetModal = new bootstrap.Modal(document.getElementById('assignTargetModal'));
+            document.getElementById('saleDate').valueAsDate = new Date();
+            const currentYear = new Date().getFullYear();
+            document.getElementById('targetYear').value = currentYear;
 
-document.addEventListener('DOMContentLoaded', function () {
-    toast = new bootstrap.Toast(document.getElementById('successToast'));
-    hqModal = new bootstrap.Modal(document.getElementById('hqModal'));
-    employeeModal = new bootstrap.Modal(document.getElementById('employeeModal'));
-    wholesalerModal = new bootstrap.Modal(document.getElementById('wholesalerModal'));
-    productModal = new bootstrap.Modal(document.getElementById('productModal'));
-    targetModal = new bootstrap.Modal(document.getElementById('targetModal'));
+            document.getElementById('hqSearch').addEventListener('input', filterHQs);
+            document.getElementById('employeeSearch').addEventListener('input', filterEmployees);
+            document.getElementById('wholesalerSearch').addEventListener('input', filterWholesalers);
+            document.getElementById('productSearch').addEventListener('input', filterProducts);
 
-    document.getElementById('saleDate').valueAsDate = new Date();
+            loadDashboard();
+        });
 
-    document.getElementById('hqSearch').addEventListener('input', filterHQs);
-    document.getElementById('employeeSearch').addEventListener('input', filterEmployees);
-    document.getElementById('wholesalerSearch').addEventListener('input', filterWholesalers);
-    document.getElementById('productSearch').addEventListener('input', filterProducts);
+        function showToast(msg) {
+            document.getElementById('toastMessage').innerText = msg;
+            toast.show();
+        }
 
-    loadDashboard();
-    populateMonthOptions();
-});
+        async function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(id).style.display = 'block';
+            event.target.classList.add('active');
 
-function showToast(msg) {
-    document.getElementById('toastMessage').innerText = msg;
-    toast.show();
-}
+            if (id === 'dashboard') await loadDashboard();
+            if (id === 'hq') await loadHQSection();
+            if (id === 'employee') await loadEmployeeSection();
+            if (id === 'wholesaler') await loadWholesalerSection();
+            if (id === 'products') await loadProductsSection();
+            if (id === 'sales') await loadSalesSection();
+            if (id === 'target-assignment') await loadTargetAssignmentSection();
+        }
 
-async function showSection(id) {
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    document.getElementById(id).style.display = 'block';
-    event.target.classList.add('active');
+        async function loadDashboard() {
+            try {
+                const res = await axios.get(`${API}/admin/stats`);
+                document.getElementById('statHQ').innerText = res.data.hqs;
+                document.getElementById('statHBP').innerText = res.data.hbps;
+                document.getElementById('statWS').innerText = res.data.wholesalers;
+                document.getElementById('statProd').innerText = res.data.products;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
-    if (id === 'dashboard') await loadDashboard();
-    if (id === 'hq') await loadHQSection();
-    if (id === 'employee') await loadEmployeeSection();
-    if (id === 'wholesaler') await loadWholesalerSection();
-    if (id === 'products') await loadProductsSection();
-    if (id === 'sales') await loadSalesSection();
-    if (id === 'performance') await loadPerformanceSection();
-}
+        async function loadHQSection() {
+            await loadAllHQs();
+            document.getElementById('hqSearch').value = '';
+        }
 
-async function loadDashboard() {
-    try {
-        const res = await axios.get(`${API}/admin/stats`);
-        document.getElementById('statHQ').innerText = res.data.hqs;
-        document.getElementById('statHBP').innerText = res.data.hbps;
-        document.getElementById('statWS').innerText = res.data.wholesalers;
-        document.getElementById('statProd').innerText = res.data.products;
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+        async function loadAllHQs() {
+            try {
+                const res = await axios.get(`${API}/hq`);
+                allHQs = res.data;
+                renderHQs(allHQs);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
-// ==================== HQ ====================
-async function loadHQSection() {
-    await loadAllHQs();
-    document.getElementById('hqSearch').value = '';
-}
-
-async function loadAllHQs() {
-    try {
-        const res = await axios.get(`${API}/hq`);
-        allHQs = res.data;
-        renderHQs(allHQs);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-function renderHQs(data) {
-    const tbody = document.getElementById('hqTableBody');
-    tbody.innerHTML = data.length === 0 ?
-        '<tr><td colspan="4" class="text-center py-4 text-muted">No headquarters found</td></tr>' :
-        data.map((hq, idx) => `
+        function renderHQs(data) {
+            const tbody = document.getElementById('hqTableBody');
+            tbody.innerHTML = data.length === 0 ?
+                '<tr><td colspan="4" class="text-center py-4 text-muted">No headquarters found</td></tr>' :
+                data.map((hq, idx) => `
             <tr>
                 <td class="serial-col">${idx + 1}</td>
                 <td><strong>${hq.name}</strong></td>
@@ -798,61 +1328,60 @@ function renderHQs(data) {
                 <td><span class="badge badge-custom bg-success">Active</span></td>
             </tr>
         `).join('');
-}
+        }
 
-function filterHQs() {
-    const query = document.getElementById('hqSearch').value.toLowerCase();
-    const filtered = allHQs.filter(hq => hq.name.toLowerCase().includes(query));
-    renderHQs(filtered);
-}
+        function filterHQs() {
+            const query = document.getElementById('hqSearch').value.toLowerCase();
+            const filtered = allHQs.filter(hq => hq.name.toLowerCase().includes(query));
+            renderHQs(filtered);
+        }
 
-async function addHQ() {
-    const name = document.getElementById('hqName').value;
-    if (!name) { alert('Enter HQ name'); return; }
-    try {
-        await axios.post(`${API}/hq`, { name });
-        showToast('HQ created!');
-        document.getElementById('hqName').value = '';
-        hqModal.hide();
-        await loadAllHQs();
-    } catch (error) {
-        alert('Error: ' + (error.response?.data?.error || error.message));
-    }
-}
+        async function addHQ() {
+            const name = document.getElementById('hqName').value;
+            if (!name) { alert('Enter HQ name'); return; }
+            try {
+                await axios.post(`${API}/hq`, { name });
+                showToast('HQ created!');
+                document.getElementById('hqName').value = '';
+                bootstrap.Modal.getInstance(document.getElementById('hqModal')).hide();
+                await loadAllHQs();
+            } catch (error) {
+                alert('Error: ' + (error.response?.data?.error || error.message));
+            }
+        }
 
-// ==================== EMPLOYEE - WITH EDIT ====================
-async function loadEmployeeSection() {
-    await loadHQsForDropdown('empHQ');
-    await loadAllEmployees();
-    document.getElementById('employeeSearch').value = '';
-}
+        async function loadEmployeeSection() {
+            await loadHQsForDropdown('empHQ');
+            await loadAllEmployees();
+            document.getElementById('employeeSearch').value = '';
+        }
 
-async function loadHQsForDropdown(selectId) {
-    try {
-        const res = await axios.get(`${API}/hq`);
-        const select = document.getElementById(selectId);
-        select.innerHTML = '<option value="">Select HQ</option>' +
-            res.data.map(hq => `<option value="${hq._id}">${hq.name}</option>`).join('');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+        async function loadHQsForDropdown(selectId) {
+            try {
+                const res = await axios.get(`${API}/hq`);
+                const select = document.getElementById(selectId);
+                select.innerHTML = '<option value="">Select HQ</option>' +
+                    res.data.map(hq => `<option value="${hq._id}">${hq.name}</option>`).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
-async function loadAllEmployees() {
-    try {
-        const res = await axios.get(`${API}/hbp`);
-        allEmployees = res.data;
-        renderEmployees(allEmployees);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+        async function loadAllEmployees() {
+            try {
+                const res = await axios.get(`${API}/hbp`);
+                allEmployees = res.data;
+                renderEmployees(allEmployees);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
 
-function renderEmployees(data) {
-    const tbody = document.getElementById('employeeTableBody');
-    tbody.innerHTML = data.length === 0 ?
-        '<tr><td colspan="8" class="text-center py-4 text-muted">No employees</td></tr>' :
-        data.map((emp, idx) => `
+        function renderEmployees(data) {
+            const tbody = document.getElementById('employeeTableBody');
+            tbody.innerHTML = data.length === 0 ?
+                '<tr><td colspan="8" class="text-center py-4 text-muted">No employees</td></tr>' :
+                data.map((emp, idx) => `
             <tr>
                 <td class="serial-col">${idx + 1}</td>
                 <td><strong>${emp.name}</strong></td>
@@ -868,117 +1397,116 @@ function renderEmployees(data) {
                 </td>
             </tr>
         `).join('');
-}
-
-function filterEmployees() {
-    const query = document.getElementById('employeeSearch').value.toLowerCase();
-    const filtered = allEmployees.filter(emp =>
-        emp.name.toLowerCase().includes(query) ||
-        emp.username.toLowerCase().includes(query) ||
-        emp.mobileNumber.includes(query)
-    );
-    renderEmployees(filtered);
-}
-
-function resetEmployeeModal() {
-    document.getElementById('empId').value = '';
-    document.getElementById('empRole').value = 'HBP';
-    document.getElementById('empHQ').value = '';
-    document.getElementById('empName').value = '';
-    document.getElementById('empMobile').value = '';
-    document.getElementById('empAddress').value = '';
-    document.getElementById('empUsername').value = '';
-    document.getElementById('empPassword').value = '';
-    document.getElementById('employeeModalTitle').innerText = 'Add Employee';
-    document.getElementById('employeeSaveBtn').innerText = 'Register';
-}
-
-function editEmployee(id) {
-    const employee = allEmployees.find(e => e._id === id);
-    if (!employee) return;
-
-    document.getElementById('empId').value = employee._id;
-    document.getElementById('empRole').value = employee.role || 'HBP';
-    document.getElementById('empHQ').value = employee.hqId?._id || '';
-    document.getElementById('empName').value = employee.name;
-    document.getElementById('empMobile').value = employee.mobileNumber;
-    document.getElementById('empAddress').value = employee.address || '';
-    document.getElementById('empUsername').value = employee.username;
-    document.getElementById('empPassword').value = employee.password;
-
-    document.getElementById('employeeModalTitle').innerText = 'Update Employee';
-    document.getElementById('employeeSaveBtn').innerText = 'Update';
-    employeeModal.show();
-}
-
-async function saveEmployee() {
-    const id = document.getElementById('empId').value;
-    const data = {
-        role: document.getElementById('empRole').value,
-        hqId: document.getElementById('empHQ').value,
-        name: document.getElementById('empName').value,
-        mobileNumber: document.getElementById('empMobile').value,
-        address: document.getElementById('empAddress').value,
-        username: document.getElementById('empUsername').value,
-        password: document.getElementById('empPassword').value
-    };
-
-    if (!data.hqId || !data.name || !data.mobileNumber || !data.username || !data.password) {
-        alert('Fill all required fields'); return;
-    }
-
-    try {
-        if (id) {
-            await axios.put(`${API}/hbp/${id}`, data);
-            showToast('Employee updated!');
-        } else {
-            await axios.post(`${API}/hbp`, data);
-            showToast('Employee registered!');
         }
-        employeeModal.hide();
-        await loadAllEmployees();
-    } catch (error) {
-        alert('Error: ' + (error.response?.data?.error || error.message));
-    }
-}
 
-// ==================== WHOLESALER - WITH EDIT ====================
-async function loadWholesalerSection() {
-    await loadHQsForDropdown('wsHQ');
-    await loadAllWholesalers();
-    document.getElementById('wholesalerSearch').value = '';
-}
+        function filterEmployees() {
+            const query = document.getElementById('employeeSearch').value.toLowerCase();
+            const filtered = allEmployees.filter(emp =>
+                emp.name.toLowerCase().includes(query) ||
+                emp.username.toLowerCase().includes(query) ||
+                emp.mobileNumber.includes(query)
+            );
+            renderEmployees(filtered);
+        }
 
-async function loadHBPsForWholesaler() {
-    const hqId = document.getElementById('wsHQ').value;
-    if (!hqId) {
-        document.getElementById('wsHBP').innerHTML = '<option value="">Select Employee</option>';
-        return;
-    }
-    try {
-        const res = await axios.get(`${API}/hbp/hq/${hqId}`);
-        document.getElementById('wsHBP').innerHTML = '<option value="">Select Employee</option>' +
-            res.data.map(hbp => `<option value="${hbp._id}">${hbp.name}</option>`).join('');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+        function resetEmployeeModal() {
+            document.getElementById('empId').value = '';
+            document.getElementById('empRole').value = 'HBP';
+            document.getElementById('empHQ').value = '';
+            document.getElementById('empName').value = '';
+            document.getElementById('empMobile').value = '';
+            document.getElementById('empAddress').value = '';
+            document.getElementById('empUsername').value = '';
+            document.getElementById('empPassword').value = '';
+            document.getElementById('employeeModalTitle').innerText = 'Add Employee';
+            document.getElementById('employeeSaveBtn').innerText = 'Register';
+        }
 
-async function loadAllWholesalers() {
-    try {
-        const res = await axios.get(`${API}/wholesalers`);
-        allWholesalers = res.data;
-        renderWholesalers(allWholesalers);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+        function editEmployee(id) {
+            const employee = allEmployees.find(e => e._id === id);
+            if (!employee) return;
 
-function renderWholesalers(data) {
-    const tbody = document.getElementById('wholesalerTableBody');
-    tbody.innerHTML = data.length === 0 ?
-        '<tr><td colspan="6" class="text-center py-4 text-muted">No wholesalers</td></tr>' :
-        data.map((ws, idx) => `
+            document.getElementById('empId').value = employee._id;
+            document.getElementById('empRole').value = employee.role || 'HBP';
+            document.getElementById('empHQ').value = employee.hqId?._id || '';
+            document.getElementById('empName').value = employee.name;
+            document.getElementById('empMobile').value = employee.mobileNumber;
+            document.getElementById('empAddress').value = employee.address || '';
+            document.getElementById('empUsername').value = employee.username;
+            document.getElementById('empPassword').value = employee.password;
+
+            document.getElementById('employeeModalTitle').innerText = 'Update Employee';
+            document.getElementById('employeeSaveBtn').innerText = 'Update';
+            new bootstrap.Modal(document.getElementById('employeeModal')).show();
+        }
+
+        async function saveEmployee() {
+            const id = document.getElementById('empId').value;
+            const data = {
+                role: document.getElementById('empRole').value,
+                hqId: document.getElementById('empHQ').value,
+                name: document.getElementById('empName').value,
+                mobileNumber: document.getElementById('empMobile').value,
+                address: document.getElementById('empAddress').value,
+                username: document.getElementById('empUsername').value,
+                password: document.getElementById('empPassword').value
+            };
+
+            if (!data.hqId || !data.name || !data.mobileNumber || !data.username || !data.password) {
+                alert('Fill all required fields'); return;
+            }
+
+            try {
+                if (id) {
+                    await axios.put(`${API}/hbp/${id}`, data);
+                    showToast('Employee updated!');
+                } else {
+                    await axios.post(`${API}/hbp`, data);
+                    showToast('Employee registered!');
+                }
+                bootstrap.Modal.getInstance(document.getElementById('employeeModal')).hide();
+                await loadAllEmployees();
+            } catch (error) {
+                alert('Error: ' + (error.response?.data?.error || error.message));
+            }
+        }
+
+        async function loadWholesalerSection() {
+            await loadHQsForDropdown('wsHQ');
+            await loadAllWholesalers();
+            document.getElementById('wholesalerSearch').value = '';
+        }
+
+        async function loadHBPsForWholesaler() {
+            const hqId = document.getElementById('wsHQ').value;
+            if (!hqId) {
+                document.getElementById('wsHBP').innerHTML = '<option value="">Select Employee</option>';
+                return;
+            }
+            try {
+                const res = await axios.get(`${API}/hbp/hq/${hqId}`);
+                document.getElementById('wsHBP').innerHTML = '<option value="">Select Employee</option>' +
+                    res.data.map(hbp => `<option value="${hbp._id}">${hbp.name}</option>`).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadAllWholesalers() {
+            try {
+                const res = await axios.get(`${API}/wholesalers`);
+                allWholesalers = res.data;
+                renderWholesalers(allWholesalers);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function renderWholesalers(data) {
+            const tbody = document.getElementById('wholesalerTableBody');
+            tbody.innerHTML = data.length === 0 ?
+                '<tr><td colspan="6" class="text-center py-4 text-muted">No wholesalers</td></tr>' :
+                data.map((ws, idx) => `
             <tr>
                 <td class="serial-col">${idx + 1}</td>
                 <td><strong>${ws.partyName}</strong></td>
@@ -992,106 +1520,104 @@ function renderWholesalers(data) {
                 </td>
             </tr>
         `).join('');
-}
-
-function filterWholesalers() {
-    const query = document.getElementById('wholesalerSearch').value.toLowerCase();
-    const filtered = allWholesalers.filter(ws =>
-        ws.partyName.toLowerCase().includes(query) ||
-        ws.gstNumber.toLowerCase().includes(query) ||
-        ws.mobileNumber.includes(query)
-    );
-    renderWholesalers(filtered);
-}
-
-function resetWholesalerModal() {
-    document.getElementById('wsId').value = '';
-    document.getElementById('wsHQ').value = '';
-    document.getElementById('wsHBP').innerHTML = '<option value="">Select Employee</option>';
-    document.getElementById('wsPartyName').value = '';
-    document.getElementById('wsGST').value = '';
-    document.getElementById('wsDrugLicense').value = '';
-    document.getElementById('wsMobile').value = '';
-    document.getElementById('wsAddress').value = '';
-    document.getElementById('wholesalerModalTitle').innerText = 'Add Wholesaler';
-    document.getElementById('wholesalerSaveBtn').innerText = 'Register';
-}
-
-function editWholesaler(id) {
-    const wholesaler = allWholesalers.find(w => w._id === id);
-    if (!wholesaler) return;
-
-    document.getElementById('wsId').value = wholesaler._id;
-    document.getElementById('wsHQ').value = wholesaler.hqId?._id || '';
-    
-    // Load HBPs for the selected HQ
-    loadHBPsForWholesaler().then(() => {
-        document.getElementById('wsHBP').value = wholesaler.hbpId?._id || '';
-    });
-
-    document.getElementById('wsPartyName').value = wholesaler.partyName;
-    document.getElementById('wsGST').value = wholesaler.gstNumber;
-    document.getElementById('wsDrugLicense').value = wholesaler.drugLicense;
-    document.getElementById('wsMobile').value = wholesaler.mobileNumber;
-    document.getElementById('wsAddress').value = wholesaler.address;
-
-    document.getElementById('wholesalerModalTitle').innerText = 'Update Wholesaler';
-    document.getElementById('wholesalerSaveBtn').innerText = 'Update';
-    wholesalerModal.show();
-}
-
-async function saveWholesaler() {
-    const id = document.getElementById('wsId').value;
-    const data = {
-        hqId: document.getElementById('wsHQ').value,
-        hbpId: document.getElementById('wsHBP').value,
-        partyName: document.getElementById('wsPartyName').value,
-        gstNumber: document.getElementById('wsGST').value,
-        drugLicense: document.getElementById('wsDrugLicense').value,
-        mobileNumber: document.getElementById('wsMobile').value,
-        address: document.getElementById('wsAddress').value
-    };
-
-    if (!data.hqId || !data.hbpId || !data.partyName || !data.gstNumber || !data.drugLicense || !data.mobileNumber || !data.address) {
-        alert('Fill all fields'); return;
-    }
-
-    try {
-        if (id) {
-            await axios.put(`${API}/wholesalers/${id}`, data);
-            showToast('Wholesaler updated!');
-        } else {
-            await axios.post(`${API}/wholesalers`, data);
-            showToast('Wholesaler registered!');
         }
-        wholesalerModal.hide();
-        await loadAllWholesalers();
-    } catch (error) {
-        alert('Error: ' + (error.response?.data?.error || error.message));
-    }
-}
 
-// ==================== PRODUCTS ====================
-async function loadProductsSection() {
-    await loadAllProducts();
-    document.getElementById('productSearch').value = '';
-}
+        function filterWholesalers() {
+            const query = document.getElementById('wholesalerSearch').value.toLowerCase();
+            const filtered = allWholesalers.filter(ws =>
+                ws.partyName.toLowerCase().includes(query) ||
+                ws.gstNumber.toLowerCase().includes(query) ||
+                ws.mobileNumber.includes(query)
+            );
+            renderWholesalers(filtered);
+        }
 
-async function loadAllProducts() {
-    try {
-        const res = await axios.get(`${API}/products`);
-        allProducts = res.data;
-        renderProducts(allProducts);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+        function resetWholesalerModal() {
+            document.getElementById('wsId').value = '';
+            document.getElementById('wsHQ').value = '';
+            document.getElementById('wsHBP').innerHTML = '<option value="">Select Employee</option>';
+            document.getElementById('wsPartyName').value = '';
+            document.getElementById('wsGST').value = '';
+            document.getElementById('wsDrugLicense').value = '';
+            document.getElementById('wsMobile').value = '';
+            document.getElementById('wsAddress').value = '';
+            document.getElementById('wholesalerModalTitle').innerText = 'Add Wholesaler';
+            document.getElementById('wholesalerSaveBtn').innerText = 'Register';
+        }
 
-function renderProducts(data) {
-    const tbody = document.getElementById('productTableBody');
-    tbody.innerHTML = data.length === 0 ?
-        '<tr><td colspan="5" class="text-center py-4 text-muted">No products</td></tr>' :
-        data.map((prod, idx) => `
+        function editWholesaler(id) {
+            const wholesaler = allWholesalers.find(w => w._id === id);
+            if (!wholesaler) return;
+
+            document.getElementById('wsId').value = wholesaler._id;
+            document.getElementById('wsHQ').value = wholesaler.hqId?._id || '';
+
+            loadHBPsForWholesaler().then(() => {
+                document.getElementById('wsHBP').value = wholesaler.hbpId?._id || '';
+            });
+
+            document.getElementById('wsPartyName').value = wholesaler.partyName;
+            document.getElementById('wsGST').value = wholesaler.gstNumber;
+            document.getElementById('wsDrugLicense').value = wholesaler.drugLicense;
+            document.getElementById('wsMobile').value = wholesaler.mobileNumber;
+            document.getElementById('wsAddress').value = wholesaler.address;
+
+            document.getElementById('wholesalerModalTitle').innerText = 'Update Wholesaler';
+            document.getElementById('wholesalerSaveBtn').innerText = 'Update';
+            new bootstrap.Modal(document.getElementById('wholesalerModal')).show();
+        }
+
+        async function saveWholesaler() {
+            const id = document.getElementById('wsId').value;
+            const data = {
+                hqId: document.getElementById('wsHQ').value,
+                hbpId: document.getElementById('wsHBP').value,
+                partyName: document.getElementById('wsPartyName').value,
+                gstNumber: document.getElementById('wsGST').value,
+                drugLicense: document.getElementById('wsDrugLicense').value,
+                mobileNumber: document.getElementById('wsMobile').value,
+                address: document.getElementById('wsAddress').value
+            };
+
+            if (!data.hqId || !data.hbpId || !data.partyName || !data.gstNumber || !data.drugLicense || !data.mobileNumber || !data.address) {
+                alert('Fill all fields'); return;
+            }
+
+            try {
+                if (id) {
+                    await axios.put(`${API}/wholesalers/${id}`, data);
+                    showToast('Wholesaler updated!');
+                } else {
+                    await axios.post(`${API}/wholesalers`, data);
+                    showToast('Wholesaler registered!');
+                }
+                bootstrap.Modal.getInstance(document.getElementById('wholesalerModal')).hide();
+                await loadAllWholesalers();
+            } catch (error) {
+                alert('Error: ' + (error.response?.data?.error || error.message));
+            }
+        }
+
+        async function loadProductsSection() {
+            await loadAllProducts();
+            document.getElementById('productSearch').value = '';
+        }
+
+        async function loadAllProducts() {
+            try {
+                const res = await axios.get(`${API}/products`);
+                allProducts = res.data;
+                renderProducts(allProducts);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function renderProducts(data) {
+            const tbody = document.getElementById('productTableBody');
+            tbody.innerHTML = data.length === 0 ?
+                '<tr><td colspan="5" class="text-center py-4 text-muted">No products</td></tr>' :
+                data.map((prod, idx) => `
             <tr>
                 <td class="serial-col">${idx + 1}</td>
                 <td><strong>${prod.name} (${prod.quantity || 'N/A'} ${prod.measuredIn})</strong></td>
@@ -1104,313 +1630,478 @@ function renderProducts(data) {
                 </td>
             </tr>
         `).join('');
-}
-
-function filterProducts() {
-    const query = document.getElementById('productSearch').value.toLowerCase();
-    const filtered = allProducts.filter(prod =>
-        prod.name.toLowerCase().includes(query) ||
-        prod.type.toLowerCase().includes(query)
-    );
-    renderProducts(filtered);
-}
-
-function resetProductModal() {
-    document.getElementById('prodId').value = '';
-    document.getElementById('prodName').value = '';
-    document.getElementById('prodType').value = '';
-    document.getElementById('prodMeasure').value = '';
-    document.getElementById('prodQuantity').value = '';
-    document.getElementById('prodMRP').value = '';
-    document.getElementById('productModalTitle').innerText = 'Add Product';
-    document.getElementById('productSaveBtn').innerText = 'Add Product';
-}
-
-function editProduct(id) {
-    const product = allProducts.find(p => p._id === id);
-    if (!product) return;
-
-    document.getElementById('prodId').value = product._id;
-    document.getElementById('prodName').value = product.name;
-    document.getElementById('prodType').value = product.type;
-    document.getElementById('prodMeasure').value = product.measuredIn;
-    document.getElementById('prodQuantity').value = product.quantity || '';
-    document.getElementById('prodMRP').value = product.mrp;
-
-    document.getElementById('productModalTitle').innerText = 'Update Product';
-    document.getElementById('productSaveBtn').innerText = 'Update Product';
-    productModal.show();
-}
-
-async function saveProduct() {
-    const id = document.getElementById('prodId').value;
-    const data = {
-        name: document.getElementById('prodName').value,
-        type: document.getElementById('prodType').value,
-        measuredIn: document.getElementById('prodMeasure').value,
-        quantity: parseInt(document.getElementById('prodQuantity').value) || 0,
-        mrp: parseFloat(document.getElementById('prodMRP').value)
-    };
-
-    if (!data.name || !data.type || !data.measuredIn || !data.mrp) {
-        alert('Please fill all required fields');
-        return;
-    }
-
-    try {
-        if (id) {
-            await axios.put(`${API}/products/${id}`, data);
-            showToast('Product updated!');
-        } else {
-            await axios.post(`${API}/products`, data);
-            showToast('Product added!');
         }
-        productModal.hide();
-        await loadAllProducts();
-    } catch (error) {
-        alert('Error: ' + (error.response?.data?.error || error.message));
-    }
-}
 
-// ==================== SALES ====================
-async function loadSalesSection() {
-    await loadHQsForDropdown('saleHQ');
-    await loadProductsForDropdown();
-}
-
-async function loadProductsForDropdown() {
-    try {
-        const res = await axios.get(`${API}/products`);
-        document.getElementById('saleProd').innerHTML = '<option value="">Choose product...</option>' +
-            res.data.map(p => `<option value="${p._id}">${p.name} - ${p.type} (${p.quantity || 'N/A'} ${p.measuredIn})</option>`).join('');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-async function loadHBPsForSales() {
-    const hqId = document.getElementById('saleHQ').value;
-    if (!hqId) {
-        document.getElementById('saleHBP').innerHTML = '<option value="">Select Employee</option>';
-        document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
-        return;
-    }
-    try {
-        const res = await axios.get(`${API}/hbp/hq/${hqId}`);
-        document.getElementById('saleHBP').innerHTML = '<option value="">Select Employee</option>' +
-            res.data.map(hbp => `<option value="${hbp._id}">${hbp.name}</option>`).join('');
-        document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-async function loadWholesalersForSales() {
-    const hbpId = document.getElementById('saleHBP').value;
-    if (!hbpId) {
-        document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
-        return;
-    }
-    try {
-        const res = await axios.get(`${API}/wholesalers/hbp/${hbpId}`);
-        document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>' +
-            res.data.map(ws => `<option value="${ws._id}">${ws.partyName}</option>`).join('');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-async function recordSale() {
-    const data = {
-        type: "purchase",
-        date: document.getElementById('saleDate').value,
-        hqId: document.getElementById('saleHQ').value,
-        hbpId: document.getElementById('saleHBP').value,
-        wholesalerId: document.getElementById('saleWS').value,
-        productId: document.getElementById('saleProd').value,
-        quantity: parseInt(document.getElementById('saleQty').value),
-        recordedBy: "admin"
-    };
-
-    if (!data.date || !data.hqId || !data.hbpId || !data.wholesalerId || !data.productId || !data.quantity) {
-        alert('Please fill all fields');
-        return;
-    }
-
-    try {
-        await axios.post(`${API}/sales`, data);
-        showToast('Purchase recorded successfully!');
-        document.getElementById('saleQty').value = '';
-    } catch (error) {
-        alert('Error: ' + (error.response?.data?.error || error.message));
-    }
-}
-
-// ==================== PERFORMANCE TRACKING ====================
-async function loadPerformanceSection() {
-    await loadHQsForDropdown('performanceHQ');
-    await loadEmployeesForPerformance();
-}
-
-function populateMonthOptions() {
-    const select = document.getElementById('performanceMonth');
-    const now = new Date();
-    let options = '<option value="">Current Month</option>';
-    
-    for (let i = 0; i < 12; i++) {
-        const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
-        const monthYear = `${date.getMonth() + 1}-${date.getFullYear()}`;
-        const label = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-        options += `<option value="${monthYear}">${label}</option>`;
-    }
-    
-    select.innerHTML = options;
-}
-
-async function loadEmployeesForPerformance() {
-    const hqId = document.getElementById('performanceHQ').value;
-    
-    try {
-        let url = `${API}/hbp`;
-        if (hqId) {
-            url = `${API}/hbp/hq/${hqId}`;
+        function filterProducts() {
+            const query = document.getElementById('productSearch').value.toLowerCase();
+            const filtered = allProducts.filter(prod =>
+                prod.name.toLowerCase().includes(query) ||
+                prod.type.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
         }
-        
-        const res = await axios.get(url);
-        await loadPerformanceData(res.data);
-    } catch (error) {
-        console.error('Error loading employees:', error);
-    }
-}
 
-async function loadPerformanceData(employees = null) {
-    const container = document.getElementById('performanceContainer');
-    const monthValue = document.getElementById('performanceMonth').value;
-    
-    let month, year;
-    if (monthValue) {
-        [month, year] = monthValue.split('-').map(Number);
-    } else {
-        const now = new Date();
-        month = now.getMonth() + 1;
-        year = now.getFullYear();
-    }
+        function resetProductModal() {
+            document.getElementById('prodId').value = '';
+            document.getElementById('prodName').value = '';
+            document.getElementById('prodType').value = '';
+            document.getElementById('prodMeasure').value = '';
+            document.getElementById('prodQuantity').value = '';
+            document.getElementById('prodMRP').value = '';
+            document.getElementById('productModalTitle').innerText = 'Add Product';
+            document.getElementById('productSaveBtn').innerText = 'Add Product';
+        }
 
-    if (!employees) {
-        await loadEmployeesForPerformance();
-        return;
-    }
+        function editProduct(id) {
+            const product = allProducts.find(p => p._id === id);
+            if (!product) return;
 
-    if (employees.length === 0) {
-        container.innerHTML = '<div class="alert alert-info">No employees found</div>';
-        return;
-    }
+            document.getElementById('prodId').value = product._id;
+            document.getElementById('prodName').value = product.name;
+            document.getElementById('prodType').value = product.type;
+            document.getElementById('prodMeasure').value = product.measuredIn;
+            document.getElementById('prodQuantity').value = product.quantity || '';
+            document.getElementById('prodMRP').value = product.mrp;
 
-    container.innerHTML = '<div class="text-center"><div class="spinner-border text-primary"></div></div>';
+            document.getElementById('productModalTitle').innerText = 'Update Product';
+            document.getElementById('productSaveBtn').innerText = 'Update Product';
+            new bootstrap.Modal(document.getElementById('productModal')).show();
+        }
 
-    try {
-        const performanceCards = await Promise.all(employees.map(async (emp) => {
+        async function saveProduct() {
+            const id = document.getElementById('prodId').value;
+            const data = {
+                name: document.getElementById('prodName').value,
+                type: document.getElementById('prodType').value,
+                measuredIn: document.getElementById('prodMeasure').value,
+                quantity: parseInt(document.getElementById('prodQuantity').value) || 0,
+                mrp: parseFloat(document.getElementById('prodMRP').value)
+            };
+
+            if (!data.name || !data.type || !data.measuredIn || !data.mrp) {
+                alert('Please fill all required fields');
+                return;
+            }
+
             try {
-                const res = await axios.get(`${API}/hbp/progress/${emp._id}`, {
-                    params: { month, year }
-                });
-                
-                const { target, achieved } = res.data;
-                const percentage = target > 0 ? (achieved / target) * 100 : 0;
-                const gap = Math.max(0, target - achieved);
-                
-                return `
-                    <div class="col-md-6 mb-4">
-                        <div class="performance-card">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h5 class="mb-1">${emp.name}</h5>
-                                    <small style="opacity: 0.9;">${emp.hqId?.name || 'N/A'} • ${emp.role || 'HBP'}</small>
+                if (id) {
+                    await axios.put(`${API}/products/${id}`, data);
+                    showToast('Product updated!');
+                } else {
+                    await axios.post(`${API}/products`, data);
+                    showToast('Product added!');
+                }
+                bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
+                await loadAllProducts();
+            } catch (error) {
+                alert('Error: ' + (error.response?.data?.error || error.message));
+            }
+        }
+
+        async function loadSalesSection() {
+            await loadHQsForDropdown('saleHQ');
+            await loadProductsForDropdown();
+        }
+
+        async function loadProductsForDropdown() {
+            try {
+                const res = await axios.get(`${API}/products`);
+                document.getElementById('saleProd').innerHTML = '<option value="">Choose product...</option>' +
+                    res.data.map(p => `<option value="${p._id}">${p.name} - ${p.type} (${p.quantity || 'N/A'} ${p.measuredIn})</option>`).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadHBPsForSales() {
+            const hqId = document.getElementById('saleHQ').value;
+            if (!hqId) {
+                document.getElementById('saleHBP').innerHTML = '<option value="">Select Employee</option>';
+                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
+                return;
+            }
+            try {
+                const res = await axios.get(`${API}/hbp/hq/${hqId}`);
+                document.getElementById('saleHBP').innerHTML = '<option value="">Select Employee</option>' +
+                    res.data.map(hbp => `<option value="${hbp._id}">${hbp.name}</option>`).join('');
+                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function loadWholesalersForSales() {
+            const hbpId = document.getElementById('saleHBP').value;
+            if (!hbpId) {
+                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
+                return;
+            }
+            try {
+                const res = await axios.get(`${API}/wholesalers/hbp/${hbpId}`);
+                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>' +
+                    res.data.map(ws => `<option value="${ws._id}">${ws.partyName}</option>`).join('');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function recordSale() {
+            const data = {
+                type: "purchase",
+                date: document.getElementById('saleDate').value,
+                hqId: document.getElementById('saleHQ').value,
+                hbpId: document.getElementById('saleHBP').value,
+                wholesalerId: document.getElementById('saleWS').value,
+                productId: document.getElementById('saleProd').value,
+                quantity: parseInt(document.getElementById('saleQty').value),
+                recordedBy: "admin"
+            };
+
+            if (!data.date || !data.hqId || !data.hbpId || !data.wholesalerId || !data.productId || !data.quantity) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            try {
+                await axios.post(`${API}/sales`, data);
+                showToast('✅ Purchase recorded successfully!');
+                document.getElementById('saleQty').value = '';
+            } catch (error) {
+                alert('Error: ' + (error.response?.data?.error || error.message));
+            }
+        }
+
+        async function loadTargetAssignmentSection() {
+            await loadHQsForDropdown('targetHQ');
+            await loadTargetOverview();
+            await loadAllProductsForTarget();
+        }
+
+        async function loadAllProductsForTarget() {
+            try {
+                const res = await axios.get(`${API}/products`);
+                allProductsForTarget = res.data;
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        async function loadTargetOverview() {
+            const container = document.getElementById('targetOverviewContainer');
+            const year = parseInt(document.getElementById('targetYear').value);
+            const hqId = document.getElementById('targetHQ').value;
+
+            container.innerHTML = '<div class="text-center py-5"><div class="spinner-border" style="color: white;"></div></div>';
+
+            try {
+                const params = { year };
+                if (hqId) params.hqId = hqId;
+
+                const res = await axios.get(`${API}/targets/admin/overview`, { params });
+                const { employees, summary } = res.data;
+
+                if (employees.length === 0) {
+                    container.innerHTML = '<div class="alert alert-custom" style="background: white;">No employees found</div>';
+                    return;
+                }
+
+                let html = `
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="summary-card">
+                        <h6>Total Employees</h6>
+                        <div class="value">${summary.total}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="summary-card">
+                        <h6>With Targets Assigned</h6>
+                        <div class="value text-success">${summary.withTargets}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="summary-card">
+                        <h6>Pending Assignment</h6>
+                        <div class="value text-warning">${summary.withoutTargets}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+        `;
+
+                employees.forEach(emp => {
+                    html += `
+                <div class="col-md-6 mb-3">
+                    <div class="target-status-card ${emp.hasTargets ? 'has-targets' : 'no-targets'}">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="mb-1">
+                                    <i class="bi bi-person-circle me-2"></i>${emp.name}
+                                </h5>
+                                <div class="mb-2">
+                                    <span class="badge bg-primary me-2">${emp.role}</span>
+                                    <span class="badge bg-secondary">${emp.hq}</span>
                                 </div>
-                                <button class="btn btn-light btn-sm" onclick="openTargetModal('${emp._id}', '${emp.name}', ${month}, ${year}, ${target})">
-                                    <i class="bi bi-bullseye"></i> Set Target
+                                ${emp.hasTargets
+                            ? `<span class="status-badge status-achieved">
+                                        <i class="bi bi-check-circle-fill me-1"></i>${emp.productCount} Products
+                                       </span>`
+                            : `<span class="status-badge status-behind">
+                                        <i class="bi bi-exclamation-triangle-fill me-1"></i>No Targets
+                                       </span>`
+                        }
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn ${emp.hasTargets ? 'btn-gradient-primary' : 'btn-gradient-warning'} quick-action-btn" 
+                                        onclick="openAssignTargetModal('${emp.hbpId}', '${emp.name}', ${year})">
+                                    <i class="bi bi-${emp.hasTargets ? 'pencil' : 'plus-circle'} me-2"></i>${emp.hasTargets ? 'Edit' : 'Assign'}
                                 </button>
-                            </div>
-                            
-                            <div class="mt-3 mb-2">
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span style="font-size: 14px;">Achievement Progress</span>
-                                    <span style="font-size: 18px; font-weight: bold;">${Math.round(percentage)}%</span>
-                                </div>
-                                <div class="progress progress-bar-custom">
-                                    <div class="progress-bar ${percentage >= 100 ? 'bg-success' : 'bg-warning'}" 
-                                         style="width: ${Math.min(percentage, 100)}%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="performance-stats">
-                                <div class="performance-stat">
-                                    <div class="performance-stat-value">${target}</div>
-                                    <div class="performance-stat-label">Target</div>
-                                </div>
-                                <div class="performance-stat">
-                                    <div class="performance-stat-value">${achieved}</div>
-                                    <div class="performance-stat-label">Achieved</div>
-                                </div>
-                                <div class="performance-stat">
-                                    <div class="performance-stat-value">${gap}</div>
-                                    <div class="performance-stat-label">Gap</div>
-                                </div>
                             </div>
                         </div>
                     </div>
-                `;
+                </div>
+            `;
+                });
+
+                html += '</div>';
+                container.innerHTML = html;
             } catch (error) {
-                console.error(`Error loading performance for ${emp.name}:`, error);
-                return '';
+                console.error('Error loading overview:', error);
+                container.innerHTML = '<div class="alert alert-danger">Failed to load data</div>';
             }
-        }));
+        }
 
-        container.innerHTML = `<div class="row">${performanceCards.join('')}</div>`;
-    } catch (error) {
-        console.error('Error:', error);
-        container.innerHTML = '<div class="alert alert-danger">Failed to load performance data</div>';
-    }
-}
+        async function openAssignTargetModal(hbpId, name, year) {
+            document.getElementById('assignTargetHbpId').value = hbpId;
+            document.getElementById('assignTargetYear').value = year;
+            document.getElementById('targetModalSubtitle').innerText = `${name} • Year ${year}`;
 
-function openTargetModal(hbpId, hbpName, month, year, currentTarget) {
-    document.getElementById('targetHbpId').value = hbpId;
-    document.getElementById('targetMonth').value = month;
-    document.getElementById('targetYear').value = year;
-    document.getElementById('targetHbpName').value = hbpName;
-    
-    const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long', year: 'numeric' });
-    document.getElementById('targetPeriod').value = monthName;
-    document.getElementById('targetAmount').value = currentTarget || '';
-    
-    targetModal.show();
-}
+            try {
+                const res = await axios.get(`${API}/targets/yearly/${hbpId}`, { params: { year } });
+                const existingTargets = res.data.targets || [];
 
-async function saveTarget() {
-    const hbpId = document.getElementById('targetHbpId').value;
-    const month = parseInt(document.getElementById('targetMonth').value);
-    const year = parseInt(document.getElementById('targetYear').value);
-    const targetAmount = parseInt(document.getElementById('targetAmount').value);
+                const targetMap = {};
+                existingTargets.forEach(t => {
+                    targetMap[t.productId._id] = t.monthlyTargets || {};
+                });
 
-    if (!targetAmount || targetAmount <= 0) {
-        alert('Please enter a valid target amount');
-        return;
-    }
+                const tbody = document.getElementById('productTargetTableBody');
+                tbody.innerHTML = allProductsForTarget.map((prod, idx) => {
+                    const monthlyTargets = targetMap[prod._id] || {};
+                    const packing = `${prod.quantity || ''} ${prod.measuredIn}`;
 
-    try {
-        await axios.post(`${API}/hbp/target`, {
-            hbpId,
-            month,
-            year,
-            targetAmount
-        });
+                    let monthCells = '';
+                    let yearlyTotal = 0;
 
-        showToast('Target assigned successfully!');
-        targetModal.hide();
-        await loadPerformanceData(allEmployees.length > 0 ? allEmployees : null);
-    } catch (error) {
-        alert('Error: ' + (error.response?.data?.error || error.message));
-    }
-}
-</script>
+                    for (let month = 1; month <= 12; month++) {
+                        const value = monthlyTargets[month] || 0;
+                        yearlyTotal += value;
+                        monthCells += `
+                    <td style="text-align: center; padding: 8px;">
+                        <input type="number" 
+                               class="month-input" 
+                               data-product-id="${prod._id}"
+                               data-product-idx="${idx}"
+                               data-month="${month}"
+                               data-price="${prod.mrp}"
+                               value="${value}" 
+                               min="0" 
+                               placeholder="0"
+                               onchange="updateMonthlyTotals()"
+                               oninput="updateMonthlyTotals()">
+                    </td>
+                `;
+                    }
+
+                    return `
+                <tr>
+                    <td class="product-info">
+                        <div class="d-flex align-items-center">
+                            <div class="me-2" style="background: #0f172a; color: white; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; font-size: 14px;">
+                                ${idx + 1}
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 14px;">${prod.name}</div>
+                                <div style="font-size: 11px; color: #64748b;">
+                                    <span class="product-badge bg-info text-white">${prod.type}</span>
+                                    <span class="ms-2">${packing}</span>
+                                    <span class="ms-2 fw-semibold">₹${prod.mrp}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    ${monthCells}
+                    <td class="total-cell" id="product-total-${idx}">${yearlyTotal}</td>
+                </tr>
+            `;
+                }).join('');
+
+                updateMonthlyTotals();
+                assignTargetModal.show();
+            } catch (error) {
+                console.error('Error loading existing targets:', error);
+                alert('Failed to load existing targets');
+            }
+        }
+
+        function updateMonthlyTotals() {
+            const inputs = document.querySelectorAll('.month-input');
+            let grandTotal = 0;
+            let grandValue = 0;
+
+            const monthTotals = new Array(12).fill(0);
+            const productTotals = {};
+
+            inputs.forEach(input => {
+                const quantity = parseInt(input.value) || 0;
+                const month = parseInt(input.dataset.month);
+                const price = parseFloat(input.dataset.price) || 0;
+                const productIdx = input.dataset.productIdx;
+
+                monthTotals[month - 1] += quantity;
+                grandTotal += quantity;
+                grandValue += quantity * price;
+
+                if (!productTotals[productIdx]) {
+                    productTotals[productIdx] = 0;
+                }
+                productTotals[productIdx] += quantity;
+            });
+
+            for (let i = 0; i < 12; i++) {
+                const cell = document.getElementById(`total-month-${i + 1}`);
+                if (cell) {
+                    cell.innerText = monthTotals[i];
+                }
+            }
+
+            Object.keys(productTotals).forEach(idx => {
+                const cell = document.getElementById(`product-total-${idx}`);
+                if (cell) {
+                    cell.innerText = productTotals[idx];
+                }
+            });
+
+            const grandTotalCell = document.getElementById('grand-total');
+            if (grandTotalCell) {
+                grandTotalCell.innerText = grandTotal;
+            }
+
+            document.getElementById('totalYearlyUnits').innerText = grandTotal.toLocaleString();
+            document.getElementById('totalYearlyValue').innerText = '₹' + grandValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+        }
+
+        async function saveYearlyTargets() {
+            const hbpId = document.getElementById('assignTargetHbpId').value;
+            const year = parseInt(document.getElementById('assignTargetYear').value);
+
+            const inputs = document.querySelectorAll('.month-input');
+            const productTargets = {};
+
+            inputs.forEach(input => {
+                const productId = input.dataset.productId;
+                const month = parseInt(input.dataset.month);
+                const quantity = parseInt(input.value) || 0;
+
+                if (!productTargets[productId]) {
+                    productTargets[productId] = {};
+                }
+                productTargets[productId][month] = quantity;
+            });
+
+            const targets = Object.keys(productTargets).map(productId => ({
+                productId,
+                monthlyTargets: productTargets[productId]
+            })).filter(t => {
+                return Object.values(t.monthlyTargets).some(val => val > 0);
+            });
+
+            if (targets.length === 0) {
+                alert('⚠️ Please set at least one product target for at least one month');
+                return;
+            }
+
+            const saveBtn = event.target;
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
+            saveBtn.disabled = true;
+
+            try {
+                await axios.post(`${API}/targets/assign-yearly`, {
+                    hbpId,
+                    year,
+                    targets,
+                });
+
+                showToast(`✅ Successfully assigned targets for ${targets.length} products!`);
+                assignTargetModal.hide();
+                await loadTargetOverview();
+            } catch (error) {
+                console.error('Error saving targets:', error);
+                alert('❌ Failed to save targets: ' + (error.response?.data?.error || error.message));
+            } finally {
+                saveBtn.innerHTML = originalText;
+                saveBtn.disabled = false;
+            }
+        }
+
+        function fillAllMonths() {
+            const value = prompt('Enter the same target for all months (e.g., 50):');
+            if (!value || isNaN(value) || value < 0) return;
+
+            const inputs = document.querySelectorAll('.month-input');
+            inputs.forEach(input => {
+                input.value = parseInt(value);
+            });
+            updateMonthlyTotals();
+            showToast('✅ All months filled with same value!');
+        }
+
+        function fillSeasonalPattern() {
+            const seasonalPattern = {
+                1: 1.2, 2: 1.2, 3: 1.0, 4: 0.8, 5: 0.7, 6: 0.9,
+                7: 1.1, 8: 1.2, 9: 1.0, 10: 1.1, 11: 1.2, 12: 1.3
+            };
+
+            const baseValue = prompt('Enter base monthly target (e.g., 50):\n\nThe system will apply seasonal adjustments:\n• Winter (Dec-Feb): +20-30%\n• Monsoon (Jul-Aug): +10-20%\n• Summer (Apr-May): -20-30%');
+
+            if (!baseValue || isNaN(baseValue) || baseValue < 0) return;
+
+            const base = parseInt(baseValue);
+            const inputs = document.querySelectorAll('.month-input');
+
+            const productGroups = {};
+            inputs.forEach(input => {
+                const productId = input.dataset.productId;
+                if (!productGroups[productId]) {
+                    productGroups[productId] = [];
+                }
+                productGroups[productId].push(input);
+            });
+
+            Object.values(productGroups).forEach(productInputs => {
+                productInputs.forEach(input => {
+                    const month = parseInt(input.dataset.month);
+                    const multiplier = seasonalPattern[month];
+                    input.value = Math.round(base * multiplier);
+                });
+            });
+
+            updateMonthlyTotals();
+            showToast('✅ Seasonal pattern applied successfully!');
+        }
+
+        function clearAllTargets() {
+            if (!confirm('⚠️ Are you sure you want to clear all targets?')) return;
+
+            const inputs = document.querySelectorAll('.month-input');
+            inputs.forEach(input => {
+                input.value = 0;
+            });
+            updateMonthlyTotals();
+            showToast('✅ All targets cleared!');
+        }
+    </script>
+</body>
+
 </html>
