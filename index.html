@@ -7,675 +7,902 @@
     <title>Titanic Pharma | Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-  <style>
-    :root {
-        --primary-nav: #0f172a;
-        --accent: #3b82f6;
-        --success: #10b981;
-        --warning: #f59e0b;
-        --danger: #ef4444;
-        --gray-50: #f9fafb;
-        --gray-100: #f3f4f6;
-        --gray-200: #e5e7eb;
-        --gray-300: #d1d5db;
-        --gray-500: #6b7280;
-        --gray-600: #4b5563;
-        --gray-700: #374151;
-        --gray-900: #111827;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        background: var(--gray-50);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: var(--gray-900);
-    }
-
-    /* ==================== SIDEBAR ==================== */
-    .sidebar {
-        background: var(--primary-nav);
-        color: white;
-        min-height: 100vh;
-        width: 280px;
-        position: fixed;
-        overflow-y: auto;
-        z-index: 1000;
-        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .logo-section {
-        padding: 30px 25px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        background: #0a0f1a;
-    }
-
-    .logo-section h4 {
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        margin-bottom: 5px;
-    }
-
-    .logo-section .text-secondary {
-        color: #94a3b8 !important;
-        font-size: 13px;
-    }
-
-    .nav-link {
-        color: #94a3b8;
-        padding: 14px 25px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border-left: 4px solid transparent;
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        font-weight: 500;
-        margin: 2px 0;
-    }
-
-    .nav-link:hover {
-        background: rgba(255, 255, 255, 0.06);
-        color: white;
-        border-left-color: rgba(59, 130, 246, 0.3);
-    }
-
-    .nav-link.active {
-        color: white;
-        background: rgba(59, 130, 246, 0.12);
-        border-left-color: var(--accent);
-    }
-
-    .nav-link i {
-        font-size: 16px;
-    }
-
-    /* ==================== MAIN CONTENT ==================== */
-    .main {
-        margin-left: 280px;
-        padding: 30px 40px;
-        min-height: 100vh;
-    }
-
-    .section {
-        animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(15px);
+    <style>
+        :root {
+            --primary-nav: #0f172a;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
 
-    /* ==================== STAT CARDS ==================== */
-    .stat-card {
-        border: none;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        background: white;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        position: relative;
-        overflow: hidden;
-        border-left: 4px solid transparent;
-    }
+        body {
+            background: var(--gray-50);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--gray-900);
+        }
 
-    .stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
-
-    .stat-card .icon-bg {
-        position: absolute;
-        right: -10px;
-        top: -10px;
-        font-size: 70px;
-        opacity: 0.08;
-    }
-
-    .stat-card h6 {
-        font-size: 13px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-    }
-
-    .stat-card h2 {
-        font-size: 32px;
-        font-weight: 700;
-        margin: 0;
-    }
-
-    /* ==================== SECTION HEADER ==================== */
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 25px;
-        padding: 20px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    }
-
-    .section-header h3 {
-        font-size: 20px;
-        font-weight: 600;
-        color: var(--gray-900);
-        margin: 0;
-    }
-
-    .search-box {
-        max-width: 300px;
-        min-width: 250px;
-    }
-
-    /* ==================== TABLE STYLES ==================== */
-    .table-card {
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    }
-
-    .table {
-        margin: 0;
-    }
-
-    .table thead {
-        background: var(--gray-100);
-    }
-
-    .table thead th {
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--gray-700);
-        padding: 16px;
-        border: none;
-    }
-
-    .table tbody td {
-        padding: 16px;
-        vertical-align: middle;
-        border-top: 1px solid var(--gray-200);
-        font-size: 14px;
-    }
-
-    .table tbody tr:hover {
-        background: var(--gray-50);
-    }
-
-    .serial-col {
-        width: 50px;
-        text-align: center;
-        font-weight: 600;
-        color: var(--gray-500);
-    }
-
-    /* ==================== FORM CONTROLS ==================== */
-    .form-control,
-    .form-select {
-        border-radius: 8px;
-        border: 1px solid var(--gray-300);
-        padding: 10px 15px;
-        font-size: 14px;
-        transition: all 0.2s ease;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        outline: none;
-    }
-
-    .form-label {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--gray-700);
-        margin-bottom: 8px;
-    }
-
-    /* ==================== BUTTONS ==================== */
-    .btn-custom {
-        padding: 10px 24px;
-        border-radius: 8px;
-        font-weight: 500;
-        font-size: 14px;
-        transition: all 0.2s ease;
-        border: none;
-    }
-
-    .btn-custom:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .btn-gradient-primary {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        color: white;
-    }
-
-    .btn-gradient-primary:hover {
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    }
-
-    .btn-gradient-success {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: white;
-    }
-
-    .btn-gradient-success:hover {
-        background: linear-gradient(135deg, #059669 0%, #047857 100%);
-    }
-
-    .btn-gradient-warning {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        color: white;
-    }
-
-    .btn-gradient-warning:hover {
-        background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
-    }
-
-    /* ==================== BADGES ==================== */
-    .badge-custom {
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-weight: 500;
-        font-size: 12px;
-    }
-
-    /* ==================== MODALS ==================== */
-    .modal-header {
-        background: var(--primary-nav);
-        color: white;
-        padding: 20px 24px;
-        border: none;
-    }
-
-    .modal-header .modal-title {
-        font-size: 18px;
-        font-weight: 600;
-    }
-
-    .modal-header .btn-close {
-        filter: invert(1);
-        opacity: 0.8;
-    }
-
-    .modal-body {
-        padding: 24px;
-    }
-
-    .modal-footer {
-        padding: 16px 24px;
-        border-top: 1px solid var(--gray-200);
-    }
-
-    /* ==================== ALERTS ==================== */
-    .alert-custom {
-        border: none;
-        border-radius: 10px;
-        padding: 16px 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        border-left: 4px solid;
-    }
-
-    /* ==================== TARGET ASSIGNMENT ==================== */
-    .target-status-card {
-        border: 2px solid var(--gray-200);
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 20px;
-        transition: all 0.3s ease;
-        background: white;
-    }
-
-    .target-status-card:hover {
-        border-color: var(--accent);
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
-        transform: translateY(-2px);
-    }
-
-    .target-status-card.has-targets {
-        border-left: 5px solid var(--success);
-        background: linear-gradient(to right, #f0fdf4, white);
-    }
-
-    .target-status-card.no-targets {
-        border-left: 5px solid var(--warning);
-        background: linear-gradient(to right, #fffbeb, white);
-    }
-
-    .target-status-card h5 {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--gray-900);
-        margin-bottom: 8px;
-    }
-
-    .summary-card {
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        margin-bottom: 20px;
-        border-left: 4px solid var(--accent);
-    }
-
-    .summary-card h6 {
-        color: var(--gray-600);
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 10px;
-    }
-
-    .summary-card .value {
-        font-size: 28px;
-        font-weight: 700;
-        color: var(--accent);
-    }
-
-    .summary-card .value.text-success {
-        color: var(--success);
-    }
-
-    .summary-card .value.text-warning {
-        color: var(--warning);
-    }
-
-    /* ==================== MONTH TARGET TABLE ==================== */
-    .month-target-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        margin: 20px 0;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    .month-target-table thead {
-        background: var(--primary-nav);
-    }
-
-    .month-target-table th {
-        padding: 14px 10px;
-        text-align: center;
-        font-weight: 600;
-        font-size: 12px;
-        color: white;
-        border-right: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .month-target-table th:last-child {
-        border-right: none;
-    }
-
-    .month-target-table tbody tr {
-        background: white;
-        transition: background 0.2s ease;
-    }
-
-    .month-target-table tbody tr:hover {
-        background: var(--gray-50);
-    }
-
-    .month-target-table td {
-        padding: 10px;
-        border-bottom: 1px solid var(--gray-200);
-        border-right: 1px solid var(--gray-200);
-    }
-
-    .month-target-table td:last-child {
-        border-right: none;
-    }
-
-    .month-target-table .product-info {
-        padding: 14px;
-        background: var(--gray-50);
-        font-weight: 600;
-        min-width: 220px;
-        border-right: 2px solid var(--gray-300);
-    }
-
-    .month-input {
-        width: 68px;
-        padding: 8px 6px;
-        border: 1px solid var(--gray-300);
-        border-radius: 6px;
-        text-align: center;
-        font-weight: 600;
-        font-size: 13px;
-        transition: all 0.2s ease;
-    }
-
-    .month-input:focus {
-        border-color: var(--accent);
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        transform: scale(1.03);
-    }
-
-    .month-input:hover {
-        border-color: var(--gray-400);
-    }
-
-    .total-cell {
-        background: var(--gray-100);
-        font-weight: 700;
-        color: var(--accent);
-        text-align: center;
-        padding: 12px;
-        font-size: 13px;
-    }
-
-    /* ==================== STATUS BADGES ==================== */
-    .status-badge {
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-block;
-    }
-
-    .status-achieved {
-        background: #d1fae5;
-        color: #065f46;
-    }
-
-    .status-behind {
-        background: #fee2e2;
-        color: #991b1b;
-    }
-
-    .status-progress {
-        background: #dbeafe;
-        color: #1e40af;
-    }
-
-    /* ==================== QUICK ACTION BUTTONS ==================== */
-    .quick-action-btn {
-        padding: 10px 20px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 13px;
-        transition: all 0.2s ease;
-        border: none;
-    }
-
-    .quick-action-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    /* ==================== PRODUCT BADGE ==================== */
-    .product-badge {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 11px;
-        font-weight: 600;
-        margin-left: 6px;
-    }
-
-    /* ==================== SCROLLBAR ==================== */
-    .table-scroll-container {
-        max-height: calc(100vh - 320px);
-        overflow-y: auto;
-        border-radius: 12px;
-    }
-
-    .table-scroll-container::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    .table-scroll-container::-webkit-scrollbar-track {
-        background: var(--gray-100);
-        border-radius: 10px;
-    }
-
-    .table-scroll-container::-webkit-scrollbar-thumb {
-        background: var(--gray-400);
-        border-radius: 10px;
-    }
-
-    .table-scroll-container::-webkit-scrollbar-thumb:hover {
-        background: var(--gray-500);
-    }
-
-    .sticky-header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-    }
-
-    /* ==================== YEARLY TOTAL BANNER ==================== */
-    .yearly-total-banner {
-        background: linear-gradient(135deg, var(--primary-nav) 0%, #1e293b 100%);
-        color: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        margin: 24px 0;
-    }
-
-    .yearly-total-banner h4 {
-        margin: 0;
-        font-weight: 600;
-        font-size: 17px;
-    }
-
-    .yearly-total-banner .value {
-        font-size: 34px;
-        font-weight: 800;
-    }
-
-    .yearly-total-banner .opacity-75 {
-        opacity: 0.75;
-    }
-
-    /* ==================== TOAST NOTIFICATIONS ==================== */
-    .toast {
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    /* ==================== RESPONSIVE ==================== */
-    @media (max-width: 768px) {
+        /* ==================== SIDEBAR ==================== */
         .sidebar {
-            width: 100%;
-            position: relative;
-            min-height: auto;
+            background: var(--primary-nav);
+            color: white;
+            min-height: 100vh;
+            width: 280px;
+            position: fixed;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
         }
 
+        .logo-section {
+            padding: 30px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0a0f1a;
+        }
+
+        .logo-section h4 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .logo-section .text-secondary {
+            color: #94a3b8 !important;
+            font-size: 13px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            padding: 14px 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 2px 0;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: white;
+            border-left-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-link.active {
+            color: white;
+            background: rgba(59, 130, 246, 0.12);
+            border-left-color: var(--accent);
+        }
+
+        .nav-link i {
+            font-size: 16px;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
         .main {
-            margin-left: 0;
-            padding: 20px;
+            margin-left: 280px;
+            padding: 30px 40px;
+            min-height: 100vh;
         }
 
+        .section {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== STAT CARDS ==================== */
+        .stat-card {
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid transparent;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card .icon-bg {
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            font-size: 70px;
+            opacity: 0.08;
+        }
+
+        .stat-card h6 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* ==================== SECTION HEADER ==================== */
         .section-header {
-            flex-direction: column;
-            gap: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-header h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 0;
         }
 
         .search-box {
-            max-width: 100%;
-            width: 100%;
+            max-width: 300px;
+            min-width: 250px;
         }
 
-        .month-input {
-            width: 55px;
-            padding: 6px 4px;
+        /* ==================== TABLE STYLES ==================== */
+        .table-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .table thead {
+            background: var(--gray-100);
+        }
+
+        .table thead th {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-700);
+            padding: 16px;
+            border: none;
+        }
+
+        .table tbody td {
+            padding: 16px;
+            vertical-align: middle;
+            border-top: 1px solid var(--gray-200);
+            font-size: 14px;
+        }
+
+        .table tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .serial-col {
+            width: 50px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+
+        /* ==================== FORM CONTROLS ==================== */
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            border: 1px solid var(--gray-300);
+            padding: 10px 15px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn-custom {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-gradient-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+
+        .btn-gradient-primary:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        }
+
+        .btn-gradient-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-gradient-success:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        .btn-gradient-warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .btn-gradient-warning:hover {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+        }
+
+        /* ==================== BADGES ==================== */
+        .badge-custom {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 500;
             font-size: 12px;
         }
 
-        .month-target-table th,
-        .month-target-table td {
-            padding: 8px 5px;
-            font-size: 11px;
+        /* ==================== MODALS ==================== */
+        .modal-header {
+            background: var(--primary-nav);
+            color: white;
+            padding: 20px 24px;
+            border: none;
         }
-    }
 
-    /* ==================== UTILITY CLASSES ==================== */
-    .fw-semibold {
-        font-weight: 600;
-    }
+        .modal-header .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
 
-    .text-muted {
-        color: var(--gray-500);
-    }
+        .modal-header .btn-close {
+            filter: invert(1);
+            opacity: 0.8;
+        }
 
-    .bg-light {
-        background-color: var(--gray-100) !important;
-    }
+        .modal-body {
+            padding: 24px;
+        }
 
-    /* ==================== ADDITIONAL REFINEMENTS ==================== */
-    h3 i, h4 i, h5 i {
-        margin-right: 8px;
-        opacity: 0.9;
-    }
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--gray-200);
+        }
 
-    .card {
-        border: none;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    }
+        /* ==================== ALERTS ==================== */
+        .alert-custom {
+            border: none;
+            border-radius: 10px;
+            padding: 16px 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid;
+        }
 
-    .card-body {
-        padding: 20px;
-    }
+        /* ==================== TARGET ASSIGNMENT ==================== */
+        .target-status-card {
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: white;
+        }
 
-    code {
-        background: var(--gray-100);
-        padding: 3px 8px;
-        border-radius: 4px;
-        font-size: 13px;
-        color: #e83e8c;
-    }
+        .target-status-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
+            transform: translateY(-2px);
+        }
 
-    small {
-        font-size: 12px;
-    }
+        .target-status-card.has-targets {
+            border-left: 5px solid var(--success);
+            background: linear-gradient(to right, #f0fdf4, white);
+        }
 
-    strong {
-        font-weight: 600;
-    }
-</style>
+        .target-status-card.no-targets {
+            border-left: 5px solid var(--warning);
+            background: linear-gradient(to right, #fffbeb, white);
+        }
+
+        .target-status-card h5 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .summary-card h6 {
+            color: var(--gray-600);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .summary-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .summary-card .value.text-success {
+            color: var(--success);
+        }
+
+        .summary-card .value.text-warning {
+            color: var(--warning);
+        }
+
+        /* ==================== MONTH TARGET TABLE ==================== */
+        .month-target-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .month-target-table thead {
+            background: var(--primary-nav);
+        }
+
+        .month-target-table th {
+            padding: 14px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 12px;
+            color: white;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .month-target-table th:last-child {
+            border-right: none;
+        }
+
+        .month-target-table tbody tr {
+            background: white;
+            transition: background 0.2s ease;
+        }
+
+        .month-target-table tbody tr:hover {
+            background: var(--gray-50);
+        }
+
+        .month-target-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--gray-200);
+            border-right: 1px solid var(--gray-200);
+        }
+
+        .month-target-table td:last-child {
+            border-right: none;
+        }
+
+        .month-target-table .product-info {
+            padding: 14px;
+            background: var(--gray-50);
+            font-weight: 600;
+            min-width: 220px;
+            border-right: 2px solid var(--gray-300);
+        }
+
+        .month-input {
+            width: 68px;
+            padding: 8px 6px;
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .month-input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            transform: scale(1.03);
+        }
+
+        .month-input:hover {
+            border-color: var(--gray-400);
+        }
+
+        .total-cell {
+            background: var(--gray-100);
+            font-weight: 700;
+            color: var(--accent);
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+        }
+
+        /* ==================== STATUS BADGES ==================== */
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-achieved {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-behind {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-progress {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* ==================== QUICK ACTION BUTTONS ==================== */
+        .quick-action-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ==================== PRODUCT BADGE ==================== */
+        .product-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+
+        /* ==================== SCROLLBAR ==================== */
+        .table-scroll-container {
+            max-height: calc(100vh - 320px);
+            overflow-y: auto;
+            border-radius: 12px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 10px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--gray-400);
+            border-radius: 10px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* ==================== YEARLY TOTAL BANNER ==================== */
+        .yearly-total-banner {
+            background: linear-gradient(135deg, var(--primary-nav) 0%, #1e293b 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            margin: 24px 0;
+        }
+
+        .yearly-total-banner h4 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        .yearly-total-banner .value {
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .yearly-total-banner .opacity-75 {
+            opacity: 0.75;
+        }
+
+        /* ==================== TOAST NOTIFICATIONS ==================== */
+        .toast {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                min-height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-box {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .month-input {
+                width: 55px;
+                padding: 6px 4px;
+                font-size: 12px;
+            }
+
+            .month-target-table th,
+            .month-target-table td {
+                padding: 8px 5px;
+                font-size: 11px;
+            }
+        }
+
+        /* ==================== UTILITY CLASSES ==================== */
+        .fw-semibold {
+            font-weight: 600;
+        }
+
+        .text-muted {
+            color: var(--gray-500);
+        }
+
+        .bg-light {
+            background-color: var(--gray-100) !important;
+        }
+
+        /* ==================== ADDITIONAL REFINEMENTS ==================== */
+        h3 i,
+        h4 i,
+        h5 i {
+            margin-right: 8px;
+            opacity: 0.9;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        code {
+            background: var(--gray-100);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #e83e8c;
+        }
+
+        small {
+            font-size: 12px;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        .table-scroll-container {
+            max-height: calc(100vh - 400px);
+            /* Adjust based on screen height */
+            overflow-x: auto;
+            overflow-y: auto;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        /* Enhanced scrollbar styling */
+        .table-scroll-container::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+            margin: 4px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            border-color: #e2e8f0;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-corner {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+
+        /* Firefox scrollbar */
+        .table-scroll-container {
+            scrollbar-width: auto;
+            scrollbar-color: #64748b #f1f5f9;
+        }
+
+        /* Smooth scrolling */
+        .table-scroll-container {
+            scroll-behavior: smooth;
+        }
+
+        /* Sticky header enhancement */
+        .month-target-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--primary-nav);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Sticky product info column */
+        .month-target-table .product-info {
+            position: sticky;
+            left: 0;
+            z-index: 50;
+            background: var(--gray-50);
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Header corner cell (sticky both ways) */
+        .month-target-table thead th:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 150;
+            background: var(--primary-nav);
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Input focus enhancement */
+        .month-input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            transform: scale(1.05);
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Highlight current row on input focus */
+        .month-target-table tbody tr:has(.month-input:focus) {
+            background: #eff6ff;
+        }
+
+        /* Enhanced month input */
+        .month-input {
+            width: 60px;
+            padding: 10px 8px;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .month-input:hover {
+            border-color: var(--gray-400);
+            background: #fafafa;
+        }
+
+        /* Loading indicator for smooth scroll */
+        .table-scroll-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    var(--accent) 50%,
+                    transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        .table-scroll-container.scrolling::before {
+            opacity: 1;
+        }
+
+        /* Modal body padding adjustment for better scrolling */
+        #assignTargetModal .modal-body {
+            padding: 20px;
+        }
+
+        /* Improve table responsiveness */
+        .month-target-table {
+            min-width: 1400px;
+            /* Ensure table doesn't get squished */
+        }
+
+        /* Better visual feedback for keyboard navigation */
+        .month-input[data-navigation-active="true"] {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Total cells enhancement */
+        .total-cell {
+            background: #f8fafc;
+            font-weight: 700;
+            color: var(--accent);
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            border-left: 2px solid var(--gray-300);
+            position: sticky;
+            right: 0;
+            z-index: 40;
+            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Footer totals sticky */
+        .month-target-table tfoot {
+            position: sticky;
+            bottom: 0;
+            z-index: 90;
+            background: #f1f5f9;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .table-scroll-container {
+                max-height: calc(100vh - 350px);
+            }
+
+            .month-input {
+                width: 60px;
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .table-scroll-container {
+                max-height: calc(100vh - 300px);
+            }
+
+            .month-input {
+                width: 50px;
+                padding: 6px 4px;
+                font-size: 12px;
+            }
+
+            .month-target-table .product-info {
+                min-width: 180px;
+            }
+        }
+
+        /* Smooth transitions for all interactive elements */
+        .month-input,
+        .month-target-table tbody tr,
+        .total-cell {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Visual indicator for active cell */
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.1);
+            }
+        }
+
+        .month-input:focus {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+    </style>
 </head>
 
 <body>
@@ -737,8 +964,8 @@
                 <h3 class="fw-bold mb-0"><i class="bi bi-building me-2"></i>Headquarter Management</h3>
                 <div class="d-flex gap-2">
                     <input type="text" id="hqSearch" class="form-control search-box" placeholder="🔍 Search...">
-                    <button class="btn btn-gradient-primary btn-custom" data-bs-toggle="modal"
-                        data-bs-target="#hqModal" onclick="resetHQModal()">
+                    <button class="btn btn-gradient-primary btn-custom" data-bs-toggle="modal" data-bs-target="#hqModal"
+                        onclick="resetHQModal()">
                         <i class="bi bi-plus-circle me-2"></i>Add HQ
                     </button>
                 </div>
@@ -1204,11 +1431,11 @@
                                         <i class="bi bi-calendar-fill me-2"></i>Same for All Months
                                     </button>
                                 </div>
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
                                     <button class="btn btn-outline-success w-100" onclick="fillSeasonalPattern()">
                                         <i class="bi bi-snow me-2"></i>Seasonal Pattern
                                     </button>
-                                </div>
+                                </div> -->
                                 <div class="col-md-4">
                                     <button class="btn btn-outline-danger w-100" onclick="clearAllTargets()">
                                         <i class="bi bi-x-circle me-2"></i>Clear All
@@ -1244,7 +1471,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        
+
         const API = "https://titanicadminbackend.onrender.com/api";
         let toast, hqModal, employeeModal, wholesalerModal, productModal, assignTargetModal;
         let allHQs = [], allEmployees = [], allWholesalers = [], allProducts = [], allProductsForTarget = [];
@@ -1351,19 +1578,19 @@
             document.getElementById('hqName').value = hq.name;
             document.getElementById('hqModalTitle').innerText = 'Update Headquarter';
             document.getElementById('hqSaveBtn').innerText = 'Update';
-            
+
             new bootstrap.Modal(document.getElementById('hqModal')).show();
         }
 
         async function addHQ() {
             const id = document.getElementById('hqId').value;
             const name = document.getElementById('hqName').value;
-            
-            if (!name) { 
-                alert('Enter HQ name'); 
-                return; 
+
+            if (!name) {
+                alert('Enter HQ name');
+                return;
             }
-            
+
             try {
                 if (id) {
                     // Update existing HQ
@@ -1374,7 +1601,7 @@
                     await axios.post(`${API}/hq`, { name });
                     showToast('HQ created successfully!');
                 }
-                
+
                 document.getElementById('hqName').value = '';
                 document.getElementById('hqId').value = '';
                 bootstrap.Modal.getInstance(document.getElementById('hqModal')).hide();
@@ -1931,53 +2158,282 @@
                         const value = monthlyTargets[month] || 0;
                         yearlyTotal += value;
                         monthCells += `
-                    <td style="text-align: center; padding: 8px;">
-                        <input type="number" 
-                               class="month-input" 
-                               data-product-id="${prod._id}"
-                               data-product-idx="${idx}"
-                               data-month="${month}"
-                               data-price="${prod.mrp}"
-                               value="${value}" 
-                               min="0" 
-                               placeholder="0"
-                               onchange="updateMonthlyTotals()"
-                               oninput="updateMonthlyTotals()">
-                    </td>
-                `;
+            <td style="text-align: center; padding: 8px;">
+                <input type="text" 
+                       class="month-input" 
+                       data-product-id="${prod._id}"
+                       data-product-idx="${idx}"
+                       data-month="${month}"
+                       data-price="${prod.mrp}"
+                       value="${value}" 
+                       min="0" 
+                       placeholder="0"
+                       onchange="updateMonthlyTotals()"
+                       oninput="updateMonthlyTotals()"
+                       onkeydown="handleKeyboardNavigation(event, ${idx}, ${month})"
+                       onfocus="this.select()">
+            </td>
+        `;
                     }
 
                     return `
-                <tr>
-                    <td class="product-info">
-                        <div class="d-flex align-items-center">
-                            <div class="me-2" style="background: #0f172a; color: white; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; font-size: 14px;">
-                                ${idx + 1}
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; font-size: 14px;">${prod.name}</div>
-                                <div style="font-size: 11px; color: #64748b;">
-                                    <span class="product-badge bg-info text-white">${prod.type}</span>
-                                    <span class="ms-2">${packing}</span>
-                                    <span class="ms-2 fw-semibold">₹${prod.mrp}</span>
-                                </div>
-                            </div>
+        <tr>
+            <td class="product-info">
+                <div class="d-flex align-items-center">
+                    <div class="me-2" style="background: #0f172a; color: white; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; font-size: 14px;">
+                        ${idx + 1}
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px;">${prod.name}</div>
+                        <div style="font-size: 11px; color: #64748b;">
+                            <span class="product-badge bg-info text-white">${prod.type}</span>
+                            <span class="ms-2">${packing}</span>
+                            <span class="ms-2 fw-semibold">₹${prod.mrp}</span>
                         </div>
-                    </td>
-                    ${monthCells}
-                    <td class="total-cell" id="product-total-${idx}">${yearlyTotal}</td>
-                </tr>
-            `;
+                    </div>
+                </div>
+            </td>
+            ${monthCells}
+            <td class="total-cell" id="product-total-${idx}">${yearlyTotal}</td>
+        </tr>
+    `;
                 }).join('');
 
                 updateMonthlyTotals();
                 assignTargetModal.show();
+
+                // Focus first input after modal opens
+                setTimeout(() => {
+                    const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
+                    if (firstInput) {
+                        firstInput.focus();
+                        firstInput.select();
+                    }
+                }, 300);
             } catch (error) {
                 console.error('Error loading existing targets:', error);
                 alert('Failed to load existing targets');
             }
         }
 
+        // ==================== KEYBOARD NAVIGATION ====================
+
+        function handleKeyboardNavigation(event, currentRow, currentMonth) {
+            const key = event.key;
+            const totalProducts = allProductsForTarget.length;
+
+            // Don't navigate if user is typing or using modifiers
+            if (event.ctrlKey || event.altKey || event.metaKey) {
+                return;
+            }
+
+            let targetRow = currentRow;
+            let targetMonth = currentMonth;
+            let shouldNavigate = false;
+
+            switch (key) {
+                case 'Enter':
+                    event.preventDefault();
+                    // Move down to next row (same month)
+                    targetRow = currentRow + 1;
+                    targetMonth = currentMonth;
+
+                    // If at last row, wrap to first row of next month
+                    if (targetRow >= totalProducts) {
+                        targetRow = 0;
+                        targetMonth = currentMonth < 12 ? currentMonth + 1 : currentMonth;
+                    }
+                    shouldNavigate = true;
+                    break;
+
+                case 'ArrowRight':
+                    event.preventDefault();
+                    // Move right to next month (same row)
+                    if (currentMonth < 12) {
+                        targetRow = currentRow;
+                        targetMonth = currentMonth + 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    // Move left to previous month (same row)
+                    if (currentMonth > 1) {
+                        targetRow = currentRow;
+                        targetMonth = currentMonth - 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'ArrowDown':
+                    event.preventDefault();
+                    // Move down to next row (same month)
+                    if (currentRow < totalProducts - 1) {
+                        targetRow = currentRow + 1;
+                        targetMonth = currentMonth;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'ArrowUp':
+                    event.preventDefault();
+                    // Move up to previous row (same month)
+                    if (currentRow > 0) {
+                        targetRow = currentRow - 1;
+                        targetMonth = currentMonth;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'Tab':
+                    // Let Tab work naturally but prevent default to customize behavior
+                    event.preventDefault();
+                    if (event.shiftKey) {
+                        // Shift+Tab: Move to previous cell
+                        if (currentMonth > 1) {
+                            targetRow = currentRow;
+                            targetMonth = currentMonth - 1;
+                        } else if (currentRow > 0) {
+                            targetRow = currentRow - 1;
+                            targetMonth = 12;
+                        }
+                    } else {
+                        // Tab: Move to next cell
+                        if (currentMonth < 12) {
+                            targetRow = currentRow;
+                            targetMonth = currentMonth + 1;
+                        } else if (currentRow < totalProducts - 1) {
+                            targetRow = currentRow + 1;
+                            targetMonth = 1;
+                        }
+                    }
+                    shouldNavigate = true;
+                    break;
+            }
+
+            if (shouldNavigate) {
+                navigateToCell(targetRow, targetMonth);
+            }
+        }
+
+        function navigateToCell(row, month) {
+            // Find the target input
+            const targetInput = document.querySelector(
+                `.month-input[data-product-idx="${row}"][data-month="${month}"]`
+            );
+
+            if (targetInput) {
+                // Focus and select the input
+                targetInput.focus();
+                targetInput.select();
+
+                // Scroll into view smoothly
+                const scrollContainer = document.querySelector('.table-scroll-container');
+                if (scrollContainer) {
+                    // Calculate if element is in view
+                    const inputRect = targetInput.getBoundingClientRect();
+                    const containerRect = scrollContainer.getBoundingClientRect();
+
+                    // Check if element is outside viewport
+                    if (inputRect.top < containerRect.top || inputRect.bottom > containerRect.bottom ||
+                        inputRect.left < containerRect.left || inputRect.right > containerRect.right) {
+
+                        targetInput.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'nearest'
+                        });
+                    }
+                }
+            }
+        }
+
+        // ==================== ENHANCED QUICK FILL FUNCTIONS ====================
+
+        function fillAllMonths() {
+            const value = prompt('Enter the same target for all months (e.g., 50):');
+            if (!value || isNaN(value) || value < 0) return;
+
+            const inputs = document.querySelectorAll('.month-input');
+            inputs.forEach(input => {
+                input.value = parseInt(value);
+            });
+            updateMonthlyTotals();
+            showToast('✅ All months filled with same value!');
+
+            // Focus first input
+            setTimeout(() => {
+                const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
+                if (firstInput) {
+                    firstInput.focus();
+                    firstInput.select();
+                }
+            }, 100);
+        }
+
+        function fillSeasonalPattern() {
+            const seasonalPattern = {
+                1: 1.2, 2: 1.2, 3: 1.0, 4: 0.8, 5: 0.7, 6: 0.9,
+                7: 1.1, 8: 1.2, 9: 1.0, 10: 1.1, 11: 1.2, 12: 1.3
+            };
+
+            const baseValue = prompt('Enter base monthly target (e.g., 50):\n\nThe system will apply seasonal adjustments:\n• Winter (Dec-Feb): +20-30%\n• Monsoon (Jul-Aug): +10-20%\n• Summer (Apr-May): -20-30%');
+
+            if (!baseValue || isNaN(baseValue) || baseValue < 0) return;
+
+            const base = parseInt(baseValue);
+            const inputs = document.querySelectorAll('.month-input');
+
+            const productGroups = {};
+            inputs.forEach(input => {
+                const productId = input.dataset.productId;
+                if (!productGroups[productId]) {
+                    productGroups[productId] = [];
+                }
+                productGroups[productId].push(input);
+            });
+
+            Object.values(productGroups).forEach(productInputs => {
+                productInputs.forEach(input => {
+                    const month = parseInt(input.dataset.month);
+                    const multiplier = seasonalPattern[month];
+                    input.value = Math.round(base * multiplier);
+                });
+            });
+
+            updateMonthlyTotals();
+            showToast('✅ Seasonal pattern applied successfully!');
+
+            // Focus first input
+            setTimeout(() => {
+                const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
+                if (firstInput) {
+                    firstInput.focus();
+                    firstInput.select();
+                }
+            }, 100);
+        }
+
+        function clearAllTargets() {
+            if (!confirm('⚠️ Are you sure you want to clear all targets?')) return;
+
+            const inputs = document.querySelectorAll('.month-input');
+            inputs.forEach(input => {
+                input.value = 0;
+            });
+            updateMonthlyTotals();
+            showToast('✅ All targets cleared!');
+
+            // Focus first input
+            setTimeout(() => {
+                const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
+                if (firstInput) {
+                    firstInput.focus();
+                    firstInput.select();
+                }
+            }, 100);
+        }
         function updateMonthlyTotals() {
             const inputs = document.querySelectorAll('.month-input');
             let grandTotal = 0;
