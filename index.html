@@ -36,7 +36,6 @@
             color: var(--gray-900);
         }
 
-        /* ==================== SIDEBAR ==================== */
         .sidebar {
             background: var(--primary-nav);
             color: white;
@@ -94,7 +93,6 @@
             font-size: 16px;
         }
 
-        /* ==================== MAIN CONTENT ==================== */
         .main {
             margin-left: 280px;
             padding: 30px 40px;
@@ -117,7 +115,6 @@
             }
         }
 
-        /* ==================== STAT CARDS ==================== */
         .stat-card {
             border: none;
             border-radius: 12px;
@@ -156,7 +153,6 @@
             margin: 0;
         }
 
-        /* ==================== SECTION HEADER ==================== */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -180,7 +176,6 @@
             min-width: 250px;
         }
 
-        /* ==================== TABLE STYLES ==================== */
         .table-card {
             background: white;
             border-radius: 12px;
@@ -218,13 +213,22 @@
         }
 
         .serial-col {
-            width: 50px;
+            width: 40px;
             text-align: center;
             font-weight: 600;
             color: var(--gray-500);
         }
 
-        /* ==================== FORM CONTROLS ==================== */
+        .table tbody tr.clickable-row {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .table tbody tr.clickable-row:hover {
+            background: var(--gray-100) !important;
+            transform: translateX(2px);
+        }
+
         .form-control,
         .form-select {
             border-radius: 8px;
@@ -248,7 +252,6 @@
             margin-bottom: 8px;
         }
 
-        /* ==================== BUTTONS ==================== */
         .btn-custom {
             padding: 10px 24px;
             border-radius: 8px;
@@ -290,7 +293,6 @@
             background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
         }
 
-        /* ==================== BADGES ==================== */
         .badge-custom {
             padding: 6px 12px;
             border-radius: 6px;
@@ -298,7 +300,6 @@
             font-size: 12px;
         }
 
-        /* ==================== MODALS ==================== */
         .modal-header {
             background: var(--primary-nav);
             color: white;
@@ -325,7 +326,6 @@
             border-top: 1px solid var(--gray-200);
         }
 
-        /* ==================== ALERTS ==================== */
         .alert-custom {
             border: none;
             border-radius: 10px;
@@ -334,46 +334,19 @@
             border-left: 4px solid;
         }
 
-        /* ==================== TARGET ASSIGNMENT ==================== */
-        .target-status-card {
-            border: 2px solid var(--gray-200);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .target-status-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.12);
-            transform: translateY(-2px);
-        }
-
-        .target-status-card.has-targets {
-            border-left: 5px solid var(--success);
-            background: linear-gradient(to right, #f0fdf4, white);
-        }
-
-        .target-status-card.no-targets {
-            border-left: 5px solid var(--warning);
-            background: linear-gradient(to right, #fffbeb, white);
-        }
-
-        .target-status-card h5 {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--gray-900);
-            margin-bottom: 8px;
-        }
-
         .summary-card {
             background: white;
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
+            margin-bottom: 0;
             border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
         .summary-card h6 {
@@ -386,7 +359,7 @@
         }
 
         .summary-card .value {
-            font-size: 28px;
+            font-size: 21px;
             font-weight: 700;
             color: var(--accent);
         }
@@ -399,15 +372,16 @@
             color: var(--warning);
         }
 
-        /* ==================== MONTH TARGET TABLE ==================== */
         .month-target-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 20px 0;
+            margin: 10px 0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             border-radius: 12px;
             overflow: hidden;
+            margin: 0 !important;
+            font-size: 11px;
         }
 
         .month-target-table thead {
@@ -415,10 +389,10 @@
         }
 
         .month-target-table th {
-            padding: 14px 10px;
+            padding: 6px 3px !important;
+            font-size: 9px !important;
             text-align: center;
             font-weight: 600;
-            font-size: 12px;
             color: white;
             border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
@@ -437,7 +411,7 @@
         }
 
         .month-target-table td {
-            padding: 10px;
+            padding: 4px 2px !important;
             border-bottom: 1px solid var(--gray-200);
             border-right: 1px solid var(--gray-200);
         }
@@ -450,114 +424,92 @@
             padding: 14px;
             background: var(--gray-50);
             font-weight: 600;
-            min-width: 220px;
+            min-width: 195px;
             border-right: 2px solid var(--gray-300);
         }
 
         .month-input {
-            width: 68px;
-            padding: 8px 6px;
-            border: 1px solid var(--gray-300);
-            border-radius: 6px;
+            width: 45px;
+            padding: 5px 2px;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
             text-align: center;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             transition: all 0.2s ease;
+            background: white;
         }
 
         .month-input:focus {
             border-color: var(--accent);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-            transform: scale(1.03);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            transform: scale(1.05);
+            z-index: 10;
+            position: relative;
         }
 
         .month-input:hover {
             border-color: var(--gray-400);
+            background: #fafafa;
         }
 
         .total-cell {
-            background: var(--gray-100);
-            font-weight: 700;
+            background: #f8fafc;
+            font-weight: 600;
             color: var(--accent);
             text-align: center;
-            padding: 12px;
+            padding: 10px;
             font-size: 13px;
+            border-left: 2px solid var(--gray-300);
+            position: sticky;
+            right: 0;
+            z-index: 40;
+            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
         }
 
-        /* ==================== STATUS BADGES ==================== */
-        .status-badge {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .status-achieved {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .status-behind {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .status-progress {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        /* ==================== QUICK ACTION BUTTONS ==================== */
-        .quick-action-btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            transition: all 0.2s ease;
-            border: none;
-        }
-
-        .quick-action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* ==================== PRODUCT BADGE ==================== */
         .product-badge {
             display: inline-block;
-            padding: 4px 10px;
+            padding: 3px 5px;
             border-radius: 5px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-left: 6px;
+            font-size: 10px;
+            font-weight: 400;
         }
 
-        /* ==================== SCROLLBAR ==================== */
         .table-scroll-container {
-            max-height: calc(100vh - 320px);
+            max-height: calc(100vh - 400px);
+            overflow-x: auto;
             overflow-y: auto;
             border-radius: 12px;
+            position: relative;
+            scroll-behavior: smooth;
         }
 
         .table-scroll-container::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 12px;
+            height: 12px;
         }
 
         .table-scroll-container::-webkit-scrollbar-track {
-            background: var(--gray-100);
+            background: #f1f5f9;
             border-radius: 10px;
+            margin: 4px;
         }
 
         .table-scroll-container::-webkit-scrollbar-thumb {
-            background: var(--gray-400);
+            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
             border-radius: 10px;
+            border: 2px solid #f1f5f9;
         }
 
         .table-scroll-container::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-500);
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+            border-color: #e2e8f0;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-corner {
+            background: #f1f5f9;
+            border-radius: 4px;
         }
 
         .sticky-header {
@@ -566,38 +518,131 @@
             z-index: 10;
         }
 
-        /* ==================== YEARLY TOTAL BANNER ==================== */
         .yearly-total-banner {
             background: linear-gradient(135deg, var(--primary-nav) 0%, #1e293b 100%);
             color: white;
-            padding: 15px;
+            padding: 8px 12px !important;
+            margin: 8px 0 !important;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            margin: 24px 0;
         }
 
         .yearly-total-banner h4 {
             margin: 0;
             font-weight: 600;
-            font-size: 17px;
+            font-size: 16px;
         }
 
         .yearly-total-banner .value {
-            font-size: 34px;
-            font-weight: 800;
+            font-size: 25px;
+            font-weight: 700;
         }
 
         .yearly-total-banner .opacity-75 {
             opacity: 0.75;
         }
 
-        /* ==================== TOAST NOTIFICATIONS ==================== */
         .toast {
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* ==================== RESPONSIVE ==================== */
+        .month-target-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--primary-nav);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .month-target-table .product-info {
+            position: sticky;
+            left: 0;
+            z-index: 50;
+            background: var(--gray-50);
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .month-target-table thead th:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 150;
+            background: var(--primary-nav);
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .month-target-table tbody tr:has(.month-input:focus) {
+            background: #eff6ff;
+        }
+
+        .month-target-table tfoot {
+            position: sticky;
+            bottom: 0;
+            z-index: 90;
+            background: #f1f5f9;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #assignTargetModal .modal-body {
+            padding: 10px 15px !important;
+        }
+
+        .sales-quantity-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .sales-quantity-input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            transform: scale(1.02);
+            z-index: 10;
+            position: relative;
+        }
+
+        .sales-quantity-input:hover {
+            border-color: var(--gray-400);
+            background: #fafafa;
+        }
+
+        .product-details-cell {
+            padding: 16px !important;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .product-meta {
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 1200px) {
+            .table-scroll-container {
+                max-height: calc(100vh - 280px) !important;
+                min-height: 400px;
+                margin: 0 !important;
+            }
+
+            .month-input {
+                width: 60px;
+                padding: 8px 6px;
+                font-size: 13px;
+            }
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
@@ -620,20 +665,21 @@
                 width: 100%;
             }
 
+            .table-scroll-container {
+                max-height: calc(100vh - 300px);
+            }
+
             .month-input {
-                width: 55px;
+                width: 50px;
                 padding: 6px 4px;
                 font-size: 12px;
             }
 
-            .month-target-table th,
-            .month-target-table td {
-                padding: 8px 5px;
-                font-size: 11px;
+            .month-target-table .product-info {
+                min-width: 180px;
             }
         }
 
-        /* ==================== UTILITY CLASSES ==================== */
         .fw-semibold {
             font-weight: 600;
         }
@@ -646,7 +692,6 @@
             background-color: var(--gray-100) !important;
         }
 
-        /* ==================== ADDITIONAL REFINEMENTS ==================== */
         h3 i,
         h4 i,
         h5 i {
@@ -679,214 +724,6 @@
             font-weight: 600;
         }
 
-        .table-scroll-container {
-            max-height: calc(100vh - 400px);
-            /* Adjust based on screen height */
-            overflow-x: auto;
-            overflow-y: auto;
-            border-radius: 12px;
-            position: relative;
-        }
-
-        /* Enhanced scrollbar styling */
-        .table-scroll-container::-webkit-scrollbar {
-            width: 12px;
-            height: 12px;
-        }
-
-        .table-scroll-container::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-            margin: 4px;
-        }
-
-        .table-scroll-container::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
-            border-radius: 10px;
-            border: 2px solid #f1f5f9;
-        }
-
-        .table-scroll-container::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #475569 0%, #334155 100%);
-            border-color: #e2e8f0;
-        }
-
-        .table-scroll-container::-webkit-scrollbar-corner {
-            background: #f1f5f9;
-            border-radius: 4px;
-        }
-
-        /* Firefox scrollbar */
-        .table-scroll-container {
-            scrollbar-width: auto;
-            scrollbar-color: #64748b #f1f5f9;
-        }
-
-        /* Smooth scrolling */
-        .table-scroll-container {
-            scroll-behavior: smooth;
-        }
-
-        /* Sticky header enhancement */
-        .month-target-table thead {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: var(--primary-nav);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Sticky product info column */
-        .month-target-table .product-info {
-            position: sticky;
-            left: 0;
-            z-index: 50;
-            background: var(--gray-50);
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
-        }
-
-        /* Header corner cell (sticky both ways) */
-        .month-target-table thead th:first-child {
-            position: sticky;
-            left: 0;
-            z-index: 150;
-            background: var(--primary-nav);
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Input focus enhancement */
-        .month-input:focus {
-            border-color: var(--accent);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
-            transform: scale(1.05);
-            z-index: 10;
-            position: relative;
-        }
-
-        /* Highlight current row on input focus */
-        .month-target-table tbody tr:has(.month-input:focus) {
-            background: #eff6ff;
-        }
-
-        /* Enhanced month input */
-        .month-input {
-            width: 60px;
-            padding: 10px 8px;
-            border: 2px solid var(--gray-300);
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            background: white;
-        }
-
-        .month-input:hover {
-            border-color: var(--gray-400);
-            background: #fafafa;
-        }
-
-        /* Loading indicator for smooth scroll */
-        .table-scroll-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg,
-                    transparent 0%,
-                    var(--accent) 50%,
-                    transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 200;
-        }
-
-        .table-scroll-container.scrolling::before {
-            opacity: 1;
-        }
-
-        /* Modal body padding adjustment for better scrolling */
-        #assignTargetModal .modal-body {
-            padding: 20px;
-        }
-
-        /* Improve table responsiveness */
-        .month-target-table {
-            min-width: 1400px;
-            /* Ensure table doesn't get squished */
-        }
-
-        /* Better visual feedback for keyboard navigation */
-        .month-input[data-navigation-active="true"] {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-
-        /* Total cells enhancement */
-        .total-cell {
-            background: #f8fafc;
-            font-weight: 700;
-            color: var(--accent);
-            text-align: center;
-            padding: 10px;
-            font-size: 14px;
-            border-left: 2px solid var(--gray-300);
-            position: sticky;
-            right: 0;
-            z-index: 40;
-            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Footer totals sticky */
-        .month-target-table tfoot {
-            position: sticky;
-            bottom: 0;
-            z-index: 90;
-            background: #f1f5f9;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .table-scroll-container {
-                max-height: calc(100vh - 350px);
-            }
-
-            .month-input {
-                width: 60px;
-                padding: 8px 6px;
-                font-size: 13px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .table-scroll-container {
-                max-height: calc(100vh - 300px);
-            }
-
-            .month-input {
-                width: 50px;
-                padding: 6px 4px;
-                font-size: 12px;
-            }
-
-            .month-target-table .product-info {
-                min-width: 180px;
-            }
-        }
-
-        /* Smooth transitions for all interactive elements */
-        .month-input,
-        .month-target-table tbody tr,
-        .total-cell {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Visual indicator for active cell */
         @keyframes pulseGlow {
 
             0%,
@@ -901,6 +738,424 @@
 
         .month-input:focus {
             animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        .clickable-row {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .clickable-row:hover {
+            background: var(--gray-100) !important;
+            transform: translateX(4px);
+        }
+
+        .product-stock-row {
+            transition: background 0.2s ease;
+        }
+
+        .product-stock-row:hover {
+            background: #f8fafc;
+        }
+
+        .stock-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .stock-positive {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .stock-negative {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .stock-zero {
+            background: var(--gray-200);
+            color: var(--gray-600);
+        }
+
+        /* Stock Details Table Container */
+        .stock-details-container {
+            max-height: calc(100vh - 450px);
+            overflow-x: auto;
+            overflow-y: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: white;
+            position: relative;
+        }
+
+        /* Stock Details Table */
+        .stock-details-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+        }
+
+        /* Table Header */
+        .stock-table-thead {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--primary-nav);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .stock-th {
+            color: white !important;
+            padding: 18px 16px !important;
+            font-size: 12px !important;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border: none !important;
+            background: var(--primary-nav) !important;
+            white-space: nowrap;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .stock-th i {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Table Body */
+        .stock-details-table tbody tr {
+            border-bottom: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+        }
+
+        .stock-details-table tbody tr:hover {
+            background: #f8fafc;
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stock-details-table tbody td {
+            padding: 14px 16px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        /* Scrollbar Styling */
+        .stock-details-container::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        .stock-details-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+            margin: 4px;
+        }
+
+        .stock-details-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+
+        .stock-details-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+        }
+
+        .stock-details-container::-webkit-scrollbar-corner {
+            background: #f1f5f9;
+        }
+
+        /* Product Details Cell */
+        .product-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .product-meta {
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        .wholesaler-info-bar {
+            background: white;
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border-bottom: 3px solid #e5e7eb;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .info-item i {
+            font-size: 28px;
+            color: var(--accent);
+            opacity: 0.8;
+        }
+
+        .info-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .info-sub {
+            font-size: 11px;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .info-divider {
+            width: 1px;
+            height: 45px;
+            background: linear-gradient(to bottom, transparent, #d1d5db, transparent);
+        }
+
+        /* Stock Table Wrapper - Full Height */
+        .stock-table-wrapper {
+            flex: 1;
+            overflow: auto;
+            background: white;
+            margin: 15px 30px 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Professional Stock Table */
+        .professional-stock-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .professional-stock-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .professional-stock-table thead th {
+            color: white;
+            padding: 16px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            border: none;
+            white-space: nowrap;
+            line-height: 1.4;
+        }
+
+        .professional-stock-table thead th i {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .professional-stock-table tbody tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.15s ease;
+        }
+
+        .professional-stock-table tbody tr:hover {
+            background: #f8fafc;
+            transform: translateX(2px);
+        }
+
+        .professional-stock-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .professional-stock-table tbody td {
+            padding: 14px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        /* Product Details in Table */
+        .professional-stock-table .product-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .professional-stock-table .product-meta {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .professional-stock-table .product-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            background: #dbeafe;
+            color: #1e40af;
+            margin-right: 6px;
+        }
+
+        /* Stock Badges */
+        .professional-stock-table .stock-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .professional-stock-table .stock-positive {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .professional-stock-table .stock-negative {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .professional-stock-table .stock-zero {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+
+        /* Summary Footer - Sticky */
+        .summary-footer {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            bottom: 0;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+        }
+
+        .summary-item-large {
+            flex: 1.5;
+        }
+
+        .summary-item i {
+            font-size: 32px;
+            color: white;
+            opacity: 0.7;
+        }
+
+        .summary-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .summary-divider {
+            width: 1px;
+            height: 45px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        /* Scrollbar for Table */
+        .stock-table-wrapper::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .stock-table-wrapper::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        .stock-table-wrapper::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+            border-radius: 10px;
+            border: 2px solid #f1f5f9;
+        }
+
+        .stock-table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #475569 0%, #334155 100%);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1400px) {
+            .wholesaler-info-bar {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .info-item {
+                flex: 0 0 calc(33.333% - 10px);
+            }
+
+            .summary-footer {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .summary-item {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .info-item,
+            .summary-item {
+                flex: 0 0 100%;
+            }
+
+            .info-divider,
+            .summary-divider {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -919,45 +1174,366 @@
             <a class="nav-link" onclick="showSection('wholesaler')"><i class="bi bi-shop me-2"></i> Wholesaler</a>
             <a class="nav-link" onclick="showSection('products')"><i class="bi bi-box-seam me-2"></i> Products</a>
             <a class="nav-link" onclick="showSection('sales')"><i class="bi bi-cart-plus me-2"></i> Sales</a>
+            <a class="nav-link" onclick="showSection('sales-history')"><i class="bi bi-clock-history me-2"></i> Sales
+                History</a>
             <a class="nav-link" onclick="showSection('target-assignment')"><i class="bi bi-clipboard-check me-2"></i>
+
                 Target Assignment</a>
         </nav>
     </div>
 
     <div class="main">
-        <div id="dashboard" class="section">
-            <h3 class="fw-bold mb-4"><i class="bi bi-grid-fill me-2"></i>Dashboard Overview</h3>
-            <div class="row g-4">
+
+        <div id="sales-history" class="section" style="display:none;">
+            <!-- Header with Filters -->
+            <div class="section-header">
+                <h3 class="fw-bold mb-0"><i class="bi bi-clock-history me-2"></i>Sales Reports</h3>
+                <div class="d-flex gap-2">
+                    <select id="historyMonth" class="form-select" style="width: 150px;"
+                        onchange="loadWholesalerSales()">
+                        <option value="">All Months</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <select id="historyYear" class="form-select" style="width: 120px;" onchange="loadWholesalerSales()">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                    </select>
+                    <select id="historyHQ" class="form-select" style="width: 200px;" onchange="loadWholesalerSales()">
+                        <option value="">All Headquarters</option>
+                    </select>
+                    <input type="text" id="historySearch" class="form-control search-box"
+                        placeholder="🔍 Search by wholesaler, employee, or HQ..." oninput="filterWholesalerSales()">
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="row g-4 mb-4 d-none">
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
-                        <i class="bi bi-building icon-bg text-primary"></i>
-                        <h6 class="text-muted mb-2">Headquarters</h6>
-                        <h2 id="statHQ" class="text-primary fw-bold">0</h2>
+                    <div class="summary-card d-flex justify-content-between align-items-center">
+                        <h6>Total Wholesalers</h6>
+                        <div class="value" id="summaryTotalWholesalers">0</div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
-                        <i class="bi bi-people icon-bg text-success"></i>
-                        <h6 class="text-muted mb-2">Employees</h6>
-                        <h2 id="statHBP" class="text-success fw-bold">0</h2>
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--success);">
+                        <h6>Total Transactions</h6>
+                        <div class="value text-success" id="summaryTotalTransactions">0</div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
-                        <i class="bi bi-shop icon-bg text-info"></i>
-                        <h6 class="text-muted mb-2">Wholesalers</h6>
-                        <h2 id="statWS" class="text-info fw-bold">0</h2>
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--warning);">
+                        <h6>Total Purchases</h6>
+                        <div class="value text-warning" id="summaryTotalPurchases">0</div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
-                        <i class="bi bi-box-seam icon-bg text-warning"></i>
-                        <h6 class="text-muted mb-2">Products</h6>
-                        <h2 id="statProd" class="text-warning fw-bold">0</h2>
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--accent);">
+                        <h6>Total Value</h6>
+                        <div class="value" style="color: var(--accent);" id="summaryTotalValue">₹0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wholesaler List Table -->
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="serial-col">#</th>
+                                <th>Wholesaler Name</th>
+                                <!-- <th>GST Number</th> -->
+                                <th>Employee</th>
+                                <th>Headquarter</th>
+                                <!-- <th>Total Transactions</th> -->
+                                <!-- <th>Total Purchases</th> -->
+                                <!-- <th>Actions</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="wholesalerSalesTableBody">
+                            <tr>
+                                <td colspan="8" class="text-center py-5">
+                                    <div class="spinner-border text-primary"></div>
+                                    <p class="mt-2 text-muted">Loading wholesalers...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wholesaler Details Modal -->
+        <div class="modal fade" id="wholesalerDetailsModal" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content" style="background: #f1f5f9;">
+                    <div class="modal-header"
+                        style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: none; padding: 20px 40px;">
+                        <div>
+                            <h5 class="modal-title mb-1" style="font-size: 20px; font-weight: 700;">
+                                <i class="bi bi-shop me-2"></i>Wholesaler Sales Details
+                            </h5>
+                            <small class="text-white-50" id="wholesalerDetailsSubtitle" style="font-size: 13px;">
+                                Wholesaler • Employee • HQ • Month/Year
+                            </small>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            style="filter: brightness(0) invert(1);"></button>
+                    </div>
+
+                    <div class="modal-body p-0"
+                        style="background: #f1f5f9; display: flex; flex-direction: column; height: calc(100vh - 140px);">
+
+                        <!-- Wholesaler Info Card - Compact -->
+                        <!-- <div class="wholesaler-info-bar">
+                    <div class="info-item">
+                        <i class="bi bi-shop-window"></i>
+                        <div>
+                            <div class="info-label">WHOLESALER</div>
+                            <div class="info-value" id="detailWholesalerName">-</div>
+                            <div class="info-sub" id="detailGST">-</div>
+                        </div>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="info-item">
+                        <i class="bi bi-person-badge"></i>
+                        <div>
+                            <div class="info-label">EMPLOYEE</div>
+                            <div class="info-value" id="detailEmployee">-</div>
+                            <div class="info-sub" id="detailRole">-</div>
+                        </div>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="info-item">
+                        <i class="bi bi-building"></i>
+                        <div>
+                            <div class="info-label">HEADQUARTER</div>
+                            <div class="info-value" id="detailHQ">-</div>
+                        </div>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="info-item">
+                        <i class="bi bi-calendar3"></i>
+                        <div>
+                            <div class="info-label">PERIOD</div>
+                            <div class="info-value" id="detailPeriod">-</div>
+                        </div>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="info-item">
+                        <i class="bi bi-telephone"></i>
+                        <div>
+                            <div class="info-label">CONTACT</div>
+                            <div class="info-value" id="detailMobile">-</div>
+                        </div>
+                    </div>
+                </div> -->
+
+                        <!-- Product Stock Details Table - Full Height -->
+                        <div class="stock-table-wrapper">
+                            <table class="professional-stock-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;">#</th>
+                                        <th style="min-width: 280px;">
+                                            Product Details
+                                        </th>
+                                        <th class="text-center" style="width: 130px;">
+                                            Opening Stock
+                                        </th>
+                                        <th class="text-center" style="width: 130px;">
+                                            Purchase
+                                        </th>
+                                        <th class="text-center" style="width: 130px;">
+                                            Sales
+                                        </th>
+                                        <th class="text-center" style="width: 130px;">
+                                            Closing Stock
+                                        </th>
+                                        <th class="text-end" style="width: 110px;">
+                                            Rate
+                                        </th>
+                                        <!-- <th class="text-end" style="width: 150px;">
+                                            Purchase Value
+                                        </th> -->
+                                    </tr>
+                                </thead>
+                                <tbody id="productStockDetailsBody">
+                                    <tr>
+                                        <td colspan="8" class="text-center py-5">
+                                            <div class="spinner-border text-primary"></div>
+                                            <p class="mt-2 text-muted">Loading product details...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Summary Footer - Sticky at Bottom -->
+                        <!-- <div class="row summary-footer">
+                            <div class="col-2 summary-item">
+                                <i class="bi bi-boxes"></i>
+                                <div>
+                                    <div class="summary-label">Total Products</div>
+                                    <div class="summary-value" id="detailTotalProducts">0</div>
+                                </div>
+                            </div>
+                            <div class="col-2 summary-divider"></div>
+                            <div class="summary-item">
+                                <i class="bi bi-cart-plus"></i>
+                                <div>
+                                    <div class="summary-label">Total Purchase</div>
+                                    <div class="summary-value text-success" id="detailTotalPurchase">0</div>
+                                </div>
+                            </div>
+                            <div class="col-2 summary-divider"></div>
+                            <div class="summary-item">
+                                <i class="bi bi-cart-dash"></i>
+                                <div>
+                                    <div class="summary-label">Total Sales</div>
+                                    <div class="summary-value text-danger" id="detailTotalSales">0</div>
+                                </div>
+                            </div>
+                            <div class="col-2 summary-divider"></div>
+                            <div class="summary-item summary-item-large">
+                                <i class="bi bi-cash-stack"></i>
+                                <div>
+                                    <div class="summary-label">Total Value</div>
+                                    <div class="summary-value" style="font-size: 28px; color: var(--accent);"
+                                        id="detailTotalValue">₹0</div>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Wholesaler Details Modal -->
+        <div class="modal fade" id="wholesalerDetailsModal" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <h5 class="modal-title mb-1">
+                                <i class="bi bi-shop me-2"></i>Wholesaler Sales Details
+                            </h5>
+                            <small class="text-white-50" id="wholesalerDetailsSubtitle">
+                                Wholesaler • Employee • HQ • Month/Year
+                            </small>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4" style="background: #f8fafc;">
+
+                        <!-- Wholesaler Info Card -->
+                        <div class="card mb-4" style="border-left: 4px solid var(--accent);">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h6 class="text-muted mb-1" style="font-size: 11px;">WHOLESALER</h6>
+                                        <p class="mb-0 fw-bold" id="detailWholesalerName">-</p>
+                                        <small class="text-muted" id="detailGST">-</small>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h6 class="text-muted mb-1" style="font-size: 11px;">EMPLOYEE</h6>
+                                        <p class="mb-0 fw-bold" id="detailEmployee">-</p>
+                                        <small class="text-muted" id="detailRole">-</small>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6 class="text-muted mb-1" style="font-size: 11px;">HEADQUARTER</h6>
+                                        <p class="mb-0 fw-bold" id="detailHQ">-</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6 class="text-muted mb-1" style="font-size: 11px;">PERIOD</h6>
+                                        <p class="mb-0 fw-bold" id="detailPeriod">-</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h6 class="text-muted mb-1" style="font-size: 11px;">CONTACT</h6>
+                                        <p class="mb-0 fw-bold" id="detailMobile">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Stock Details Table -->
+                        <div class="table-scroll-container" style="max-height: calc(100vh - 450px);">
+                            <table class="table table-hover mb-0"
+                                style="background: white; border-radius: 12px; overflow: hidden;">
+                                <thead style="position: sticky; top: 0; background: var(--primary-nav); z-index: 10;">
+                                    <tr>
+                                        <th style="color: white; padding: 16px;">#</th>
+                                        <th style="color: white; padding: 16px; min-width: 250px;">Product Details</th>
+                                        <th style="color: white; padding: 16px; text-align: center;">Opening Stock</th>
+                                        <th style="color: white; padding: 16px; text-align: center;">Purchase</th>
+                                        <th style="color: white; padding: 16px; text-align: center;">Sales</th>
+                                        <th style="color: white; padding: 16px; text-align: center;">Closing Stock</th>
+                                        <th style="color: white; padding: 16px; text-align: right;">Rate</th>
+                                        <th style="color: white; padding: 16px; text-align: right;">Purchase Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productStockDetailsBody">
+                                    <tr>
+                                        <td colspan="8" class="text-center py-5">
+                                            <div class="spinner-border text-primary"></div>
+                                            <p class="mt-2 text-muted">Loading product details...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Summary Banner -->
+                        <div class="yearly-total-banner mt-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <h4><i class="bi bi-calculator-fill me-2"></i>Summary</h4>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <div class="opacity-75" style="font-size: 12px;">Total Products</div>
+                                    <div class="value" id="detailTotalProducts">0</div>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <div class="opacity-75" style="font-size: 12px;">Total Purchase</div>
+                                    <div class="value" id="detailTotalPurchase">0</div>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <div class="opacity-75" style="font-size: 12px;">Total Sales</div>
+                                    <div class="value" id="detailTotalSales">0</div>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <div class="opacity-75" style="font-size: 12px;">Total Value</div>
+                                    <div class="value" id="detailTotalValue">₹0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background: #f8fafc; padding: 20px 30px;">
+                        <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-2"></i>Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div id="hq" class="section" style="display:none;">
             <div class="section-header">
@@ -1079,54 +1655,85 @@
             </div>
         </div>
 
-        <div id="sales" class="section" style="display:none;">
-            <div class="container" style="max-width: 900px;">
-                <div class="card shadow-lg border-0" style="border-radius: 20px;">
-                    <div class="card-body p-4">
-                        <h4 class="mb-4">
-                            <i class="bi bi-cart-check-fill me-2" style="color: #10b981;"></i>Record Purchase
-                            Transaction
-                        </h4>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Transaction Date</label>
-                                <input id="saleDate" type="date" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Headquarter</label>
-                                <select id="saleHQ" class="form-select" onchange="loadHBPsForSales()">
-                                    <option value="">Select Headquarter</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Employee</label>
-                                <select id="saleHBP" class="form-select" onchange="loadWholesalersForSales()">
-                                    <option value="">Select Employee</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Wholesaler</label>
-                                <select id="saleWS" class="form-select">
-                                    <option value="">Select Wholesaler</option>
-                                </select>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="form-label fw-semibold">Product</label>
-                                <select id="saleProd" class="form-select">
-                                    <option value="">Choose product...</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label fw-semibold">Quantity</label>
-                                <input id="saleQty" type="number" class="form-control" placeholder="Enter quantity">
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-gradient-success w-100 py-3 btn-custom" onclick="recordSale()">
-                                    <i class="bi bi-check-circle-fill me-2"></i>RECORD PURCHASE
-                                </button>
-                            </div>
-                        </div>
+        <div id="dashboard" class="section">
+            <h3 class="fw-bold mb-4"><i class="bi bi-grid-fill me-2"></i>Dashboard Overview</h3>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stat-card p-4">
+                        <i class="bi bi-building icon-bg text-primary"></i>
+                        <h6 class="text-muted mb-2">Headquarters</h6>
+                        <h2 id="statHQ" class="text-primary fw-bold">0</h2>
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card p-4">
+                        <i class="bi bi-people icon-bg text-success"></i>
+                        <h6 class="text-muted mb-2">Employees</h6>
+                        <h2 id="statHBP" class="text-success fw-bold">0</h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card p-4">
+                        <i class="bi bi-shop icon-bg text-info"></i>
+                        <h6 class="text-muted mb-2">Wholesalers</h6>
+                        <h2 id="statWS" class="text-info fw-bold">0</h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card p-4">
+                        <i class="bi bi-box-seam icon-bg text-warning"></i>
+                        <h6 class="text-muted mb-2">Products</h6>
+                        <h2 id="statProd" class="text-warning fw-bold">0</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sales" class="section" style="display:none;">
+            <div class="section-header">
+                <h3 class="fw-bold mb-0"><i class="bi bi-cart-check-fill me-2"></i>Record Purchase Transactions</h3>
+                <div class="d-flex gap-2">
+                    <select id="salesMonth" class="form-select" style="width: 150px;">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <select id="salesYear" class="form-select" style="width: 120px;">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                    </select>
+                    <input type="text" id="salesSearch" class="form-control search-box"
+                        placeholder="🔍 Search by Wholesaler, HQ or Employee..." oninput="filterSalesWholesalers()">
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="serial-col">#</th>
+                                <th>Wholesaler Name</th>
+                                <th>GST Number</th>
+                                <th>Employee</th>
+                                <th>Headquarter</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesWholesalerTableBody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -1140,18 +1747,49 @@
                         <option value="2026">2026</option>
                         <option value="2027">2027</option>
                     </select>
-                    <select id="targetHQ" class="form-select" style="width: 250px;" onchange="loadTargetOverview()">
-                        <option value="">All Headquarters</option>
-                    </select>
+                    <input type="text" id="targetSearch" class="form-control search-box"
+                        placeholder="🔍 Search by HQ or Employee..." oninput="filterTargetEmployees()">
                 </div>
             </div>
-            <div class="alert alert-custom bg-light">
-                <i class="bi bi-info-circle me-2 text-primary"></i>
-                <strong class="text-dark">Season-based Targeting:</strong>
-                <span class="text-muted">Assign different monthly targets based on weather, seasons, and area-specific
-                    demand patterns.</span>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="summary-card d-flex justify-content-between align-items-center">
+                        <h6>Total Employees</h6>
+                        <div class="value" id="summaryTotalEmployees">0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--success);">
+                        <h6>With Targets Assigned</h6>
+                        <div class="value text-success" id="summaryWithTargets">0</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--warning);">
+                        <h6>Pending Assignment</h6>
+                        <div class="value text-warning" id="summaryPendingTargets">0</div>
+                    </div>
+                </div>
             </div>
-            <div id="targetOverviewContainer"></div>
+
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="serial-col">#</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Headquarter</th>
+                            </tr>
+                        </thead>
+                        <tbody id="targetOverviewContainer"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1183,6 +1821,7 @@
         </div>
     </div>
 
+    <!-- Employee Modal -->
     <div class="modal fade" id="employeeModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -1236,6 +1875,7 @@
         </div>
     </div>
 
+    <!-- Wholesaler Modal -->
     <div class="modal fade" id="wholesalerModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -1287,6 +1927,7 @@
         </div>
     </div>
 
+    <!-- Product Modal -->
     <div class="modal fade" id="productModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -1343,6 +1984,77 @@
         </div>
     </div>
 
+    <!-- Sales Product Modal -->
+    <div class="modal fade" id="salesProductModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title mb-1"><i class="bi bi-cart-plus me-2"></i>Record Purchase for Products
+                        </h5>
+                        <small class="text-white-50" id="salesModalSubtitle">Wholesaler • Employee • HQ</small>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4" style="background: #f8fafc;">
+                    <input type="hidden" id="salesWholesalerId">
+                    <input type="hidden" id="salesHbpId">
+                    <input type="hidden" id="salesHqId">
+                    <input type="hidden" id="salesMonthValue">
+                    <input type="hidden" id="salesYearValue">
+
+                    <!-- <div class="alert alert-info mb-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Instructions:</strong> Enter quantities for products purchased. Leave blank or 0 for
+                        products not purchased. Press Enter or Tab to move between fields.
+                    </div> -->
+
+                    <div class="table-scroll-container" style="max-height: calc(100vh - 300px);">
+                        <table class="table table-hover mb-0">
+                            <thead class="sticky-header">
+                                <tr>
+                                    <th style="width: 60px;">#</th>
+                                    <th style="min-width: 250px;">Product Details</th>
+                                    <th style="width: 150px;">Type</th>
+                                    <th style="width: 120px;">Rate</th>
+                                    <th style="width: 200px;">Quantity</th>
+                                    <th style="width: 150px;">Total Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="salesProductTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="yearly-total-banner mt-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h4><i class="bi bi-calculator-fill me-2"></i>Purchase Summary</h4>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="opacity-75" style="font-size: 12px;">Total Units</div>
+                                <div class="value" id="salesTotalUnits">0</div>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <div class="opacity-75" style="font-size: 12px;">Total Value</div>
+                                <div class="value" id="salesTotalValue">₹0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background: #f8fafc; padding: 20px 30px;">
+                    <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </button>
+                    <button type="button" class="btn btn-gradient-success btn-custom" style="padding: 14px 40px;"
+                        onclick="saveBulkPurchases()">
+                        <i class="bi bi-check-circle-fill me-2"></i>Save Purchases
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Target Assignment Modal -->
     <div class="modal fade" id="assignTargetModal" tabindex="-1">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
@@ -1362,7 +2074,7 @@
                         <table class="month-target-table" id="monthTargetTable">
                             <thead class="sticky-header">
                                 <tr>
-                                    <th rowspan="2" style="min-width: 250px;">Product Details</th>
+                                    <th rowspan="2" style="min-width: 190px;">Product Details</th>
                                     <th colspan="12">Monthly Targets (Units)</th>
                                     <th rowspan="2" style="min-width: 100px;">Yearly Total</th>
                                 </tr>
@@ -1398,49 +2110,25 @@
                                     <td class="total-cell" id="total-month-10">0</td>
                                     <td class="total-cell" id="total-month-11">0</td>
                                     <td class="total-cell" id="total-month-12">0</td>
-                                    <td class="total-cell" id="grand-total" style="font-size: 16px; font-weight: 800;">0
+                                    <td class="total-cell" id="grand-total" style="font-size: 15px; font-weight: 700;">0
                                     </td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
 
-                    <div class="yearly-total-banner mt-4">
+                    <div class="yearly-total-banner mt-2">
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <h4><i class="bi bi-trophy-fill me-2"></i>Yearly Target Summary</h4>
-                                <p class="mb-0 opacity-75">Total targets across all products for the year</p>
                             </div>
                             <div class="col-md-3 text-center">
-                                <div class="opacity-75" style="font-size: 14px;">Total Units</div>
+                                <div class="opacity-75" style="font-size: 12px;">Total Units</div>
                                 <div class="value" id="totalYearlyUnits">0</div>
                             </div>
                             <div class="col-md-3 text-center">
-                                <div class="opacity-75" style="font-size: 14px;">Total Value</div>
+                                <div class="opacity-75" style="font-size: 12px;">Total Value</div>
                                 <div class="value" id="totalYearlyValue">₹0</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mt-4 border-0 shadow-sm">
-                        <div class="card-body">
-                            <h6 class="fw-bold mb-3"><i class="bi bi-magic me-2"></i>Quick Fill Options</h6>
-                            <div class="row g-3">
-                                <div class="col-md-4">
-                                    <button class="btn btn-outline-primary w-100" onclick="fillAllMonths()">
-                                        <i class="bi bi-calendar-fill me-2"></i>Same for All Months
-                                    </button>
-                                </div>
-                                <!-- <div class="col-md-4">
-                                    <button class="btn btn-outline-success w-100" onclick="fillSeasonalPattern()">
-                                        <i class="bi bi-snow me-2"></i>Seasonal Pattern
-                                    </button>
-                                </div> -->
-                                <div class="col-md-4">
-                                    <button class="btn btn-outline-danger w-100" onclick="clearAllTargets()">
-                                        <i class="bi bi-x-circle me-2"></i>Clear All
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1458,6 +2146,7 @@
         </div>
     </div>
 
+    <!-- Toast -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
         <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert"
             style="border-radius: 8px;">
@@ -1471,15 +2160,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-
         const API = "https://titanicadminbackend.onrender.com/api";
-        let toast, hqModal, employeeModal, wholesalerModal, productModal, assignTargetModal;
+
+
+        // const API = "http://192.168.2.105:5000/api";
+
+        let allEmployeesForTarget = [];
+        let allSalesWholesalers = [];
+        let allSalesHistory = [];
+        let toast, assignTargetModal, salesProductModal;
         let allHQs = [], allEmployees = [], allWholesalers = [], allProducts = [], allProductsForTarget = [];
+        let allWholesalerSales = [];
+        let wholesalerDetailsModal;
 
         document.addEventListener('DOMContentLoaded', function () {
             toast = new bootstrap.Toast(document.getElementById('successToast'));
             assignTargetModal = new bootstrap.Modal(document.getElementById('assignTargetModal'));
-            document.getElementById('saleDate').valueAsDate = new Date();
+            salesProductModal = new bootstrap.Modal(document.getElementById('salesProductModal'));
+            wholesalerDetailsModal = new bootstrap.Modal(document.getElementById('wholesalerDetailsModal'));
+
             const currentYear = new Date().getFullYear();
             document.getElementById('targetYear').value = currentYear;
 
@@ -1508,6 +2207,7 @@
             if (id === 'wholesaler') await loadWholesalerSection();
             if (id === 'products') await loadProductsSection();
             if (id === 'sales') await loadSalesSection();
+            if (id === 'sales-history') await loadSalesHistorySection(); // Add this line
             if (id === 'target-assignment') await loadTargetAssignmentSection();
         }
 
@@ -1528,6 +2228,15 @@
             document.getElementById('hqSearch').value = '';
         }
 
+        async function loadSalesHistorySection() {
+            const now = new Date();
+            document.getElementById('historyMonth').value = '';
+            document.getElementById('historyYear').value = now.getFullYear();
+
+            await loadHQsForDropdown('historyHQ');
+            await loadSalesHistory();
+        }
+
         async function loadAllHQs() {
             try {
                 const res = await axios.get(`${API}/hq`);
@@ -1540,21 +2249,22 @@
 
         function renderHQs(data) {
             const tbody = document.getElementById('hqTableBody');
-            tbody.innerHTML = data.length === 0 ?
+            const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
+            tbody.innerHTML = sortedData.length === 0 ?
                 '<tr><td colspan="5" class="text-center py-4 text-muted">No headquarters found</td></tr>' :
-                data.map((hq, idx) => `
-            <tr>
-                <td class="serial-col">${idx + 1}</td>
-                <td><strong>${hq.name}</strong></td>
-                <td>${new Date(hq.createdAt).toLocaleDateString()}</td>
-                <td><span class="badge badge-custom bg-success">Active</span></td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary" onclick="editHQ('${hq._id}')">
-                        <i class="bi bi-pencil"></i> Edit
-                    </button>
-                </td>
-            </tr>
-        `).join('');
+                sortedData.map((hq, idx) => `
+        <tr>
+            <td class="serial-col">${idx + 1}</td>
+            <td><strong>${hq.name}</strong></td>
+            <td>${new Date(hq.createdAt).toLocaleDateString()}</td>
+            <td><span class="badge badge-custom bg-success">Active</span></td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="editHQ('${hq._id}')">
+                    <i class="bi bi-pencil"></i> Edit
+                </button>
+            </td>
+        </tr>
+    `).join('');
         }
 
         function filterHQs() {
@@ -1593,11 +2303,9 @@
 
             try {
                 if (id) {
-                    // Update existing HQ
                     await axios.put(`${API}/hq/${id}`, { name });
                     showToast('HQ updated successfully!');
                 } else {
-                    // Create new HQ
                     await axios.post(`${API}/hq`, { name });
                     showToast('HQ created successfully!');
                 }
@@ -1620,9 +2328,10 @@
         async function loadHQsForDropdown(selectId) {
             try {
                 const res = await axios.get(`${API}/hq`);
+                const sortedHQs = res.data.sort((a, b) => a.name.localeCompare(b.name));
                 const select = document.getElementById(selectId);
                 select.innerHTML = '<option value="">Select HQ</option>' +
-                    res.data.map(hq => `<option value="${hq._id}">${hq.name}</option>`).join('');
+                    sortedHQs.map(hq => `<option value="${hq._id}">${hq.name}</option>`).join('');
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -1640,9 +2349,10 @@
 
         function renderEmployees(data) {
             const tbody = document.getElementById('employeeTableBody');
-            tbody.innerHTML = data.length === 0 ?
+            const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
+            tbody.innerHTML = sortedData.length === 0 ?
                 '<tr><td colspan="8" class="text-center py-4 text-muted">No employees</td></tr>' :
-                data.map((emp, idx) => `
+                sortedData.map((emp, idx) => `
             <tr>
                 <td class="serial-col">${idx + 1}</td>
                 <td><strong>${emp.name}</strong></td>
@@ -1746,8 +2456,9 @@
             }
             try {
                 const res = await axios.get(`${API}/hbp/hq/${hqId}`);
+                const sortedHBPs = res.data.sort((a, b) => a.name.localeCompare(b.name));
                 document.getElementById('wsHBP').innerHTML = '<option value="">Select Employee</option>' +
-                    res.data.map(hbp => `<option value="${hbp._id}">${hbp.name}</option>`).join('');
+                    sortedHBPs.map(hbp => `<option value="${hbp._id}">${hbp.name}</option>`).join('');
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -1765,9 +2476,10 @@
 
         function renderWholesalers(data) {
             const tbody = document.getElementById('wholesalerTableBody');
-            tbody.innerHTML = data.length === 0 ?
+            const sortedData = [...data].sort((a, b) => a.partyName.localeCompare(b.partyName));
+            tbody.innerHTML = sortedData.length === 0 ?
                 '<tr><td colspan="6" class="text-center py-4 text-muted">No wholesalers</td></tr>' :
-                data.map((ws, idx) => `
+                sortedData.map((ws, idx) => `
             <tr>
                 <td class="serial-col">${idx + 1}</td>
                 <td><strong>${ws.partyName}</strong></td>
@@ -1876,9 +2588,10 @@
 
         function renderProducts(data) {
             const tbody = document.getElementById('productTableBody');
-            tbody.innerHTML = data.length === 0 ?
+            const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
+            tbody.innerHTML = sortedData.length === 0 ?
                 '<tr><td colspan="5" class="text-center py-4 text-muted">No products</td></tr>' :
-                data.map((prod, idx) => `
+                sortedData.map((prod, idx) => `
             <tr>
                 <td class="serial-col">${idx + 1}</td>
                 <td><strong>${prod.name} (${prod.quantity || 'N/A'} ${prod.measuredIn})</strong></td>
@@ -1959,81 +2672,542 @@
             }
         }
 
-        async function loadSalesSection() {
-            await loadHQsForDropdown('saleHQ');
-            await loadProductsForDropdown();
+
+        async function loadWholesalerSales() {
+            const tbody = document.getElementById('wholesalerSalesTableBody');
+            tbody.innerHTML = '<tr><td colspan="8" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+
+            try {
+                const month = document.getElementById('historyMonth').value;
+                const year = document.getElementById('historyYear').value;
+                const hqId = document.getElementById('historyHQ').value;
+
+                // Build query params
+                const params = new URLSearchParams();
+                if (month) params.append('month', month);
+                if (year) params.append('year', year);
+                if (hqId) params.append('hqId', hqId);
+
+                // Fetch wholesalers with their sales summary
+                const response = await axios.get(`${API}/wholesalers/sales-summary?${params.toString()}`);
+                allWholesalerSales = response.data;
+
+                // Update summary cards
+                updateSalesSummary(allWholesalerSales);
+
+                // Render table
+                renderWholesalerSalesTable(allWholesalerSales);
+
+            } catch (error) {
+                console.error('Error loading wholesaler sales:', error);
+                tbody.innerHTML = `
+            <tr>
+                <td colspan="8" class="text-center py-4">
+                    <div class="alert alert-danger m-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Failed to load sales data: ${error.message}
+                    </div>
+                </td>
+            </tr>
+        `;
+            }
         }
 
-        async function loadProductsForDropdown() {
+        // Render wholesaler sales table
+        function renderWholesalerSalesTable(data) {
+            const tbody = document.getElementById('wholesalerSalesTableBody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = `
+            <tr>
+                <td colspan="8" class="text-center py-4 text-muted">
+                    <i class="bi bi-inbox" style="font-size: 48px; opacity: 0.3;"></i>
+                    <p class="mb-0 mt-2">No sales records found</p>
+                </td>
+            </tr>
+        `;
+                return;
+            }
+
+            const sortedData = [...data].sort((a, b) => a.partyName.localeCompare(b.partyName));
+
+            let html = '';
+            sortedData.forEach((ws, idx) => {
+                html += `
+            <tr class="clickable-row" onclick="showWholesalerDetails('${ws._id}')">
+                <td class="serial-col">${idx + 1}</td>
+                <td><strong>${ws.partyName}</strong></td>
+                
+                <td>
+                    <div>${ws.employeeName || 'N/A'}</div>
+                    <small class="text-muted">${ws.employeeRole || ''}</small>
+                </td>
+                <td>${ws.hqName || 'N/A'}</td>
+               
+                
+                
+            </tr>
+        `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        // Filter wholesaler sales
+        function filterWholesalerSales() {
+            const query = document.getElementById('historySearch').value.toLowerCase();
+
+            if (!query) {
+                renderWholesalerSalesTable(allWholesalerSales);
+                return;
+            }
+
+            const filtered = allWholesalerSales.filter(ws =>
+                (ws.partyName || '').toLowerCase().includes(query) ||
+                (ws.gstNumber || '').toLowerCase().includes(query) ||
+                (ws.employeeName || '').toLowerCase().includes(query) ||
+                (ws.hqName || '').toLowerCase().includes(query)
+            );
+
+            renderWholesalerSalesTable(filtered);
+        }
+
+        // Update summary cards
+        function updateSalesSummary(data) {
+            const totalWholesalers = data.length;
+            const totalTransactions = data.reduce((sum, ws) => sum + (ws.totalTransactions || 0), 0);
+            const totalPurchases = data.reduce((sum, ws) => sum + (ws.totalPurchases || 0), 0);
+            const totalValue = data.reduce((sum, ws) => sum + (ws.totalValue || 0), 0);
+
+            document.getElementById('summaryTotalWholesalers').innerText = totalWholesalers;
+            document.getElementById('summaryTotalTransactions').innerText = totalTransactions;
+            document.getElementById('summaryTotalPurchases').innerText = totalPurchases.toLocaleString();
+            document.getElementById('summaryTotalValue').innerText = '₹' + totalValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+        }
+
+        // Show wholesaler details in modal
+        async function showWholesalerDetails(wholesalerId) {
+            try {
+                const month = document.getElementById('historyMonth').value;
+                const year = document.getElementById('historyYear').value;
+
+                // Find wholesaler info
+                const wholesaler = allWholesalerSales.find(ws => ws._id === wholesalerId);
+                if (!wholesaler) {
+                    alert('Wholesaler not found');
+                    return;
+                }
+
+                // Update modal header info
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const periodText = month && year ? `${monthNames[month - 1]} ${year}` : year ? `Year ${year}` : 'All Time';
+
+                document.getElementById('wholesalerDetailsSubtitle').innerText =
+                    `${wholesaler.partyName} • ${wholesaler.employeeName} • ${wholesaler.hqName} • ${periodText}`;
+
+                document.getElementById('detailWholesalerName').innerText = wholesaler.partyName;
+                document.getElementById('detailGST').innerText = wholesaler.gstNumber;
+                document.getElementById('detailEmployee').innerText = wholesaler.employeeName || 'N/A';
+                document.getElementById('detailRole').innerText = wholesaler.employeeRole || '';
+                document.getElementById('detailHQ').innerText = wholesaler.hqName || 'N/A';
+                document.getElementById('detailPeriod').innerText = periodText;
+                document.getElementById('detailMobile').innerText = wholesaler.mobile || 'N/A';
+
+                // Show modal
+                wholesalerDetailsModal.show();
+
+                // Fetch stock ledger details
+                const tbody = document.getElementById('productStockDetailsBody');
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+
+                const params = new URLSearchParams();
+                params.append('wholesalerId', wholesalerId);
+                if (month) params.append('month', month);
+                if (year) params.append('year', year);
+
+                const response = await axios.get(`${API}/stock-ledger?${params.toString()}`);
+                const stockData = response.data;
+
+                renderStockDetails(stockData);
+
+            } catch (error) {
+                console.error('Error loading wholesaler details:', error);
+                alert('Failed to load details: ' + error.message);
+            }
+        }
+
+        // Render stock details table
+        function renderStockDetails(stockData) {
+            const tbody = document.getElementById('productStockDetailsBody');
+
+            if (stockData.length === 0) {
+                tbody.innerHTML = `
+            <tr>
+                <td colspan="8" class="text-center py-4 text-muted">
+                    <i class="bi bi-inbox" style="font-size: 48px; opacity: 0.3;"></i>
+                    <p class="mb-0 mt-2">No stock records found for this period</p>
+                </td>
+            </tr>
+        `;
+
+                // Reset summary
+                document.getElementById('detailTotalProducts').innerText = '0';
+                document.getElementById('detailTotalPurchase').innerText = '0';
+                document.getElementById('detailTotalSales').innerText = '0';
+                document.getElementById('detailTotalValue').innerText = '₹0';
+                return;
+            }
+
+            // Sort by product name
+            const sortedData = [...stockData].sort((a, b) => {
+                const nameA = a.productId?.name || '';
+                const nameB = b.productId?.name || '';
+                return nameA.localeCompare(nameB);
+            });
+
+            let totalPurchase = 0;
+            let totalSales = 0;
+            let totalValue = 0;
+
+            let html = '';
+            sortedData.forEach((stock, idx) => {
+                const product = stock.productId;
+                if (!product) return;
+
+                const packing = `${product.quantity || ''} ${product.measuredIn}`;
+                const purchaseValue = stock.totalPurchase * product.mrp;
+
+                totalPurchase += stock.totalPurchase;
+                totalSales += stock.totalSales;
+                totalValue += purchaseValue;
+
+                // Determine closing stock badge color
+                let stockClass = 'stock-zero';
+                if (stock.closingStock > 0) stockClass = 'stock-positive';
+                else if (stock.closingStock < 0) stockClass = 'stock-negative';
+
+                html += `
+            <tr class="product-stock-row">
+                <td class="serial-col">${idx + 1}</td>
+                <td class="product-details-cell">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-meta">
+                        <span class="product-badge bg-info text-white me-1">${product.type}</span>
+                        <span>${packing}</span>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <strong>${stock.openingStock}</strong>
+                </td>
+                <td class="text-center">
+                    <span class="stock-badge stock-positive">${stock.totalPurchase}</span>
+                </td>
+                <td class="text-center">
+                    <span class="stock-badge ${stock.totalSales > 0 ? 'stock-negative' : 'stock-zero'}">${stock.totalSales}</span>
+                </td>
+                <td class="text-center">
+                    <span class="stock-badge ${stockClass}">${stock.closingStock}</span>
+                </td>
+                <td class="text-end">
+                    <strong>₹${product.mrp}</strong>
+                </td>
+              
+            </tr>
+        `;
+            });
+
+            tbody.innerHTML = html;
+
+            // Update summary
+            document.getElementById('detailTotalProducts').innerText = sortedData.length;
+            document.getElementById('detailTotalPurchase').innerText = totalPurchase.toLocaleString();
+            document.getElementById('detailTotalSales').innerText = totalSales.toLocaleString();
+            document.getElementById('detailTotalValue').innerText = '₹' + totalValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+        }
+
+        // Load when section is shown
+        async function loadSalesHistorySection() {
+            const now = new Date();
+            document.getElementById('historyMonth').value = now.getMonth() + 1;
+            document.getElementById('historyYear').value = now.getFullYear();
+
+            // Load HQ dropdown
+            await loadHQsForDropdown('historyHQ');
+
+            // Load wholesaler sales
+            await loadWholesalerSales();
+        }
+
+        async function loadSalesSection() {
+            const now = new Date();
+            document.getElementById('salesMonth').value = now.getMonth() + 1;
+            document.getElementById('salesYear').value = now.getFullYear();
+
+            await loadSalesWholesalers();
+        }
+
+        async function loadSalesWholesalers() {
+            const tbody = document.getElementById('salesWholesalerTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+
+            try {
+                const res = await axios.get(`${API}/wholesalers`);
+                allSalesWholesalers = res.data;
+                renderSalesWholesalers(allSalesWholesalers);
+            } catch (error) {
+                console.error('Error loading wholesalers:', error);
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4"><div class="alert alert-danger m-0">Failed to load wholesalers</div></td></tr>';
+            }
+        }
+
+        function renderSalesWholesalers(wholesalers) {
+            const tbody = document.getElementById('salesWholesalerTableBody');
+
+            if (wholesalers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-muted">No wholesalers found</td></tr>';
+                return;
+            }
+
+            const sortedWholesalers = [...wholesalers].sort((a, b) => a.partyName.localeCompare(b.partyName));
+
+            let html = '';
+            sortedWholesalers.forEach((ws, idx) => {
+                html += `
+                <tr class="clickable-row" onclick="openSalesProductModal('${ws._id}', '${ws.partyName}', '${ws.hbpId?._id || ''}', '${ws.hbpId?.name || 'N/A'}', '${ws.hqId?._id || ''}', '${ws.hqId?.name || 'N/A'}')">
+                    <td class="serial-col">${idx + 1}</td>
+                    <td><strong>${ws.partyName}</strong></td>
+                    <td><small class="text-muted">${ws.gstNumber}</small></td>
+                    <td>${ws.hbpId?.name || 'N/A'}</td>
+                    <td>${ws.hqId?.name || 'N/A'}</td>
+                    <td>${ws.mobileNumber}</td>
+                </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function filterSalesWholesalers() {
+            const query = document.getElementById('salesSearch').value.toLowerCase();
+
+            if (!query) {
+                renderSalesWholesalers(allSalesWholesalers);
+                return;
+            }
+
+            const filtered = allSalesWholesalers.filter(ws =>
+                ws.partyName.toLowerCase().includes(query) ||
+                ws.gstNumber.toLowerCase().includes(query) ||
+                (ws.hbpId?.name || '').toLowerCase().includes(query) ||
+                (ws.hqId?.name || '').toLowerCase().includes(query)
+            );
+
+            renderSalesWholesalers(filtered);
+        }
+
+        async function openSalesProductModal(wholesalerId, wholesalerName, hbpId, hbpName, hqId, hqName) {
+            const month = document.getElementById('salesMonth').value;
+            const year = document.getElementById('salesYear').value;
+
+            document.getElementById('salesWholesalerId').value = wholesalerId;
+            document.getElementById('salesHbpId').value = hbpId;
+            document.getElementById('salesHqId').value = hqId;
+            document.getElementById('salesMonthValue').value = month;
+            document.getElementById('salesYearValue').value = year;
+
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            document.getElementById('salesModalSubtitle').innerText =
+                `${wholesalerName} • ${hbpName} • ${hqName} • ${monthNames[month - 1]} ${year}`;
+
             try {
                 const res = await axios.get(`${API}/products`);
-                document.getElementById('saleProd').innerHTML = '<option value="">Choose product...</option>' +
-                    res.data.map(p => `<option value="${p._id}">${p.name} - ${p.type} (${p.quantity || 'N/A'} ${p.measuredIn})</option>`).join('');
+                const products = res.data.sort((a, b) => a.name.localeCompare(b.name));
+
+                const tbody = document.getElementById('salesProductTableBody');
+                tbody.innerHTML = products.map((prod, idx) => {
+                    const packing = `${prod.quantity || ''} ${prod.measuredIn}`;
+
+                    return `
+                    <tr>
+                        <td class="serial-col">${idx + 1}</td>
+                        <td class="product-details-cell">
+                            <div class="product-name">${prod.name}</div>
+                            <div class="product-meta">
+                                <span class="product-badge bg-info text-white me-1">${prod.type}</span>
+                                <span>${packing}</span>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-custom bg-info">${prod.type}</span></td>
+                        <td><strong>₹${prod.mrp}</strong></td>
+                        <td>
+                            <input type="number" 
+                                   class="sales-quantity-input" 
+                                   data-product-id="${prod._id}"
+                                   data-product-idx="${idx}"
+                                   data-price="${prod.mrp}"
+                                   value="0" 
+                                   min="0" 
+                                   placeholder="0"
+                                   onchange="updateSalesTotals()"
+                                   oninput="updateSalesTotals()"
+                                   onkeydown="handleSalesKeyboardNav(event, ${idx})"
+                                   onfocus="this.select()">
+                        </td>
+                        <td class="text-end"><strong id="sales-product-value-${idx}">₹0</strong></td>
+                    </tr>
+                    `;
+                }).join('');
+
+                updateSalesTotals();
+                salesProductModal.show();
+
+                setTimeout(() => {
+                    const firstInput = document.querySelector('.sales-quantity-input[data-product-idx="0"]');
+                    if (firstInput) {
+                        firstInput.focus();
+                        firstInput.select();
+                    }
+                }, 300);
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error loading products:', error);
+                alert('Failed to load products');
             }
         }
 
-        async function loadHBPsForSales() {
-            const hqId = document.getElementById('saleHQ').value;
-            if (!hqId) {
-                document.getElementById('saleHBP').innerHTML = '<option value="">Select Employee</option>';
-                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
+        function handleSalesKeyboardNav(event, currentRow) {
+            const key = event.key;
+            const allInputs = document.querySelectorAll('.sales-quantity-input');
+            const totalProducts = allInputs.length;
+
+            if (event.ctrlKey || event.altKey || event.metaKey) {
                 return;
             }
-            try {
-                const res = await axios.get(`${API}/hbp/hq/${hqId}`);
-                document.getElementById('saleHBP').innerHTML = '<option value="">Select Employee</option>' +
-                    res.data.map(hbp => `<option value="${hbp._id}">${hbp.name}</option>`).join('');
-                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
-            } catch (error) {
-                console.error('Error:', error);
+
+            let targetRow = currentRow;
+            let shouldNavigate = false;
+
+            switch (key) {
+                case 'Enter':
+                case 'ArrowDown':
+                    event.preventDefault();
+                    if (currentRow < totalProducts - 1) {
+                        targetRow = currentRow + 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'ArrowUp':
+                    event.preventDefault();
+                    if (currentRow > 0) {
+                        targetRow = currentRow - 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'Tab':
+                    if (!event.shiftKey && currentRow < totalProducts - 1) {
+                        event.preventDefault();
+                        targetRow = currentRow + 1;
+                        shouldNavigate = true;
+                    } else if (event.shiftKey && currentRow > 0) {
+                        event.preventDefault();
+                        targetRow = currentRow - 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+            }
+
+            if (shouldNavigate) {
+                const targetInput = document.querySelector(`.sales-quantity-input[data-product-idx="${targetRow}"]`);
+                if (targetInput) {
+                    targetInput.focus();
+                    targetInput.select();
+                }
             }
         }
 
-        async function loadWholesalersForSales() {
-            const hbpId = document.getElementById('saleHBP').value;
-            if (!hbpId) {
-                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>';
-                return;
-            }
-            try {
-                const res = await axios.get(`${API}/wholesalers/hbp/${hbpId}`);
-                document.getElementById('saleWS').innerHTML = '<option value="">Select Wholesaler</option>' +
-                    res.data.map(ws => `<option value="${ws._id}">${ws.partyName}</option>`).join('');
-            } catch (error) {
-                console.error('Error:', error);
-            }
+        function updateSalesTotals() {
+            const inputs = document.querySelectorAll('.sales-quantity-input');
+            let totalUnits = 0;
+            let totalValue = 0;
+
+            inputs.forEach(input => {
+                const quantity = parseInt(input.value) || 0;
+                const price = parseFloat(input.dataset.price) || 0;
+                const productIdx = input.dataset.productIdx;
+                const itemValue = quantity * price;
+
+                totalUnits += quantity;
+                totalValue += itemValue;
+
+                const valueCell = document.getElementById(`sales-product-value-${productIdx}`);
+                if (valueCell) {
+                    valueCell.innerText = '₹' + itemValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+                }
+            });
+
+            document.getElementById('salesTotalUnits').innerText = totalUnits.toLocaleString();
+            document.getElementById('salesTotalValue').innerText = '₹' + totalValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
         }
 
-        async function recordSale() {
-            const data = {
-                type: "purchase",
-                date: document.getElementById('saleDate').value,
-                hqId: document.getElementById('saleHQ').value,
-                hbpId: document.getElementById('saleHBP').value,
-                wholesalerId: document.getElementById('saleWS').value,
-                productId: document.getElementById('saleProd').value,
-                quantity: parseInt(document.getElementById('saleQty').value),
-                recordedBy: "admin"
-            };
+        async function saveBulkPurchases() {
+            const wholesalerId = document.getElementById('salesWholesalerId').value;
+            const hbpId = document.getElementById('salesHbpId').value;
+            const hqId = document.getElementById('salesHqId').value;
+            const month = document.getElementById('salesMonthValue').value;
+            const year = document.getElementById('salesYearValue').value;
 
-            if (!data.date || !data.hqId || !data.hbpId || !data.wholesalerId || !data.productId || !data.quantity) {
-                alert('Please fill all fields');
+            const dateString = `${year}-${String(month).padStart(2, '0')}-01`;
+
+            const inputs = document.querySelectorAll('.sales-quantity-input');
+            const purchases = [];
+
+            inputs.forEach(input => {
+                const quantity = parseInt(input.value) || 0;
+                if (quantity > 0) {
+                    purchases.push({
+                        type: "purchase",
+                        date: dateString,
+                        hqId: hqId,
+                        hbpId: hbpId,
+                        wholesalerId: wholesalerId,
+                        productId: input.dataset.productId,
+                        quantity: quantity,
+                        recordedBy: "admin"
+                    });
+                }
+            });
+
+            if (purchases.length === 0) {
+                alert('⚠️ Please enter at least one product quantity');
                 return;
             }
 
+            const saveBtn = event.target;
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
+            saveBtn.disabled = true;
+
             try {
-                await axios.post(`${API}/sales`, data);
-                showToast('✅ Purchase recorded successfully!');
-                document.getElementById('saleQty').value = '';
+                for (const purchase of purchases) {
+                    await axios.post(`${API}/sales`, purchase);
+                }
+
+                showToast(`✅ Successfully recorded ${purchases.length} purchase transaction(s)!`);
+                salesProductModal.hide();
+
+                inputs.forEach(input => input.value = 0);
+                updateSalesTotals();
             } catch (error) {
-                alert('Error: ' + (error.response?.data?.error || error.message));
+                console.error('Error saving purchases:', error);
+                alert('❌ Failed to save purchases: ' + (error.response?.data?.error || error.message));
+            } finally {
+                saveBtn.innerHTML = originalText;
+                saveBtn.disabled = false;
             }
         }
 
         async function loadTargetAssignmentSection() {
-            await loadHQsForDropdown('targetHQ');
             await loadTargetOverview();
             await loadAllProductsForTarget();
         }
@@ -2041,7 +3215,7 @@
         async function loadAllProductsForTarget() {
             try {
                 const res = await axios.get(`${API}/products`);
-                allProductsForTarget = res.data;
+                allProductsForTarget = res.data.sort((a, b) => a.name.localeCompare(b.name));
             } catch (error) {
                 console.error('Error loading products:', error);
             }
@@ -2050,86 +3224,67 @@
         async function loadTargetOverview() {
             const container = document.getElementById('targetOverviewContainer');
             const year = parseInt(document.getElementById('targetYear').value);
-            const hqId = document.getElementById('targetHQ').value;
 
-            container.innerHTML = '<div class="text-center py-5"><div class="spinner-border" style="color: white;"></div></div>';
+            container.innerHTML = '<tr><td colspan="4" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
 
             try {
                 const params = { year };
-                if (hqId) params.hqId = hqId;
-
                 const res = await axios.get(`${API}/targets/admin/overview`, { params });
                 const { employees, summary } = res.data;
 
-                if (employees.length === 0) {
-                    container.innerHTML = '<div class="alert alert-custom" style="background: white;">No employees found</div>';
-                    return;
-                }
+                allEmployeesForTarget = employees;
 
-                let html = `
-            <div class="row mb-4">
-                <div class="col-md-4">
-                    <div class="summary-card">
-                        <h6>Total Employees</h6>
-                        <div class="value">${summary.total}</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="summary-card">
-                        <h6>With Targets Assigned</h6>
-                        <div class="value text-success">${summary.withTargets}</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="summary-card">
-                        <h6>Pending Assignment</h6>
-                        <div class="value text-warning">${summary.withoutTargets}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-        `;
+                document.getElementById('summaryTotalEmployees').innerText = summary.total;
+                document.getElementById('summaryWithTargets').innerText = summary.withTargets;
+                document.getElementById('summaryPendingTargets').innerText = summary.withoutTargets;
 
-                employees.forEach(emp => {
-                    html += `
-                <div class="col-md-6 mb-3">
-                    <div class="target-status-card ${emp.hasTargets ? 'has-targets' : 'no-targets'}">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div>
-                                <h5 class="mb-1">
-                                    <i class="bi bi-person-circle me-2"></i>${emp.name}
-                                </h5>
-                                <div class="mb-2">
-                                    <span class="badge bg-primary me-2">${emp.role}</span>
-                                    <span class="badge bg-secondary">${emp.hq}</span>
-                                </div>
-                                ${emp.hasTargets
-                            ? `<span class="status-badge status-achieved">
-                                        <i class="bi bi-check-circle-fill me-1"></i>${emp.productCount} Products
-                                       </span>`
-                            : `<span class="status-badge status-behind">
-                                        <i class="bi bi-exclamation-triangle-fill me-1"></i>No Targets
-                                       </span>`
-                        }
-                            </div>
-                            <div class="d-flex gap-2">
-                                <button class="btn ${emp.hasTargets ? 'btn-gradient-primary' : 'btn-gradient-warning'} quick-action-btn" 
-                                        onclick="openAssignTargetModal('${emp.hbpId}', '${emp.name}', ${year})">
-                                    <i class="bi bi-${emp.hasTargets ? 'pencil' : 'plus-circle'} me-2"></i>${emp.hasTargets ? 'Edit' : 'Assign'}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-                });
-
-                html += '</div>';
-                container.innerHTML = html;
+                renderTargetEmployees(employees);
             } catch (error) {
                 console.error('Error loading overview:', error);
-                container.innerHTML = '<div class="alert alert-danger">Failed to load data</div>';
+                container.innerHTML = '<tr><td colspan="4" class="text-center py-4"><div class="alert alert-danger m-0">Failed to load data</div></td></tr>';
             }
+        }
+
+        function renderTargetEmployees(employees) {
+            const container = document.getElementById('targetOverviewContainer');
+
+            if (employees.length === 0) {
+                container.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-muted">No employees found</td></tr>';
+                return;
+            }
+
+            const sortedEmployees = [...employees].sort((a, b) => a.name.localeCompare(b.name));
+
+            let html = '';
+            sortedEmployees.forEach((emp, idx) => {
+                const year = parseInt(document.getElementById('targetYear').value);
+                html += `
+            <tr class="clickable-row" onclick="openAssignTargetModal('${emp.hbpId}', '${emp.name}', ${year})">
+                <td class="serial-col">${idx + 1}</td>
+                <td><strong>${emp.name}</strong></td>
+                <td><span class="badge badge-custom bg-primary">${emp.role}</span></td>
+                <td>${emp.hq}</td>
+            </tr>
+        `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function filterTargetEmployees() {
+            const query = document.getElementById('targetSearch').value.toLowerCase();
+
+            if (!query) {
+                renderTargetEmployees(allEmployeesForTarget);
+                return;
+            }
+
+            const filtered = allEmployeesForTarget.filter(emp =>
+                emp.name.toLowerCase().includes(query) ||
+                emp.hq.toLowerCase().includes(query)
+            );
+
+            renderTargetEmployees(filtered);
         }
 
         async function openAssignTargetModal(hbpId, name, year) {
@@ -2178,21 +3333,21 @@
 
                     return `
         <tr>
-            <td class="product-info">
-                <div class="d-flex align-items-center">
-                    <div class="me-2" style="background: #0f172a; color: white; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: bold; font-size: 14px;">
-                        ${idx + 1}
-                    </div>
-                    <div>
-                        <div style="font-weight: 600; font-size: 14px;">${prod.name}</div>
-                        <div style="font-size: 11px; color: #64748b;">
-                            <span class="product-badge bg-info text-white">${prod.type}</span>
-                            <span class="ms-2">${packing}</span>
-                            <span class="ms-2 fw-semibold">₹${prod.mrp}</span>
-                        </div>
-                    </div>
-                </div>
-            </td>
+           <td class="product-info">
+    <div class="d-flex align-items-center">
+        <div class="me-2" style="background: #0f172a; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; font-size: 11px;">
+            ${idx + 1}
+        </div>
+        <div>
+            <div style="font-weight: 600; font-size: 11px; line-height: 1.2;">${prod.name}</div>
+            <div style="font-size: 9px; color: #64748b; line-height: 1.3;">
+                <span class="product-badge bg-info text-white">${prod.type}</span>
+                <span class="ms-1">${packing}</span>
+                <span class="ms-1 fw-semibold">₹${prod.mrp}</span>
+            </div>
+        </div>
+    </div>
+</td>
             ${monthCells}
             <td class="total-cell" id="product-total-${idx}">${yearlyTotal}</td>
         </tr>
@@ -2202,7 +3357,6 @@
                 updateMonthlyTotals();
                 assignTargetModal.show();
 
-                // Focus first input after modal opens
                 setTimeout(() => {
                     const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
                     if (firstInput) {
@@ -2216,13 +3370,10 @@
             }
         }
 
-        // ==================== KEYBOARD NAVIGATION ====================
-
         function handleKeyboardNavigation(event, currentRow, currentMonth) {
             const key = event.key;
             const totalProducts = allProductsForTarget.length;
 
-            // Don't navigate if user is typing or using modifiers
             if (event.ctrlKey || event.altKey || event.metaKey) {
                 return;
             }
@@ -2234,11 +3385,9 @@
             switch (key) {
                 case 'Enter':
                     event.preventDefault();
-                    // Move down to next row (same month)
                     targetRow = currentRow + 1;
                     targetMonth = currentMonth;
 
-                    // If at last row, wrap to first row of next month
                     if (targetRow >= totalProducts) {
                         targetRow = 0;
                         targetMonth = currentMonth < 12 ? currentMonth + 1 : currentMonth;
@@ -2248,7 +3397,6 @@
 
                 case 'ArrowRight':
                     event.preventDefault();
-                    // Move right to next month (same row)
                     if (currentMonth < 12) {
                         targetRow = currentRow;
                         targetMonth = currentMonth + 1;
@@ -2258,7 +3406,6 @@
 
                 case 'ArrowLeft':
                     event.preventDefault();
-                    // Move left to previous month (same row)
                     if (currentMonth > 1) {
                         targetRow = currentRow;
                         targetMonth = currentMonth - 1;
@@ -2268,7 +3415,6 @@
 
                 case 'ArrowDown':
                     event.preventDefault();
-                    // Move down to next row (same month)
                     if (currentRow < totalProducts - 1) {
                         targetRow = currentRow + 1;
                         targetMonth = currentMonth;
@@ -2278,7 +3424,6 @@
 
                 case 'ArrowUp':
                     event.preventDefault();
-                    // Move up to previous row (same month)
                     if (currentRow > 0) {
                         targetRow = currentRow - 1;
                         targetMonth = currentMonth;
@@ -2287,10 +3432,8 @@
                     break;
 
                 case 'Tab':
-                    // Let Tab work naturally but prevent default to customize behavior
                     event.preventDefault();
                     if (event.shiftKey) {
-                        // Shift+Tab: Move to previous cell
                         if (currentMonth > 1) {
                             targetRow = currentRow;
                             targetMonth = currentMonth - 1;
@@ -2299,7 +3442,6 @@
                             targetMonth = 12;
                         }
                     } else {
-                        // Tab: Move to next cell
                         if (currentMonth < 12) {
                             targetRow = currentRow;
                             targetMonth = currentMonth + 1;
@@ -2318,24 +3460,19 @@
         }
 
         function navigateToCell(row, month) {
-            // Find the target input
             const targetInput = document.querySelector(
                 `.month-input[data-product-idx="${row}"][data-month="${month}"]`
             );
 
             if (targetInput) {
-                // Focus and select the input
                 targetInput.focus();
                 targetInput.select();
 
-                // Scroll into view smoothly
                 const scrollContainer = document.querySelector('.table-scroll-container');
                 if (scrollContainer) {
-                    // Calculate if element is in view
                     const inputRect = targetInput.getBoundingClientRect();
                     const containerRect = scrollContainer.getBoundingClientRect();
 
-                    // Check if element is outside viewport
                     if (inputRect.top < containerRect.top || inputRect.bottom > containerRect.bottom ||
                         inputRect.left < containerRect.left || inputRect.right > containerRect.right) {
 
@@ -2349,91 +3486,6 @@
             }
         }
 
-        // ==================== ENHANCED QUICK FILL FUNCTIONS ====================
-
-        function fillAllMonths() {
-            const value = prompt('Enter the same target for all months (e.g., 50):');
-            if (!value || isNaN(value) || value < 0) return;
-
-            const inputs = document.querySelectorAll('.month-input');
-            inputs.forEach(input => {
-                input.value = parseInt(value);
-            });
-            updateMonthlyTotals();
-            showToast('✅ All months filled with same value!');
-
-            // Focus first input
-            setTimeout(() => {
-                const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
-                if (firstInput) {
-                    firstInput.focus();
-                    firstInput.select();
-                }
-            }, 100);
-        }
-
-        function fillSeasonalPattern() {
-            const seasonalPattern = {
-                1: 1.2, 2: 1.2, 3: 1.0, 4: 0.8, 5: 0.7, 6: 0.9,
-                7: 1.1, 8: 1.2, 9: 1.0, 10: 1.1, 11: 1.2, 12: 1.3
-            };
-
-            const baseValue = prompt('Enter base monthly target (e.g., 50):\n\nThe system will apply seasonal adjustments:\n• Winter (Dec-Feb): +20-30%\n• Monsoon (Jul-Aug): +10-20%\n• Summer (Apr-May): -20-30%');
-
-            if (!baseValue || isNaN(baseValue) || baseValue < 0) return;
-
-            const base = parseInt(baseValue);
-            const inputs = document.querySelectorAll('.month-input');
-
-            const productGroups = {};
-            inputs.forEach(input => {
-                const productId = input.dataset.productId;
-                if (!productGroups[productId]) {
-                    productGroups[productId] = [];
-                }
-                productGroups[productId].push(input);
-            });
-
-            Object.values(productGroups).forEach(productInputs => {
-                productInputs.forEach(input => {
-                    const month = parseInt(input.dataset.month);
-                    const multiplier = seasonalPattern[month];
-                    input.value = Math.round(base * multiplier);
-                });
-            });
-
-            updateMonthlyTotals();
-            showToast('✅ Seasonal pattern applied successfully!');
-
-            // Focus first input
-            setTimeout(() => {
-                const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
-                if (firstInput) {
-                    firstInput.focus();
-                    firstInput.select();
-                }
-            }, 100);
-        }
-
-        function clearAllTargets() {
-            if (!confirm('⚠️ Are you sure you want to clear all targets?')) return;
-
-            const inputs = document.querySelectorAll('.month-input');
-            inputs.forEach(input => {
-                input.value = 0;
-            });
-            updateMonthlyTotals();
-            showToast('✅ All targets cleared!');
-
-            // Focus first input
-            setTimeout(() => {
-                const firstInput = document.querySelector('.month-input[data-product-idx="0"][data-month="1"]');
-                if (firstInput) {
-                    firstInput.focus();
-                    firstInput.select();
-                }
-            }, 100);
-        }
         function updateMonthlyTotals() {
             const inputs = document.querySelectorAll('.month-input');
             let grandTotal = 0;
@@ -2534,62 +3586,208 @@
                 saveBtn.disabled = false;
             }
         }
+        async function loadSalesHistory() {
+            const tbody = document.getElementById('salesHistoryTableBody');
+            tbody.innerHTML = '<tr><td colspan="10" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
 
-        function fillAllMonths() {
-            const value = prompt('Enter the same target for all months (e.g., 50):');
-            if (!value || isNaN(value) || value < 0) return;
+            try {
+                const month = document.getElementById('historyMonth').value;
+                const year = document.getElementById('historyYear').value;
+                const hqId = document.getElementById('historyHQ').value;
 
-            const inputs = document.querySelectorAll('.month-input');
-            inputs.forEach(input => {
-                input.value = parseInt(value);
-            });
-            updateMonthlyTotals();
-            showToast('✅ All months filled with same value!');
+                const params = new URLSearchParams();
+                if (month) params.append('month', month);
+                if (year) params.append('year', year);
+                if (hqId) params.append('hqId', hqId);
+
+                const res = await axios.get(`${API}/sales/history?${params.toString()}`);
+                allSalesHistory = res.data.sales;
+
+                // Update summary cards
+                document.getElementById('historyTotalRecords').innerText = res.data.summary.totalRecords;
+                document.getElementById('historyTotalUnits').innerText = res.data.summary.totalQuantity.toLocaleString();
+                document.getElementById('historyTotalValue').innerText = '₹' + res.data.summary.totalValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+
+                renderSalesHistory(allSalesHistory);
+            } catch (error) {
+                console.error('Error loading sales history:', error);
+                tbody.innerHTML = '<tr><td colspan="10" class="text-center py-4"><div class="alert alert-danger m-0">Failed to load sales history</div></td></tr>';
+            }
         }
 
-        function fillSeasonalPattern() {
-            const seasonalPattern = {
-                1: 1.2, 2: 1.2, 3: 1.0, 4: 0.8, 5: 0.7, 6: 0.9,
-                7: 1.1, 8: 1.2, 9: 1.0, 10: 1.1, 11: 1.2, 12: 1.3
-            };
+        // Render sales history table
+        function renderSalesHistory(sales) {
+            const tbody = document.getElementById('salesHistoryTableBody');
 
-            const baseValue = prompt('Enter base monthly target (e.g., 50):\n\nThe system will apply seasonal adjustments:\n• Winter (Dec-Feb): +20-30%\n• Monsoon (Jul-Aug): +10-20%\n• Summer (Apr-May): -20-30%');
+            if (sales.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" class="text-center py-4 text-muted">No sales records found</td></tr>';
+                return;
+            }
 
-            if (!baseValue || isNaN(baseValue) || baseValue < 0) return;
+            let html = '';
+            sales.forEach((sale, idx) => {
+                const date = new Date(sale.date).toLocaleDateString();
+                const productName = sale.productId?.name || 'N/A';
+                const productType = sale.productId?.type || 'N/A';
+                const packing = `${sale.productId?.quantity || ''} ${sale.productId?.measuredIn || ''}`;
+                const wholesaler = sale.wholesalerId?.partyName || 'N/A';
+                const employee = sale.hbpId?.name || 'N/A';
+                const hq = sale.hqId?.name || 'N/A';
+                const rate = sale.productId?.mrp || 0;
+                const value = sale.quantity * rate;
 
-            const base = parseInt(baseValue);
-            const inputs = document.querySelectorAll('.month-input');
+                html += `
+            <tr>
+                <td class="serial-col">${idx + 1}</td>
+                <td>${date}</td>
+                <td>
+                    <div class="product-name" style="font-size: 13px;">${productName}</div>
+                    <div class="product-meta" style="font-size: 11px;">
+                        <span class="product-badge bg-info text-white">${productType}</span>
+                        <span class="ms-1">${packing}</span>
+                    </div>
+                </td>
+                <td>${wholesaler}</td>
+                <td>
+                    <div>${employee}</div>
+                    <small class="text-muted">${sale.hbpId?.role || 'HBP'}</small>
+                </td>
+                <td>${hq}</td>
+                <td><strong>${sale.quantity}</strong></td>
+                <td>₹${rate}</td>
+                <td><strong class="text-success">₹${value.toLocaleString('en-IN')}</strong></td>
+                <td>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteSalesRecord('${sale._id}')">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+            });
 
-            const productGroups = {};
-            inputs.forEach(input => {
-                const productId = input.dataset.productId;
-                if (!productGroups[productId]) {
-                    productGroups[productId] = [];
+            tbody.innerHTML = html;
+        }
+
+        // Filter sales history
+        function filterSalesHistory() {
+            const query = document.getElementById('historySearch').value.toLowerCase();
+
+            if (!query) {
+                renderSalesHistory(allSalesHistory);
+                return;
+            }
+
+            const filtered = allSalesHistory.filter(sale =>
+                (sale.productId?.name || '').toLowerCase().includes(query) ||
+                (sale.wholesalerId?.partyName || '').toLowerCase().includes(query) ||
+                (sale.hbpId?.name || '').toLowerCase().includes(query) ||
+                (sale.hqId?.name || '').toLowerCase().includes(query)
+            );
+
+            renderSalesHistory(filtered);
+        }
+
+        // Load Product Summary
+        async function loadProductSummary() {
+            const tbody = document.getElementById('productSummaryTableBody');
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+
+            try {
+                const month = document.getElementById('historyMonth').value;
+                const year = document.getElementById('historyYear').value;
+                const hqId = document.getElementById('historyHQ').value;
+
+                const params = new URLSearchParams();
+                if (month) params.append('month', month);
+                if (year) params.append('year', year);
+                if (hqId) params.append('hqId', hqId);
+
+                const res = await axios.get(`${API}/sales/summary/by-product?${params.toString()}`);
+
+                if (res.data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-muted">No data available</td></tr>';
+                    return;
                 }
-                productGroups[productId].push(input);
-            });
 
-            Object.values(productGroups).forEach(productInputs => {
-                productInputs.forEach(input => {
-                    const month = parseInt(input.dataset.month);
-                    const multiplier = seasonalPattern[month];
-                    input.value = Math.round(base * multiplier);
+                let html = '';
+                res.data.forEach((item, idx) => {
+                    html += `
+                <tr>
+                    <td class="serial-col">${idx + 1}</td>
+                    <td><strong>${item.productName}</strong></td>
+                    <td><span class="badge badge-custom bg-info">${item.productType}</span></td>
+                    <td><strong>${item.totalQuantity.toLocaleString()}</strong></td>
+                    <td>${item.transactionCount}</td>
+                    <td><strong class="text-success">₹${item.totalValue.toLocaleString('en-IN')}</strong></td>
+                </tr>
+            `;
                 });
-            });
 
-            updateMonthlyTotals();
-            showToast('✅ Seasonal pattern applied successfully!');
+                tbody.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading product summary:', error);
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4"><div class="alert alert-danger m-0">Failed to load summary</div></td></tr>';
+            }
         }
 
-        function clearAllTargets() {
-            if (!confirm('⚠️ Are you sure you want to clear all targets?')) return;
+        // Load Employee Summary
+        async function loadEmployeeSummary() {
+            const tbody = document.getElementById('employeeSummaryTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
 
-            const inputs = document.querySelectorAll('.month-input');
-            inputs.forEach(input => {
-                input.value = 0;
-            });
-            updateMonthlyTotals();
-            showToast('✅ All targets cleared!');
+            try {
+                const month = document.getElementById('historyMonth').value;
+                const year = document.getElementById('historyYear').value;
+                const hqId = document.getElementById('historyHQ').value;
+
+                const params = new URLSearchParams();
+                if (month) params.append('month', month);
+                if (year) params.append('year', year);
+                if (hqId) params.append('hqId', hqId);
+
+                const res = await axios.get(`${API}/sales/summary/by-employee?${params.toString()}`);
+
+                if (res.data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">No data available</td></tr>';
+                    return;
+                }
+
+                let html = '';
+                res.data.forEach((item, idx) => {
+                    html += `
+                <tr>
+                    <td class="serial-col">${idx + 1}</td>
+                    <td><strong>${item.employeeName}</strong></td>
+                    <td><span class="badge badge-custom bg-primary">${item.employeeRole}</span></td>
+                    <td>${item.hqName}</td>
+                    <td><strong>${item.totalQuantity.toLocaleString()}</strong></td>
+                    <td>${item.transactionCount}</td>
+                    <td><strong class="text-success">₹${item.totalValue.toLocaleString('en-IN')}</strong></td>
+                </tr>
+            `;
+                });
+
+                tbody.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading employee summary:', error);
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4"><div class="alert alert-danger m-0">Failed to load summary</div></td></tr>';
+            }
+        }
+
+        // Delete sales record
+        async function deleteSalesRecord(saleId) {
+            if (!confirm('⚠️ Are you sure you want to delete this sales record? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                await axios.delete(`${API}/sales/${saleId}`);
+                showToast('✅ Sales record deleted successfully!');
+                await loadSalesHistory();
+            } catch (error) {
+                console.error('Error deleting sales record:', error);
+                alert('❌ Failed to delete sales record: ' + (error.response?.data?.error || error.message));
+            }
         }
     </script>
 </body>
