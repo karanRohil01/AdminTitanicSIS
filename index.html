@@ -1833,40 +1833,40 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                               <tfoot>
-    <!-- Total Units Row -->
-    <tr style="background: #334155;">
-        <td colspan="2"
-            style="font-size: 12px; background: #334155; color: white; font-weight: 700; padding: 14px 16px;">
-            <i class="bi bi-calculator-fill me-2"></i>TOTAL UNITS
-        </td>
-        <td style="background: #334155; text-align: right; padding: 14px 16px;"></td>
-        <td style="background: #334155; color: #94a3b8; text-align: center; font-weight: 700; padding: 14px 16px;"
-            id="footer-total-opening">0</td>
-        <td style="background: #334155; color: #10b981; text-align: center; font-weight: 700; padding: 14px 16px;"
-            id="footer-total-purchase">0</td>
-        <td style="background: #334155; color: white; text-align: center; font-weight: 700; padding: 14px 16px;"
-            id="footer-total-total">0</td>
-        <td style="background: #334155; color: #ef4444; text-align: center; font-weight: 700; padding: 14px 16px;"
-            id="footer-total-sale">0</td>
-    </tr>
-    <!-- Total Amount Row -->
-    <tr style="background: #1e3a8a;">
-        <td colspan="2"
-            style="font-size: 13px; background: #1e3a8a; color: white; font-weight: 700; padding: 16px;">
-            <i class="bi bi-currency-rupee me-2"></i>TOTAL AMOUNT
-        </td>
-        <td style="background: #1e3a8a; text-align: right; padding: 16px;"></td>
-        <td style="background: #1e3a8a; color: #94a3b8; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
-            id="footer-amount-opening">₹0</td>
-        <td style="background: #1e3a8a; color: #10b981; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
-            id="footer-amount-purchase">₹0</td>
-        <td style="background: #1e3a8a; color: white; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
-            id="footer-amount-total">₹0</td>
-        <td style="background: #1e3a8a; color: #ef4444; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
-            id="footer-amount-sale">₹0</td>
-    </tr>
-</tfoot>
+                                <tfoot>
+                                    <!-- Total Units Row -->
+                                    <tr style="background: #334155;">
+                                        <td colspan="2"
+                                            style="font-size: 12px; background: #334155; color: white; font-weight: 700; padding: 14px 16px;">
+                                            <i class="bi bi-calculator-fill me-2"></i>TOTAL UNITS
+                                        </td>
+                                        <td style="background: #334155; text-align: right; padding: 14px 16px;"></td>
+                                        <td style="background: #334155; color: #94a3b8; text-align: center; font-weight: 700; padding: 14px 16px;"
+                                            id="footer-total-opening">0</td>
+                                        <td style="background: #334155; color: #10b981; text-align: center; font-weight: 700; padding: 14px 16px;"
+                                            id="footer-total-purchase">0</td>
+                                        <td style="background: #334155; color: white; text-align: center; font-weight: 700; padding: 14px 16px;"
+                                            id="footer-total-total">0</td>
+                                        <td style="background: #334155; color: #ef4444; text-align: center; font-weight: 700; padding: 14px 16px;"
+                                            id="footer-total-sale">0</td>
+                                    </tr>
+                                    <!-- Total Amount Row -->
+                                    <tr style="background: #1e3a8a;">
+                                        <td colspan="2"
+                                            style="font-size: 13px; background: #1e3a8a; color: white; font-weight: 700; padding: 16px;">
+                                            <i class="bi bi-currency-rupee me-2"></i>TOTAL AMOUNT
+                                        </td>
+                                        <td style="background: #1e3a8a; text-align: right; padding: 16px;"></td>
+                                        <td style="background: #1e3a8a; color: #94a3b8; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+                                            id="footer-amount-opening">₹0</td>
+                                        <td style="background: #1e3a8a; color: #10b981; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+                                            id="footer-amount-purchase">₹0</td>
+                                        <td style="background: #1e3a8a; color: white; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+                                            id="footer-amount-total">₹0</td>
+                                        <td style="background: #1e3a8a; color: #ef4444; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+                                            id="footer-amount-sale">₹0</td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 
@@ -2142,28 +2142,28 @@
             <h3 class="fw-bold mb-4"><i class="bi bi-grid-fill me-2"></i>Dashboard Overview</h3>
             <div class="row g-4">
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
+                    <div class="stat-card p-4" onclick="showSection('hq')" role="button">
                         <i class="bi bi-building icon-bg text-primary"></i>
                         <h6 class="text-muted mb-2">Headquarters</h6>
                         <h2 id="statHQ" class="text-primary fw-bold">0</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
+                    <div class="stat-card p-4" onclick="showSection('employee')" role="button">
                         <i class="bi bi-people icon-bg text-success"></i>
                         <h6 class="text-muted mb-2">Employees</h6>
                         <h2 id="statHBP" class="text-success fw-bold">0</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
+                    <div class="stat-card p-4" onclick="showSection('wholesaler')" role="button">
                         <i class="bi bi-shop icon-bg text-info"></i>
                         <h6 class="text-muted mb-2">Wholesalers</h6>
                         <h2 id="statWS" class="text-info fw-bold">0</h2>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="stat-card p-4">
+                    <div class="stat-card p-4" onclick="showSection('products')" role="button">
                         <i class="bi bi-box-seam icon-bg text-warning"></i>
                         <h6 class="text-muted mb-2">Products</h6>
                         <h2 id="statProd" class="text-warning fw-bold">0</h2>
@@ -2631,9 +2631,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const API = "https://titanicadminbackend.onrender.com/api";
+        // const API = "https://titanicadminbackend.onrender.com/api";
 
-        // const API = "http://192.168.2.106:5000/api";
+        const API = "http://192.168.2.106:5000/api";
 
         let allEmployeesForTarget = [];
         let allSalesWholesalers = [];
@@ -3356,11 +3356,11 @@
 
         // Render stock details table with ALL products
         // Render stock details table with ALL products
-function renderStockDetails(stockData, allProducts) {
-    const tbody = document.getElementById('productStockDetailsBody');
+        function renderStockDetails(stockData, allProducts) {
+            const tbody = document.getElementById('productStockDetailsBody');
 
-    if (!allProducts || allProducts.length === 0) {
-        tbody.innerHTML = `
+            if (!allProducts || allProducts.length === 0) {
+                tbody.innerHTML = `
             <tr style="background: #1e293b;">
                 <td colspan="7" class="text-center py-4" style="color: #94a3b8;">
                     <i class="bi bi-inbox" style="font-size: 48px; opacity: 0.3;"></i>
@@ -3369,72 +3369,72 @@ function renderStockDetails(stockData, allProducts) {
             </tr>
         `;
 
-        // Reset all totals
-        resetTotals();
-        return;
-    }
+                // Reset all totals
+                resetTotals();
+                return;
+            }
 
-    // Create a map of stock data by product ID for quick lookup
-    const stockMap = {};
-    stockData.forEach(stock => {
-        if (stock.productId && stock.productId._id) {
-            stockMap[stock.productId._id.toString()] = stock;
-        }
-    });
+            // Create a map of stock data by product ID for quick lookup
+            const stockMap = {};
+            stockData.forEach(stock => {
+                if (stock.productId && stock.productId._id) {
+                    stockMap[stock.productId._id.toString()] = stock;
+                }
+            });
 
-    // Sort products alphabetically
-    const sortedProducts = [...allProducts].sort((a, b) => a.name.localeCompare(b.name));
+            // Sort products alphabetically
+            const sortedProducts = [...allProducts].sort((a, b) => a.name.localeCompare(b.name));
 
-    // Totals for quantities
-    let totalOpening = 0;
-    let totalPurchase = 0;
-    let totalTotal = 0;
-    let totalSale = 0;
-    
-    // Totals for amounts (value)
-    let totalOpeningAmount = 0;
-    let totalPurchaseAmount = 0;
-    let totalTotalAmount = 0;
-    let totalSaleAmount = 0;
+            // Totals for quantities
+            let totalOpening = 0;
+            let totalPurchase = 0;
+            let totalTotal = 0;
+            let totalSale = 0;
 
-    let html = '';
-    sortedProducts.forEach((product, idx) => {
-        const productId = product._id.toString();
-        const stock = stockMap[productId] || {
-            openingStock: 0,
-            totalPurchase: 0,
-            totalSales: 0,
-            closingStock: 0
-        };
+            // Totals for amounts (value)
+            let totalOpeningAmount = 0;
+            let totalPurchaseAmount = 0;
+            let totalTotalAmount = 0;
+            let totalSaleAmount = 0;
 
-        const packing = `${product.quantity || ''} ${product.measuredIn}`;
-        const opening = stock.openingStock || 0;
-        const purchase = stock.totalPurchase || 0;
-        const total = opening + purchase;
-        const sale = stock.totalSales || 0;
-        
-        // Calculate amounts for each column
-        const openingAmount = opening * product.mrp;
-        const purchaseAmount = purchase * product.mrp;
-        const totalAmount = total * product.mrp;
-        const saleAmount = sale * product.mrp;
+            let html = '';
+            sortedProducts.forEach((product, idx) => {
+                const productId = product._id.toString();
+                const stock = stockMap[productId] || {
+                    openingStock: 0,
+                    totalPurchase: 0,
+                    totalSales: 0,
+                    closingStock: 0
+                };
 
-        // Accumulate quantity totals
-        totalOpening += opening;
-        totalPurchase += purchase;
-        totalTotal += total;
-        totalSale += sale;
-        
-        // Accumulate amount totals
-        totalOpeningAmount += openingAmount;
-        totalPurchaseAmount += purchaseAmount;
-        totalTotalAmount += totalAmount;
-        totalSaleAmount += saleAmount;
+                const packing = `${product.quantity || ''} ${product.measuredIn}`;
+                const opening = stock.openingStock || 0;
+                const purchase = stock.totalPurchase || 0;
+                const total = opening + purchase;
+                const sale = stock.totalSales || 0;
 
-        // Row background color alternating
-        const rowBg = idx % 2 === 0 ? '#1e293b' : '#2d3748';
+                // Calculate amounts for each column
+                const openingAmount = opening * product.mrp;
+                const purchaseAmount = purchase * product.mrp;
+                const totalAmount = total * product.mrp;
+                const saleAmount = sale * product.mrp;
 
-        html += `
+                // Accumulate quantity totals
+                totalOpening += opening;
+                totalPurchase += purchase;
+                totalTotal += total;
+                totalSale += sale;
+
+                // Accumulate amount totals
+                totalOpeningAmount += openingAmount;
+                totalPurchaseAmount += purchaseAmount;
+                totalTotalAmount += totalAmount;
+                totalSaleAmount += saleAmount;
+
+                // Row background color alternating
+                const rowBg = idx % 2 === 0 ? '#1e293b' : '#2d3748';
+
+                html += `
             <tr style="background: ${rowBg};" class="stock-detail-row">
                 <td style="text-align: center; padding: 12px 16px; font-weight: 600;">
                     <span style="color: #94a3b8;">${idx + 1}</span>
@@ -3465,28 +3465,28 @@ function renderStockDetails(stockData, allProducts) {
                 </td>
             </tr>
         `;
-    });
+            });
 
-    tbody.innerHTML = html;
+            tbody.innerHTML = html;
 
-    // Update footer totals (quantities)
-    document.getElementById('footer-total-opening').innerText = totalOpening.toLocaleString();
-    document.getElementById('footer-total-purchase').innerText = totalPurchase.toLocaleString();
-    document.getElementById('footer-total-total').innerText = totalTotal.toLocaleString();
-    document.getElementById('footer-total-sale').innerText = totalSale.toLocaleString();
-    
-    // Update footer totals (amounts)
-    document.getElementById('footer-amount-opening').innerText = '₹' + totalOpeningAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
-    document.getElementById('footer-amount-purchase').innerText = '₹' + totalPurchaseAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
-    document.getElementById('footer-amount-total').innerText = '₹' + totalTotalAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
-    document.getElementById('footer-amount-sale').innerText = '₹' + totalSaleAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            // Update footer totals (quantities)
+            document.getElementById('footer-total-opening').innerText = totalOpening.toLocaleString();
+            document.getElementById('footer-total-purchase').innerText = totalPurchase.toLocaleString();
+            document.getElementById('footer-total-total').innerText = totalTotal.toLocaleString();
+            document.getElementById('footer-total-sale').innerText = totalSale.toLocaleString();
 
-    // Update summary cards
-    document.getElementById('detailTotalProducts').innerText = sortedProducts.length;
-    document.getElementById('detailTotalPurchase').innerText = totalPurchase.toLocaleString();
-    document.getElementById('detailTotalSales').innerText = totalSale.toLocaleString();
-    document.getElementById('detailTotalValue').innerText = '₹' + totalPurchaseAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
-}
+            // Update footer totals (amounts)
+            document.getElementById('footer-amount-opening').innerText = '₹' + totalOpeningAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            document.getElementById('footer-amount-purchase').innerText = '₹' + totalPurchaseAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            document.getElementById('footer-amount-total').innerText = '₹' + totalTotalAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            document.getElementById('footer-amount-sale').innerText = '₹' + totalSaleAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+
+            // Update summary cards
+            document.getElementById('detailTotalProducts').innerText = sortedProducts.length;
+            document.getElementById('detailTotalPurchase').innerText = totalPurchase.toLocaleString();
+            document.getElementById('detailTotalSales').innerText = totalSale.toLocaleString();
+            document.getElementById('detailTotalValue').innerText = '₹' + totalPurchaseAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+        }
 
         // Helper function to reset all totals
         function resetTotals() {
@@ -4460,58 +4460,58 @@ function renderStockDetails(stockData, allProducts) {
             await loadPerformanceDashboard();
         }
 
-       async function loadPerformanceDashboard() {
-    const tbody = document.getElementById('performanceTableBody');
-    tbody.innerHTML = '<tr><td colspan="9" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+        async function loadPerformanceDashboard() {
+            const tbody = document.getElementById('performanceTableBody');
+            tbody.innerHTML = '<tr><td colspan="9" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
 
-    try {
-        const month = document.getElementById('perfMonth').value;
-        const year = document.getElementById('perfYear').value;
-        const hqId = document.getElementById('perfHQ').value;
-
-        // Fetch all performance data for all employees in one view
-        // We use the overview endpoint first to get the list
-        const res = await axios.get(`${API}/targets/admin/overview`, { 
-            params: { year, hqId } 
-        });
-        
-        const employees = res.data.employees;
-
-        // Fetch summary performance for the specific month/year for the table
-        const performancePromises = employees.map(async (emp) => {
             try {
-                const perfRes = await axios.get(`${API}/targets/performance/${emp.hbpId}`, {
-                    params: { month, year }
+                const month = document.getElementById('perfMonth').value;
+                const year = document.getElementById('perfYear').value;
+                const hqId = document.getElementById('perfHQ').value;
+
+                // Fetch all performance data for all employees in one view
+                // We use the overview endpoint first to get the list
+                const res = await axios.get(`${API}/targets/admin/overview`, {
+                    params: { year, hqId }
                 });
-                return {
-                    ...emp,
-                    employeeId: emp.hbpId,
-                    employeeName: emp.name,
-                    employeeRole: emp.role,
-                    hqName: emp.hq,
-                    summary: perfRes.data.summary
-                };
-            } catch (e) {
-                return {
-                    ...emp,
-                    employeeId: emp.hbpId,
-                    employeeName: emp.name,
-                    employeeRole: emp.role,
-                    hqName: emp.hq,
-                    summary: { totalTarget: 0, totalAchieved: 0, overallPercentage: 0 }
-                };
+
+                const employees = res.data.employees;
+
+                // Fetch summary performance for the specific month/year for the table
+                const performancePromises = employees.map(async (emp) => {
+                    try {
+                        const perfRes = await axios.get(`${API}/targets/performance/${emp.hbpId}`, {
+                            params: { month, year }
+                        });
+                        return {
+                            ...emp,
+                            employeeId: emp.hbpId,
+                            employeeName: emp.name,
+                            employeeRole: emp.role,
+                            hqName: emp.hq,
+                            summary: perfRes.data.summary
+                        };
+                    } catch (e) {
+                        return {
+                            ...emp,
+                            employeeId: emp.hbpId,
+                            employeeName: emp.name,
+                            employeeRole: emp.role,
+                            hqName: emp.hq,
+                            summary: { totalTarget: 0, totalAchieved: 0, overallPercentage: 0 }
+                        };
+                    }
+                });
+
+                allPerformanceData = await Promise.all(performancePromises);
+                updatePerformanceSummary(allPerformanceData);
+                renderPerformanceTable(allPerformanceData);
+
+            } catch (error) {
+                console.error('Error loading performance dashboard:', error);
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center py-4"><div class="alert alert-danger">Failed to load performance data</div></td></tr>';
             }
-        });
-
-        allPerformanceData = await Promise.all(performancePromises);
-        updatePerformanceSummary(allPerformanceData);
-        renderPerformanceTable(allPerformanceData);
-
-    } catch (error) {
-        console.error('Error loading performance dashboard:', error);
-        tbody.innerHTML = '<tr><td colspan="9" class="text-center py-4"><div class="alert alert-danger">Failed to load performance data</div></td></tr>';
-    }
-}
+        }
 
         function updatePerformanceSummary(data) {
             const totalEmployees = data.length;
