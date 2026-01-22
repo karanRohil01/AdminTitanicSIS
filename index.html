@@ -1157,6 +1157,170 @@
                 display: none;
             }
         }
+
+        /* Styling for the dropdown container */
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Rotation effect for the chevron */
+        .nav-dropdown.open .bi-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        /* Indentation for sub-items to make them look nested */
+        .dropdown-content .nav-link {
+            font-size: 13px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-left: 4px solid transparent !important;
+            /* Remove the thick blue border for sub-items */
+        }
+
+        .dropdown-content .nav-link:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Professional Compact Table Styling */
+        .sales-product-table th {
+            font-size: 11px !important;
+            padding: 10px 12px !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sales-product-table td {
+            padding: 8px 12px !important;
+            /* Tightened row spacing */
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        /* More Structured Product Info */
+        .sales-product-table .product-name {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        .sales-product-table .product-meta {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* Compact Inputs */
+        .sales-quantity-input {
+            width: 100px !important;
+            /* Fixed width for alignment */
+            height: 32px;
+            padding: 4px 8px !important;
+            font-size: 13px !important;
+            border: 1px solid var(--gray-300);
+            border-radius: 4px !important;
+        }
+
+        /* Scrollable area adjustment for 7-8 rows */
+        #salesProductModal .table-scroll-container {
+            max-height: 420px !important;
+            /* Adjusted height for visibility */
+            border: 1px solid var(--gray-200);
+        }
+
+        .month-target-table tbody td {
+            transition: background 0.2s ease;
+        }
+
+        .month-target-table tbody tr:hover td {
+            background: #f8fafc !important;
+        }
+
+        /* Ensure product name remains white/visible even when row is hovered */
+        .month-target-table tbody tr:hover .product-info div {
+            color: #ffffff !important;
+        }
+
+        /* Specific fix for the Employee Performance Modal rows */
+        #empPerfProductsBody tr:hover {
+            background-color: #334155 !important;
+            /* A slightly lighter dark-blue/gray */
+        }
+
+        /* Ensure the sticky product-info column also changes color on hover */
+        #empPerfProductsBody tr:hover .product-info {
+            background-color: #334155 !important;
+        }
+
+        /* Fix for the white background issue you mentioned */
+        .month-target-table tbody tr:hover td {
+            background-color: inherit;
+            /* Prevents it from turning white if a global style exists */
+        }
+
+        /* Dark Modal Hover Override */
+        #productTargetTableBody tr:hover td,
+        #productTargetTableBody tr:hover .product-info {
+            background-color: #334155 !important;
+            transition: background-color 0.2s;
+        }
+
+        /* Ensure inputs look good on dark background */
+        .month-input {
+            transition: all 0.2s;
+        }
+
+        .month-input:focus {
+            background: #0f172a !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Minimalist Subtitle Styling */
+        #salesModalSubtitle {
+            display: block;
+            margin-top: 5px;
+            letter-spacing: 0.2px;
+        }
+
+        /* Ensure the modal title "Record Purchase" stands out */
+        #salesProductModal .modal-title {
+            color: #ffffff !important;
+            font-size: 18px !important;
+            letter-spacing: 0.5px;
+        }
+
+        /* Remove default bootstrap muted colors for the subtitle */
+        .text-muted#salesModalSubtitle {
+            color: #ffffff !important;
+            opacity: 1 !important;
+        }
+
+        #productStockDetailsBody tr:hover {
+            background: #334155 !important;
+            /* Lighter dark blue-gray on hover */
+        }
+
+        /* Ensure product name stays white on hover */
+        #productStockDetailsBody tr:hover td {
+            background: inherit !important;
+        }
+
+        /* Make sure all text remains visible on hover */
+        #productStockDetailsBody tr:hover .product-name,
+        #productStockDetailsBody tr:hover div {
+            color: white !important;
+        }
+
+        /* Keep meta info (type, packing) visible on hover */
+        #productStockDetailsBody tr:hover .product-badge {
+            background: #1e40af !important;
+            color: white !important;
+        }
+
+        /* Optional: Add smooth transition */
+        #productStockDetailsBody tr {
+            transition: background-color 0.2s ease;
+        }
     </style>
 </head>
 
@@ -1167,18 +1331,35 @@
             <span class="text-secondary small">Pharma Distribution System</span>
         </div>
         <nav class="nav flex-column mt-3">
-            <a class="nav-link active" onclick="showSection('dashboard')"><i
-                    class="bi bi-speedometer2 me-2"></i>Dashboard</a>
-            <a class="nav-link" onclick="showSection('hq')"><i class="bi bi-building me-2"></i> Headquarter</a>
-            <a class="nav-link" onclick="showSection('employee')"><i class="bi bi-people me-2"></i> Employee</a>
-            <a class="nav-link" onclick="showSection('wholesaler')"><i class="bi bi-shop me-2"></i> Wholesaler</a>
-            <a class="nav-link" onclick="showSection('products')"><i class="bi bi-box-seam me-2"></i> Products</a>
+            <a class="nav-link active" onclick="showSection('dashboard')">
+                <i class="bi bi-speedometer2 me-2"></i>Dashboard
+            </a>
+
+            <div class="nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="javascript:void(0)" onclick="toggleMasterDropdown(this)">
+                    <i class="bi bi-database me-2"></i>Master
+                    <i class="bi bi-chevron-down ms-auto" style="font-size: 12px; transition: transform 0.3s;"></i>
+                </a>
+                <div class="dropdown-content" id="masterDropdown" style="display: none; background: rgba(0,0,0,0.2);">
+                    <a class="nav-link ps-5" onclick="showSection('hq')"><i class="bi bi-building me-2"></i>
+                        Headquarter</a>
+                    <a class="nav-link ps-5" onclick="showSection('employee')"><i class="bi bi-people me-2"></i>
+                        Employee</a>
+                    <a class="nav-link ps-5" onclick="showSection('wholesaler')"><i class="bi bi-shop me-2"></i>
+                        Wholesaler</a>
+                    <a class="nav-link ps-5" onclick="showSection('products')"><i class="bi bi-box-seam me-2"></i>
+                        Products</a>
+                </div>
+            </div>
+
             <a class="nav-link" onclick="showSection('sales')"><i class="bi bi-cart-plus me-2"></i> Sales</a>
             <a class="nav-link" onclick="showSection('sales-history')"><i class="bi bi-clock-history me-2"></i> Sales
                 History</a>
             <a class="nav-link" onclick="showSection('target-assignment')"><i class="bi bi-clipboard-check me-2"></i>
-
                 Target Assignment</a>
+            <a class="nav-link" onclick="showSection('performance-dashboard')">
+                <i class="bi bi-graph-up me-2"></i> Achievement
+            </a>
         </nav>
     </div>
 
@@ -1187,7 +1368,7 @@
         <div id="sales-history" class="section" style="display:none;">
             <!-- Header with Filters -->
             <div class="section-header">
-                <h3 class="fw-bold mb-0"><i class="bi bi-clock-history me-2"></i>Sales Reports</h3>
+                <h3 class="fw-bold mb-0"><i class="bi bi-clock-history me-2"></i> Reports</h3>
                 <div class="d-flex gap-2">
                     <select id="historyMonth" class="form-select" style="width: 150px;"
                         onchange="loadWholesalerSales()">
@@ -1280,18 +1461,115 @@
             </div>
         </div>
 
-        <!-- Wholesaler Details Modal -->
-        <div class="modal fade" id="wholesalerDetailsModal" tabindex="-1">
+        <!-- PERFORMANCE DASHBOARD SECTION -->
+        <div id="performance-dashboard" class="section" style="display:none;">
+            <div class="section-header">
+                <h3 class="fw-bold mb-0">Performance</h3>
+                <div class="d-flex gap-2">
+                    <select id="perfMonth" class="form-select d-none" style="width: 150px;"
+                        onchange="loadPerformanceDashboard()">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <select id="perfYear" class="form-select" style="width: 120px;"
+                        onchange="loadPerformanceDashboard()">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                    </select>
+                    <select id="perfHQ" class="form-select" style="width: 200px;" onchange="loadPerformanceDashboard()">
+                        <option value="">All Headquarters</option>
+                    </select>
+                    <input type="text" id="perfSearch" class="form-control search-box"
+                        placeholder="🔍 Search employee..." oninput="filterPerformanceData()">
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="row g-4 mb-4 d-none">
+                <div class="col-md-3">
+                    <div class="summary-card d-flex justify-content-between align-items-center">
+                        <h6>Total Employees</h6>
+                        <div class="value" id="perfTotalEmployees">0</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--success);">
+                        <h6>Achieved Target</h6>
+                        <div class="value text-success" id="perfAchievedCount">0</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--warning);">
+                        <h6>Below Target</h6>
+                        <div class="value text-warning" id="perfBelowCount">0</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="summary-card d-flex justify-content-between align-items-center"
+                        style="border-left-color: var(--accent);">
+                        <h6>Avg Achievement</h6>
+                        <div class="value" style="color: var(--accent);" id="perfAvgPercentage">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Table -->
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="serial-col">#</th>
+                                <th>Employee</th>
+                                <th>Role</th>
+                                <th>Headquarter</th>
+                                <th class="text-center">Target Units</th>
+                                <th class="text-center">Achieved Units</th>
+                                <th class="text-center">Achievement %</th>
+                                <!-- <th class="text-center">Status</th> -->
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="performanceTableBody">
+                            <tr>
+                                <td colspan="9" class="text-center py-5">
+                                    <div class="spinner-border text-primary"></div>
+                                    <p class="mt-2 text-muted">Loading performance data...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employee Performance Detail Modal -->
+        <!-- Minimal Employee Performance Detail Modal -->
+        <div class="modal fade" id="employeePerformanceModal" tabindex="-1">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content" style="background: #f1f5f9;">
-                    <div class="modal-header"
-                        style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: none; padding: 20px 40px;">
+                <div class="modal-content" style="background: #1e293b;">
+                    <div class="modal-header" style="background: #0f172a; border: none; padding: 16px 30px;">
                         <div>
-                            <h5 class="modal-title mb-1" style="font-size: 20px; font-weight: 700;">
-                                <i class="bi bi-shop me-2"></i>Wholesaler Sales Details
+                            <h5 class="modal-title mb-1" style="font-size: 18px; font-weight: 700; color: white;">
+                                <i class="bi bi-graph-up me-2"></i>Employee Performance Analysis
                             </h5>
-                            <small class="text-white-50" id="wholesalerDetailsSubtitle" style="font-size: 13px;">
-                                Wholesaler • Employee • HQ • Month/Year
+                            <small class="text-white-50" id="empPerfSubtitle" style="font-size: 12px;">
+                                Employee • Role • Year
                             </small>
                         </div>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -1299,128 +1577,333 @@
                     </div>
 
                     <div class="modal-body p-0"
-                        style="background: #f1f5f9; display: flex; flex-direction: column; height: calc(100vh - 140px);">
+                        style="background: #1e293b; display: flex; flex-direction: column; height: calc(100vh - 140px);">
 
-                        <!-- Wholesaler Info Card - Compact -->
-                        <!-- <div class="wholesaler-info-bar">
-                    <div class="info-item">
-                        <i class="bi bi-shop-window"></i>
-                        <div>
-                            <div class="info-label">WHOLESALER</div>
-                            <div class="info-value" id="detailWholesalerName">-</div>
-                            <div class="info-sub" id="detailGST">-</div>
-                        </div>
-                    </div>
-                    <div class="info-divider"></div>
-                    <div class="info-item">
-                        <i class="bi bi-person-badge"></i>
-                        <div>
-                            <div class="info-label">EMPLOYEE</div>
-                            <div class="info-value" id="detailEmployee">-</div>
-                            <div class="info-sub" id="detailRole">-</div>
-                        </div>
-                    </div>
-                    <div class="info-divider"></div>
-                    <div class="info-item">
-                        <i class="bi bi-building"></i>
-                        <div>
-                            <div class="info-label">HEADQUARTER</div>
-                            <div class="info-value" id="detailHQ">-</div>
-                        </div>
-                    </div>
-                    <div class="info-divider"></div>
-                    <div class="info-item">
-                        <i class="bi bi-calendar3"></i>
-                        <div>
-                            <div class="info-label">PERIOD</div>
-                            <div class="info-value" id="detailPeriod">-</div>
-                        </div>
-                    </div>
-                    <div class="info-divider"></div>
-                    <div class="info-item">
-                        <i class="bi bi-telephone"></i>
-                        <div>
-                            <div class="info-label">CONTACT</div>
-                            <div class="info-value" id="detailMobile">-</div>
-                        </div>
-                    </div>
-                </div> -->
-
-                        <!-- Product Stock Details Table - Full Height -->
-                        <div class="stock-table-wrapper">
-                            <table class="professional-stock-table">
-                                <thead>
+                        <!-- Monthly Performance Table - Full Height -->
+                        <div style="flex: 1; overflow: auto; padding: 15px 30px;">
+                            <table class="month-target-table" id="monthPerformanceTable" style="margin: 0;">
+                                <thead class="sticky-header">
                                     <tr>
-                                        <th style="width: 50px;">#</th>
-                                        <th style="min-width: 280px;">
-                                            Product Details
-                                        </th>
-                                        <th class="text-center" style="width: 130px;">
-                                            Opening Stock
-                                        </th>
-                                        <th class="text-center" style="width: 130px;">
-                                            Purchase
-                                        </th>
-                                        <th class="text-center" style="width: 130px;">
-                                            Sales
-                                        </th>
-                                        <th class="text-center" style="width: 130px;">
-                                            Closing Stock
-                                        </th>
-                                        <th class="text-end" style="width: 110px;">
-                                            Rate
-                                        </th>
-                                        <!-- <th class="text-end" style="width: 150px;">
-                                            Purchase Value
-                                        </th> -->
+                                        <th rowspan="2" style="min-width: 200px; background: #0f172a; color: white;">
+                                            Product Details</th>
+                                        <th colspan="2" style="background: #dc2626; color: white;">JAN</th>
+                                        <th colspan="2" style="background: #ea580c; color: white;">FEB</th>
+                                        <th colspan="2" style="background: #d97706; color: white;">MAR</th>
+                                        <th colspan="2" style="background: #ca8a04; color: white;">APR</th>
+                                        <th colspan="2" style="background: #65a30d; color: white;">MAY</th>
+                                        <th colspan="2" style="background: #16a34a; color: white;">JUN</th>
+                                        <th colspan="2" style="background: #059669; color: white;">JUL</th>
+                                        <th colspan="2" style="background: #0d9488; color: white;">AUG</th>
+                                        <th colspan="2" style="background: #0891b2; color: white;">SEP</th>
+                                        <th colspan="2" style="background: #0284c7; color: white;">OCT</th>
+                                        <th colspan="2" style="background: #2563eb; color: white;">NOV</th>
+                                        <th colspan="2" style="background: #4f46e5; color: white;">DEC</th>
+                                        <th rowspan="2" style="min-width: 120px; background: #0f172a; color: white;">
+                                            Yearly Total</th>
+                                    </tr>
+                                    <tr>
+                                        <!-- January -->
+                                        <th style="background: #b91c1c; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #b91c1c; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- February -->
+                                        <th style="background: #c2410c; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #c2410c; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- March -->
+                                        <th style="background: #b45309; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #b45309; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- April -->
+                                        <th style="background: #a16207; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #a16207; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- May -->
+                                        <th style="background: #4d7c0f; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #4d7c0f; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- June -->
+                                        <th style="background: #15803d; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #15803d; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- July -->
+                                        <th style="background: #047857; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #047857; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- August -->
+                                        <th style="background: #0f766e; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #0f766e; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- September -->
+                                        <th style="background: #0e7490; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #0e7490; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- October -->
+                                        <th style="background: #0369a1; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #0369a1; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- November -->
+                                        <th style="background: #1d4ed8; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #1d4ed8; font-size: 9px; color: white;">Ach . </th>
+                                        <!-- December -->
+                                        <th style="background: #4338ca; font-size: 9px; color: white;">Tgt .</th>
+                                        <th style="background: #4338ca; font-size: 9px; color: white;">Ach . </th>
                                     </tr>
                                 </thead>
-                                <tbody id="productStockDetailsBody">
+                                <tbody id="empPerfProductsBody">
                                     <tr>
-                                        <td colspan="8" class="text-center py-5">
-                                            <div class="spinner-border text-primary"></div>
-                                            <p class="mt-2 text-muted">Loading product details...</p>
+                                        <td colspan="26" class="text-center py-5">
+                                            <div class="spinner-border text-light"></div>
+                                            <p class="mt-2 text-light">Loading performance data...</p>
                                         </td>
                                     </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr style="background: #334155;">
+                                        <td class="total-cell"
+                                            style="font-size: 12px; background: #334155; color: white;"><i
+                                                class="bi bi-calculator me-2"></i>MONTHLY TOTALS</td>
+                                        <!-- January -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-1">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-1">0</td>
+                                        <!-- February -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-2">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-2">0</td>
+                                        <!-- March -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-3">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-3">0</td>
+                                        <!-- April -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-4">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-4">0</td>
+                                        <!-- May -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-5">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-5">0</td>
+                                        <!-- June -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-6">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-6">0</td>
+                                        <!-- July -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-7">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-7">0</td>
+                                        <!-- August -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-8">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-8">0</td>
+                                        <!-- September -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-9">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-9">0</td>
+                                        <!-- October -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-10">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-10">0</td>
+                                        <!-- November -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-11">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-11">0</td>
+                                        <!-- December -->
+                                        <td class="total-cell" style="background: #334155; color: #94a3b8;"
+                                            id="perf-target-12">0</td>
+                                        <td class="total-cell"
+                                            style="background: #334155; color: white; font-weight: 700;"
+                                            id="perf-achieved-12">0</td>
+                                        <!-- Yearly Total -->
+                                        <td class="total-cell"
+                                            style="font-size: 11px; font-weight: 700; background: #334155; color: white;">
+                                            <div style="color: #94a3b8;">T: <span id="perf-yearly-target">0</span></div>
+                                            <div style="color: white;">A: <span id="perf-yearly-achieved">0</span></div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
 
                         <!-- Summary Footer - Sticky at Bottom -->
-                        <!-- <div class="row summary-footer">
-                            <div class="col-2 summary-item">
-                                <i class="bi bi-boxes"></i>
-                                <div>
-                                    <div class="summary-label">Total Products</div>
-                                    <div class="summary-value" id="detailTotalProducts">0</div>
+                        <div
+                            style="background: #0f172a; padding: 16px 30px; display: flex; align-items: center; gap: 30px; border-top: 2px solid #334155;">
+                            <div style="flex: 0 0 auto;">
+                                <h4 style="color: white; margin: 0; font-size: 16px;"><i
+                                        class="bi bi-trophy-fill me-2"></i>Performance Summary</h4>
+                            </div>
+                            <div style="flex: 1; display: flex; gap: 30px; align-items: center;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Total Target</div>
+                                    <div style="font-size: 20px; font-weight: 700; color: white;"
+                                        id="empPerfTotalTarget">0</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Total Achieved
+                                    </div>
+                                    <div style="font-size: 20px; font-weight: 700; color: #10b981;"
+                                        id="empPerfTotalAchieved">0</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Achievement %
+                                    </div>
+                                    <div style="font-size: 20px; font-weight: 700; color: #3b82f6;"
+                                        id="empPerfOverallPercent">0%</div>
+                                </div>
+                                <div style="text-align: center; flex: 1; display: none;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Status</div>
+                                    <div style="font-size: 18px; font-weight: 700; color: white;" id="empPerfStatus">-
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-2 summary-divider"></div>
-                            <div class="summary-item">
-                                <i class="bi bi-cart-plus"></i>
-                                <div>
-                                    <div class="summary-label">Total Purchase</div>
-                                    <div class="summary-value text-success" id="detailTotalPurchase">0</div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wholesaler Details Modal -->
+        <div class="modal fade" id="wholesalerDetailsModal" tabindex="-1">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content" style="background: #1e293b;">
+                    <!-- Minimal Professional Header -->
+                    <div class="modal-header" style="background: #0f172a; border: none; padding: 16px 30px;">
+                        <div>
+                            <h5 class="modal-title mb-1" style="font-size: 18px; font-weight: 700; color: white;">
+                                <i class="bi bi-shop me-2"></i>Stock Ledger
+                            </h5>
+                            <small class="text-white-50" id="wholesalerDetailsSubtitle" style="font-size: 12px;">
+                                Wholesaler • Employee • Period
+                            </small>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            style="filter: brightness(0) invert(1);"></button>
+                    </div>
+
+                    <div class="modal-body p-0"
+                        style="background: #1e293b; display: flex; flex-direction: column; height: calc(100vh - 140px);">
+
+                        <!-- Product Stock Table - Full Height -->
+                        <div style="flex: 1; overflow: auto; padding: 15px 30px;">
+                            <table class="month-target-table" style="margin: 0;">
+                                <thead class="sticky-header">
+                                    <tr>
+                                        <th style="width: 50px; background: #0f172a; color: white; text-align: center;">
+                                            #</th>
+                                        <th style="min-width: 200px; background: #0f172a; color: white;">
+                                            <i class="bi bi-box-seam me-2"></i>Product
+                                        </th>
+                                        <th style="width: 110px; background: #0f172a; color: white; text-align: right;">
+                                            <i class="bi bi-currency-rupee me-2"></i>Rate
+                                        </th>
+                                        <th
+                                            style="width: 110px; background: #0f172a; color: white; text-align: center;">
+                                            <i class="bi bi-folder-symlink me-2"></i>Opening
+                                        </th>
+                                        <th
+                                            style="width: 110px; background: #0f172a; color: white; text-align: center;">
+                                            <i class="bi bi-cart-plus me-2"></i>Purchase
+                                        </th>
+                                        <th
+                                            style="width: 110px; background: #0f172a; color: white; text-align: center;">
+                                            <i class="bi bi-calculator me-2"></i>Total
+                                        </th>
+                                        <th
+                                            style="width: 110px; background: #0f172a; color: white; text-align: center;">
+                                            <i class="bi bi-cart-dash me-2"></i>sec Sale
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productStockDetailsBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center py-5" style="background: #1e293b;">
+                                            <div class="spinner-border text-light"></div>
+                                            <p class="mt-2 text-light">Loading stock details...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                               <tfoot>
+    <!-- Total Units Row -->
+    <tr style="background: #334155;">
+        <td colspan="2"
+            style="font-size: 12px; background: #334155; color: white; font-weight: 700; padding: 14px 16px;">
+            <i class="bi bi-calculator-fill me-2"></i>TOTAL UNITS
+        </td>
+        <td style="background: #334155; text-align: right; padding: 14px 16px;"></td>
+        <td style="background: #334155; color: #94a3b8; text-align: center; font-weight: 700; padding: 14px 16px;"
+            id="footer-total-opening">0</td>
+        <td style="background: #334155; color: #10b981; text-align: center; font-weight: 700; padding: 14px 16px;"
+            id="footer-total-purchase">0</td>
+        <td style="background: #334155; color: white; text-align: center; font-weight: 700; padding: 14px 16px;"
+            id="footer-total-total">0</td>
+        <td style="background: #334155; color: #ef4444; text-align: center; font-weight: 700; padding: 14px 16px;"
+            id="footer-total-sale">0</td>
+    </tr>
+    <!-- Total Amount Row -->
+    <tr style="background: #1e3a8a;">
+        <td colspan="2"
+            style="font-size: 13px; background: #1e3a8a; color: white; font-weight: 700; padding: 16px;">
+            <i class="bi bi-currency-rupee me-2"></i>TOTAL AMOUNT
+        </td>
+        <td style="background: #1e3a8a; text-align: right; padding: 16px;"></td>
+        <td style="background: #1e3a8a; color: #94a3b8; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+            id="footer-amount-opening">₹0</td>
+        <td style="background: #1e3a8a; color: #10b981; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+            id="footer-amount-purchase">₹0</td>
+        <td style="background: #1e3a8a; color: white; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+            id="footer-amount-total">₹0</td>
+        <td style="background: #1e3a8a; color: #ef4444; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+            id="footer-amount-sale">₹0</td>
+    </tr>
+</tfoot>
+                            </table>
+                        </div>
+
+                        <!-- Summary Footer - Sticky -->
+                        <div
+                            style="background: #0f172a; padding: 16px 30px; display: none; align-items: center; gap: 30px; border-top: 2px solid #334155;">
+                            <div style="flex: 0 0 auto;">
+                                <h4 style="color: white; margin: 0; font-size: 16px;">
+                                    <i class="bi bi-graph-up-arrow me-2"></i>Summary
+                                </h4>
                             </div>
-                            <div class="col-2 summary-divider"></div>
-                            <div class="summary-item">
-                                <i class="bi bi-cart-dash"></i>
-                                <div>
-                                    <div class="summary-label">Total Sales</div>
-                                    <div class="summary-value text-danger" id="detailTotalSales">0</div>
+                            <div style="flex: 1; display: flex; gap: 30px; align-items: center;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Total Products
+                                    </div>
+                                    <div style="font-size: 20px; font-weight: 700; color: white;"
+                                        id="detailTotalProducts">0</div>
                                 </div>
-                            </div>
-                            <div class="col-2 summary-divider"></div>
-                            <div class="summary-item summary-item-large">
-                                <i class="bi bi-cash-stack"></i>
-                                <div>
-                                    <div class="summary-label">Total Value</div>
-                                    <div class="summary-value" style="font-size: 28px; color: var(--accent);"
+                                <div style="text-align: center;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Total Purchase
+                                    </div>
+                                    <div style="font-size: 20px; font-weight: 700; color: #10b981;"
+                                        id="detailTotalPurchase">0</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Total Sales</div>
+                                    <div style="font-size: 20px; font-weight: 700; color: #ef4444;"
+                                        id="detailTotalSales">0</div>
+                                </div>
+                                <div style="text-align: center; flex: 1;">
+                                    <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Purchase Value
+                                    </div>
+                                    <div style="font-size: 20px; font-weight: 700; color: #3b82f6;"
                                         id="detailTotalValue">₹0</div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1986,68 +2469,60 @@
 
     <!-- Sales Product Modal -->
     <div class="modal fade" id="salesProductModal" tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header border-0 pb-0">
                     <div>
-                        <h5 class="modal-title mb-1"><i class="bi bi-cart-plus me-2"></i>Record Purchase for Products
+                        <h5 class="modal-title fw-bold" style="font-size: 16px;">
+                            <i class="bi bi-cart-plus me-2 text-accent"></i>Record Purchase
                         </h5>
-                        <small class="text-white-50" id="salesModalSubtitle">Wholesaler • Employee • HQ</small>
+                        <small class="text-muted" id="salesModalSubtitle">Wholesaler Details</small>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4" style="background: #f8fafc;">
+
+                <div class="modal-body p-3">
                     <input type="hidden" id="salesWholesalerId">
                     <input type="hidden" id="salesHbpId">
                     <input type="hidden" id="salesHqId">
                     <input type="hidden" id="salesMonthValue">
                     <input type="hidden" id="salesYearValue">
 
-                    <!-- <div class="alert alert-info mb-4">
-                        <i class="bi bi-info-circle me-2"></i>
-                        <strong>Instructions:</strong> Enter quantities for products purchased. Leave blank or 0 for
-                        products not purchased. Press Enter or Tab to move between fields.
-                    </div> -->
-
-                    <div class="table-scroll-container" style="max-height: calc(100vh - 300px);">
-                        <table class="table table-hover mb-0">
-                            <thead class="sticky-header">
+                    <div class="table-scroll-container rounded shadow-sm bg-white">
+                        <table class="table table-hover sales-product-table mb-0">
+                            <thead class="sticky-header" style="background: #f8fafc; border-bottom: 2px solid #edf2f7;">
                                 <tr>
-                                    <th style="width: 60px;">#</th>
-                                    <th style="min-width: 250px;">Product Details</th>
-                                    <th style="width: 150px;">Type</th>
-                                    <th style="width: 120px;">Rate</th>
-                                    <th style="width: 200px;">Quantity</th>
-                                    <th style="width: 150px;">Total Value</th>
+                                    <th style="width: 50px;" class="text-center">#</th>
+                                    <th>Product Details</th>
+                                    <th style="width: 100px;">Rate</th>
+                                    <th style="width: 120px;" class="text-center">Quantity</th>
+                                    <th style="width: 120px;" class="text-end">Total</th>
                                 </tr>
                             </thead>
-                            <tbody id="salesProductTableBody"></tbody>
+                            <tbody id="salesProductTableBody">
+                            </tbody>
                         </table>
                     </div>
 
-                    <div class="yearly-total-banner mt-3">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h4><i class="bi bi-calculator-fill me-2"></i>Purchase Summary</h4>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="opacity-75" style="font-size: 12px;">Total Units</div>
-                                <div class="value" id="salesTotalUnits">0</div>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="opacity-75" style="font-size: 12px;">Total Value</div>
-                                <div class="value" id="salesTotalValue">₹0</div>
-                            </div>
+                    <div class="d-flex justify-content-end align-items-center mt-3 p-2 bg-light rounded border">
+                        <div class="me-4">
+                            <small class="text-muted text-uppercase fw-bold" style="font-size: 10px;">Total
+                                Units:</small>
+                            <span class="ms-2 fw-bold" id="salesTotalUnits">0</span>
+                        </div>
+                        <div>
+                            <small class="text-muted text-uppercase fw-bold" style="font-size: 10px;">Net Value:</small>
+                            <span class="ms-2 fw-bold text-primary" style="font-size: 18px;"
+                                id="salesTotalValue">₹0</span>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer" style="background: #f8fafc; padding: 20px 30px;">
-                    <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle me-2"></i>Cancel
-                    </button>
-                    <button type="button" class="btn btn-gradient-success btn-custom" style="padding: 14px 40px;"
-                        onclick="saveBulkPurchases()">
-                        <i class="bi bi-check-circle-fill me-2"></i>Save Purchases
+
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-link text-muted text-decoration-none btn-sm"
+                        data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary btn-sm px-4 shadow-sm" onclick="saveBulkPurchases()">
+                        <i class="bi bi-check-lg me-1"></i> Save Transactions
                     </button>
                 </div>
             </div>
@@ -2057,90 +2532,86 @@
     <!-- Target Assignment Modal -->
     <div class="modal fade" id="assignTargetModal" tabindex="-1">
         <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content" style="background: #1e293b;">
+                <div class="modal-header" style="background: #0f172a; border: none; padding: 16px 30px;">
                     <div>
-                        <h5 class="modal-title mb-1"><i class="bi bi-calendar3-week me-2"></i>Assign Monthly Targets
+                        <h5 class="modal-title mb-1" style="font-size: 18px; font-weight: 700; color: white;">
+                            <i class="bi bi-calendar3-week me-2"></i>Assign Monthly Targets
                         </h5>
-                        <small class="text-white-50" id="targetModalSubtitle">Employee Name • Year 2025</small>
+                        <small class="text-white-50" id="targetModalSubtitle" style="font-size: 12px;">
+                            Employee • Role • Year
+                        </small>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        style="filter: brightness(0) invert(1);"></button>
                 </div>
-                <div class="modal-body p-4" style="background: #f8fafc;">
+
+                <div class="modal-body p-0"
+                    style="background: #1e293b; display: flex; flex-direction: column; height: calc(100vh - 140px);">
                     <input type="hidden" id="assignTargetHbpId">
                     <input type="hidden" id="assignTargetYear">
 
-                    <div class="table-scroll-container">
-                        <table class="month-target-table" id="monthTargetTable">
+                    <div style="flex: 1; overflow: auto; padding: 15px 30px;">
+                        <table class="month-target-table" id="monthTargetTable" style="margin: 0;">
                             <thead class="sticky-header">
                                 <tr>
-                                    <th rowspan="2" style="min-width: 190px;">Product Details</th>
-                                    <th colspan="12">Monthly Targets (Units)</th>
-                                    <th rowspan="2" style="min-width: 100px;">Yearly Total</th>
+                                    <th rowspan="2" style="min-width: 200px; background: #0f172a; color: white;">Product
+                                        Details</th>
+                                    <th colspan="12" style="background: #334155; color: white;">Monthly Targets (Units)
+                                    </th>
+                                    <th rowspan="2" style="min-width: 120px; background: #0f172a; color: white;">Yearly
+                                        Total</th>
                                 </tr>
-                                <tr>
-                                    <th style="background: #dc2626;">JAN</th>
-                                    <th style="background: #ea580c;">FEB</th>
-                                    <th style="background: #d97706;">MAR</th>
-                                    <th style="background: #ca8a04;">APR</th>
-                                    <th style="background: #65a30d;">MAY</th>
-                                    <th style="background: #16a34a;">JUN</th>
-                                    <th style="background: #059669;">JUL</th>
-                                    <th style="background: #0d9488;">AUG</th>
-                                    <th style="background: #0891b2;">SEP</th>
-                                    <th style="background: #0284c7;">OCT</th>
-                                    <th style="background: #2563eb;">NOV</th>
-                                    <th style="background: #4f46e5;">DEC</th>
+                                <tr id="targetMonthHeaderRow">
+                                    <th style="background: #b91c1c; font-size: 9px; color: white;">JAN</th>
+                                    <th style="background: #c2410c; font-size: 9px; color: white;">FEB</th>
+                                    <th style="background: #b45309; font-size: 9px; color: white;">MAR</th>
+                                    <th style="background: #a16207; font-size: 9px; color: white;">APR</th>
+                                    <th style="background: #4d7c0f; font-size: 9px; color: white;">MAY</th>
+                                    <th style="background: #15803d; font-size: 9px; color: white;">JUN</th>
+                                    <th style="background: #047857; font-size: 9px; color: white;">JUL</th>
+                                    <th style="background: #0f766e; font-size: 9px; color: white;">AUG</th>
+                                    <th style="background: #0e7490; font-size: 9px; color: white;">SEP</th>
+                                    <th style="background: #0369a1; font-size: 9px; color: white;">OCT</th>
+                                    <th style="background: #1d4ed8; font-size: 9px; color: white;">NOV</th>
+                                    <th style="background: #4338ca; font-size: 9px; color: white;">DEC</th>
                                 </tr>
                             </thead>
                             <tbody id="productTargetTableBody"></tbody>
                             <tfoot>
-                                <tr style="background: #f1f5f9;">
-                                    <td class="total-cell" style="font-size: 14px;"><i
-                                            class="bi bi-calculator me-2"></i>MONTHLY TOTALS</td>
-                                    <td class="total-cell" id="total-month-1">0</td>
-                                    <td class="total-cell" id="total-month-2">0</td>
-                                    <td class="total-cell" id="total-month-3">0</td>
-                                    <td class="total-cell" id="total-month-4">0</td>
-                                    <td class="total-cell" id="total-month-5">0</td>
-                                    <td class="total-cell" id="total-month-6">0</td>
-                                    <td class="total-cell" id="total-month-7">0</td>
-                                    <td class="total-cell" id="total-month-8">0</td>
-                                    <td class="total-cell" id="total-month-9">0</td>
-                                    <td class="total-cell" id="total-month-10">0</td>
-                                    <td class="total-cell" id="total-month-11">0</td>
-                                    <td class="total-cell" id="total-month-12">0</td>
-                                    <td class="total-cell" id="grand-total" style="font-size: 15px; font-weight: 700;">0
+                                <tr style="background: #334155;">
+                                    <td class="total-cell" style="font-size: 12px; background: #334155; color: white;">
+                                        <i class="bi bi-calculator me-2"></i>MONTHLY TOTALS
                                     </td>
+                                    <td colspan="12" style="background: #1e293b;">
+                                    </td>
+                                    <td class="total-cell" id="grand-total"
+                                        style="background: #334155; color: white; font-weight: 700;">0</td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
 
-                    <div class="yearly-total-banner mt-2">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h4><i class="bi bi-trophy-fill me-2"></i>Yearly Target Summary</h4>
+                    <div
+                        style="background: #0f172a; padding: 16px 30px; display: flex; align-items: center; gap: 30px; border-top: 2px solid #334155;">
+                        <div style="flex: 1; display: flex; gap: 40px; align-items: center;">
+                            <div>
+                                <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Total Yearly Units
+                                </div>
+                                <div style="font-size: 20px; font-weight: 700; color: white;" id="totalYearlyUnits">0
+                                </div>
                             </div>
-                            <div class="col-md-3 text-center">
-                                <div class="opacity-75" style="font-size: 12px;">Total Units</div>
-                                <div class="value" id="totalYearlyUnits">0</div>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <div class="opacity-75" style="font-size: 12px;">Total Value</div>
-                                <div class="value" id="totalYearlyValue">₹0</div>
+                            <div>
+                                <div style="font-size: 10px; color: #94a3b8; margin-bottom: 4px;">Total Yearly Value
+                                </div>
+                                <div style="font-size: 20px; font-weight: 700; color: #10b981;" id="totalYearlyValue">₹0
+                                </div>
                             </div>
                         </div>
+                        <button type="button" class="btn btn-success px-5 fw-bold" onclick="saveYearlyTargets()">
+                            <i class="bi bi-check-circle-fill me-2"></i>Save Targets
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer" style="background: #f8fafc; padding: 20px 30px;">
-                    <button type="button" class="btn btn-secondary btn-custom" data-bs-dismiss="modal">
-                        <i class="bi bi-x-circle me-2"></i>Cancel
-                    </button>
-                    <button type="button" class="btn btn-gradient-success btn-custom" style="padding: 14px 40px;"
-                        onclick="saveYearlyTargets()">
-                        <i class="bi bi-check-circle-fill me-2"></i>Save Yearly Targets
-                    </button>
                 </div>
             </div>
         </div>
@@ -2162,8 +2633,7 @@
     <script>
         const API = "https://titanicadminbackend.onrender.com/api";
 
-
-        // const API = "http://192.168.2.105:5000/api";
+        // const API = "http://192.168.2.106:5000/api";
 
         let allEmployeesForTarget = [];
         let allSalesWholesalers = [];
@@ -2172,6 +2642,42 @@
         let allHQs = [], allEmployees = [], allWholesalers = [], allProducts = [], allProductsForTarget = [];
         let allWholesalerSales = [];
         let wholesalerDetailsModal;
+        let allPerformanceData = [];
+        let employeePerformanceModal;
+
+        function toggleMasterDropdown(element) {
+            const dropdown = document.getElementById('masterDropdown');
+            const parent = element.parentElement;
+
+            if (dropdown.style.display === "none") {
+                dropdown.style.display = "block";
+                parent.classList.add('open');
+            } else {
+                dropdown.style.display = "none";
+                parent.classList.remove('open');
+            }
+        }
+
+        async function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+            document.getElementById(id).style.display = 'block';
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            if (id === 'dashboard') await loadDashboard();
+            if (id === 'hq') await loadHQSection();
+            if (id === 'employee') await loadEmployeeSection();
+            if (id === 'wholesaler') await loadWholesalerSection();
+            if (id === 'products') await loadProductsSection();
+            if (id === 'sales') await loadSalesSection();
+            if (id === 'sales-history') await loadSalesHistorySection();
+            if (id === 'target-assignment') await loadTargetAssignmentSection();
+        }
 
         document.addEventListener('DOMContentLoaded', function () {
             toast = new bootstrap.Toast(document.getElementById('successToast'));
@@ -2195,21 +2701,21 @@
             toast.show();
         }
 
-        async function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.getElementById(id).style.display = 'block';
-            event.target.classList.add('active');
+        // async function showSection(id) {
+        //     document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+        //     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        //     document.getElementById(id).style.display = 'block';
+        //     event.target.classList.add('active');
 
-            if (id === 'dashboard') await loadDashboard();
-            if (id === 'hq') await loadHQSection();
-            if (id === 'employee') await loadEmployeeSection();
-            if (id === 'wholesaler') await loadWholesalerSection();
-            if (id === 'products') await loadProductsSection();
-            if (id === 'sales') await loadSalesSection();
-            if (id === 'sales-history') await loadSalesHistorySection(); // Add this line
-            if (id === 'target-assignment') await loadTargetAssignmentSection();
-        }
+        //     if (id === 'dashboard') await loadDashboard();
+        //     if (id === 'hq') await loadHQSection();
+        //     if (id === 'employee') await loadEmployeeSection();
+        //     if (id === 'wholesaler') await loadWholesalerSection();
+        //     if (id === 'products') await loadProductsSection();
+        //     if (id === 'sales') await loadSalesSection();
+        //     if (id === 'sales-history') await loadSalesHistorySection(); // Add this line
+        //     if (id === 'target-assignment') await loadTargetAssignmentSection();
+        // }
 
         async function loadDashboard() {
             try {
@@ -2785,7 +3291,6 @@
             document.getElementById('summaryTotalValue').innerText = '₹' + totalValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
         }
 
-        // Show wholesaler details in modal
         async function showWholesalerDetails(wholesalerId) {
             try {
                 const month = document.getElementById('historyMonth').value;
@@ -2798,27 +3303,26 @@
                     return;
                 }
 
-                // Update modal header info
+                // Update modal subtitle with minimal info
                 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 const periodText = month && year ? `${monthNames[month - 1]} ${year}` : year ? `Year ${year}` : 'All Time';
 
-                document.getElementById('wholesalerDetailsSubtitle').innerText =
-                    `${wholesaler.partyName} • ${wholesaler.employeeName} • ${wholesaler.hqName} • ${periodText}`;
-
-                document.getElementById('detailWholesalerName').innerText = wholesaler.partyName;
-                document.getElementById('detailGST').innerText = wholesaler.gstNumber;
-                document.getElementById('detailEmployee').innerText = wholesaler.employeeName || 'N/A';
-                document.getElementById('detailRole').innerText = wholesaler.employeeRole || '';
-                document.getElementById('detailHQ').innerText = wholesaler.hqName || 'N/A';
-                document.getElementById('detailPeriod').innerText = periodText;
-                document.getElementById('detailMobile').innerText = wholesaler.mobile || 'N/A';
+                document.getElementById('wholesalerDetailsSubtitle').innerHTML = `
+            <div class="d-flex align-items-center flex-wrap gap-2 mt-1">
+                <span style="color: #3b82f6; font-weight: 700; font-size: 13px;">${wholesaler.partyName}</span>
+                <span style="color: rgba(255,255,255,0.3);">|</span>
+                <span style="color: #ffffff; font-weight: 500; font-size: 13px;">${periodText}</span>
+                <span style="color: rgba(255,255,255,0.3);">|</span>
+                <span style="color: #94a3b8; font-size: 13px;">${wholesaler.employeeName || 'N/A'}</span>
+            </div>
+        `;
 
                 // Show modal
                 wholesalerDetailsModal.show();
 
                 // Fetch stock ledger details
                 const tbody = document.getElementById('productStockDetailsBody');
-                tbody.innerHTML = '<tr><td colspan="8" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+                tbody.innerHTML = '<tr style="background: #1e293b;"><td colspan="7" class="text-center py-5"><div class="spinner-border text-light"></div><p class="mt-2 text-light">Loading stock details...</p></td></tr>';
 
                 const params = new URLSearchParams();
                 params.append('wholesalerId', wholesalerId);
@@ -2828,101 +3332,173 @@
                 const response = await axios.get(`${API}/stock-ledger?${params.toString()}`);
                 const stockData = response.data;
 
-                renderStockDetails(stockData);
+                // Fetch all products to show complete list
+                const allProductsRes = await axios.get(`${API}/products`);
+                const allProducts = allProductsRes.data;
+
+                renderStockDetails(stockData, allProducts);
 
             } catch (error) {
                 console.error('Error loading wholesaler details:', error);
-                alert('Failed to load details: ' + error.message);
+                const tbody = document.getElementById('productStockDetailsBody');
+                tbody.innerHTML = `
+            <tr style="background: #1e293b;">
+                <td colspan="7" class="text-center py-4">
+                    <div class="alert alert-danger m-0" style="background: #991b1b; color: white; border: none;">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Failed to load details: ${error.message}
+                    </div>
+                </td>
+            </tr>
+        `;
             }
         }
 
-        // Render stock details table
-        function renderStockDetails(stockData) {
-            const tbody = document.getElementById('productStockDetailsBody');
+        // Render stock details table with ALL products
+        // Render stock details table with ALL products
+function renderStockDetails(stockData, allProducts) {
+    const tbody = document.getElementById('productStockDetailsBody');
 
-            if (stockData.length === 0) {
-                tbody.innerHTML = `
-            <tr>
-                <td colspan="8" class="text-center py-4 text-muted">
+    if (!allProducts || allProducts.length === 0) {
+        tbody.innerHTML = `
+            <tr style="background: #1e293b;">
+                <td colspan="7" class="text-center py-4" style="color: #94a3b8;">
                     <i class="bi bi-inbox" style="font-size: 48px; opacity: 0.3;"></i>
-                    <p class="mb-0 mt-2">No stock records found for this period</p>
+                    <p class="mb-0 mt-2">No products found</p>
                 </td>
             </tr>
         `;
 
-                // Reset summary
-                document.getElementById('detailTotalProducts').innerText = '0';
-                document.getElementById('detailTotalPurchase').innerText = '0';
-                document.getElementById('detailTotalSales').innerText = '0';
-                document.getElementById('detailTotalValue').innerText = '₹0';
-                return;
-            }
+        // Reset all totals
+        resetTotals();
+        return;
+    }
 
-            // Sort by product name
-            const sortedData = [...stockData].sort((a, b) => {
-                const nameA = a.productId?.name || '';
-                const nameB = b.productId?.name || '';
-                return nameA.localeCompare(nameB);
-            });
+    // Create a map of stock data by product ID for quick lookup
+    const stockMap = {};
+    stockData.forEach(stock => {
+        if (stock.productId && stock.productId._id) {
+            stockMap[stock.productId._id.toString()] = stock;
+        }
+    });
 
-            let totalPurchase = 0;
-            let totalSales = 0;
-            let totalValue = 0;
+    // Sort products alphabetically
+    const sortedProducts = [...allProducts].sort((a, b) => a.name.localeCompare(b.name));
 
-            let html = '';
-            sortedData.forEach((stock, idx) => {
-                const product = stock.productId;
-                if (!product) return;
+    // Totals for quantities
+    let totalOpening = 0;
+    let totalPurchase = 0;
+    let totalTotal = 0;
+    let totalSale = 0;
+    
+    // Totals for amounts (value)
+    let totalOpeningAmount = 0;
+    let totalPurchaseAmount = 0;
+    let totalTotalAmount = 0;
+    let totalSaleAmount = 0;
 
-                const packing = `${product.quantity || ''} ${product.measuredIn}`;
-                const purchaseValue = stock.totalPurchase * product.mrp;
+    let html = '';
+    sortedProducts.forEach((product, idx) => {
+        const productId = product._id.toString();
+        const stock = stockMap[productId] || {
+            openingStock: 0,
+            totalPurchase: 0,
+            totalSales: 0,
+            closingStock: 0
+        };
 
-                totalPurchase += stock.totalPurchase;
-                totalSales += stock.totalSales;
-                totalValue += purchaseValue;
+        const packing = `${product.quantity || ''} ${product.measuredIn}`;
+        const opening = stock.openingStock || 0;
+        const purchase = stock.totalPurchase || 0;
+        const total = opening + purchase;
+        const sale = stock.totalSales || 0;
+        
+        // Calculate amounts for each column
+        const openingAmount = opening * product.mrp;
+        const purchaseAmount = purchase * product.mrp;
+        const totalAmount = total * product.mrp;
+        const saleAmount = sale * product.mrp;
 
-                // Determine closing stock badge color
-                let stockClass = 'stock-zero';
-                if (stock.closingStock > 0) stockClass = 'stock-positive';
-                else if (stock.closingStock < 0) stockClass = 'stock-negative';
+        // Accumulate quantity totals
+        totalOpening += opening;
+        totalPurchase += purchase;
+        totalTotal += total;
+        totalSale += sale;
+        
+        // Accumulate amount totals
+        totalOpeningAmount += openingAmount;
+        totalPurchaseAmount += purchaseAmount;
+        totalTotalAmount += totalAmount;
+        totalSaleAmount += saleAmount;
 
-                html += `
-            <tr class="product-stock-row">
-                <td class="serial-col">${idx + 1}</td>
-                <td class="product-details-cell">
-                    <div class="product-name">${product.name}</div>
-                    <div class="product-meta">
-                        <span class="product-badge bg-info text-white me-1">${product.type}</span>
-                        <span>${packing}</span>
+        // Row background color alternating
+        const rowBg = idx % 2 === 0 ? '#1e293b' : '#2d3748';
+
+        html += `
+            <tr style="background: ${rowBg};" class="stock-detail-row">
+                <td style="text-align: center; padding: 12px 16px; font-weight: 600;">
+                    <span style="color: #94a3b8;">${idx + 1}</span>
+                </td>
+                <td style="padding: 12px 16px;">
+                    <div class="product-name-cell" style="font-weight: 600; font-size: 13px; line-height: 1.3; color: #ffffff !important;">
+                        ${product.name}
+                    </div>
+                    <div class="product-meta-cell" style="font-size: 11px; color: #94a3b8; line-height: 1.4; margin-top: 2px;">
+                        <span class="product-badge" style="background: #1e40af; color: white; padding: 2px 6px; border-radius: 3px; font-size: 9px; display: inline-block;">${product.type}</span>
+                        <span style="margin-left: 4px; color: #94a3b8;">${packing}</span>
                     </div>
                 </td>
-                <td class="text-center">
-                    <strong>${stock.openingStock}</strong>
+                <td style="text-align: right; padding: 12px 16px; font-weight: 600;">
+                    <span style="color: #ffffff;">₹${product.mrp}</span>
                 </td>
-                <td class="text-center">
-                    <span class="stock-badge stock-positive">${stock.totalPurchase}</span>
+                <td style="text-align: center; padding: 12px 16px; font-weight: 600;">
+                    <span style="color: ${opening > 0 ? '#94a3b8' : '#64748b'};">${opening}</span>
                 </td>
-                <td class="text-center">
-                    <span class="stock-badge ${stock.totalSales > 0 ? 'stock-negative' : 'stock-zero'}">${stock.totalSales}</span>
+                <td style="text-align: center; padding: 12px 16px; font-weight: 700;">
+                    <span style="color: ${purchase > 0 ? '#10b981' : '#64748b'};">${purchase}</span>
                 </td>
-                <td class="text-center">
-                    <span class="stock-badge ${stockClass}">${stock.closingStock}</span>
+                <td style="text-align: center; padding: 12px 16px; font-weight: 700;">
+                    <span style="color: ${total > 0 ? '#ffffff' : '#64748b'};">${total}</span>
                 </td>
-                <td class="text-end">
-                    <strong>₹${product.mrp}</strong>
+                <td style="text-align: center; padding: 12px 16px; font-weight: 700;">
+                    <span style="color: ${sale > 0 ? '#ef4444' : '#64748b'};">${sale}</span>
                 </td>
-              
             </tr>
         `;
-            });
+    });
 
-            tbody.innerHTML = html;
+    tbody.innerHTML = html;
 
-            // Update summary
-            document.getElementById('detailTotalProducts').innerText = sortedData.length;
-            document.getElementById('detailTotalPurchase').innerText = totalPurchase.toLocaleString();
-            document.getElementById('detailTotalSales').innerText = totalSales.toLocaleString();
-            document.getElementById('detailTotalValue').innerText = '₹' + totalValue.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+    // Update footer totals (quantities)
+    document.getElementById('footer-total-opening').innerText = totalOpening.toLocaleString();
+    document.getElementById('footer-total-purchase').innerText = totalPurchase.toLocaleString();
+    document.getElementById('footer-total-total').innerText = totalTotal.toLocaleString();
+    document.getElementById('footer-total-sale').innerText = totalSale.toLocaleString();
+    
+    // Update footer totals (amounts)
+    document.getElementById('footer-amount-opening').innerText = '₹' + totalOpeningAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+    document.getElementById('footer-amount-purchase').innerText = '₹' + totalPurchaseAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+    document.getElementById('footer-amount-total').innerText = '₹' + totalTotalAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+    document.getElementById('footer-amount-sale').innerText = '₹' + totalSaleAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+
+    // Update summary cards
+    document.getElementById('detailTotalProducts').innerText = sortedProducts.length;
+    document.getElementById('detailTotalPurchase').innerText = totalPurchase.toLocaleString();
+    document.getElementById('detailTotalSales').innerText = totalSale.toLocaleString();
+    document.getElementById('detailTotalValue').innerText = '₹' + totalPurchaseAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+}
+
+        // Helper function to reset all totals
+        function resetTotals() {
+            document.getElementById('footer-total-opening').innerText = '0';
+            document.getElementById('footer-total-purchase').innerText = '0';
+            document.getElementById('footer-total-total').innerText = '0';
+            document.getElementById('footer-total-sale').innerText = '0';
+
+            document.getElementById('detailTotalProducts').innerText = '0';
+            document.getElementById('detailTotalPurchase').innerText = '0';
+            document.getElementById('detailTotalSales').innerText = '0';
+            document.getElementById('detailTotalValue').innerText = '₹0';
         }
 
         // Load when section is shown
@@ -3004,73 +3580,161 @@
 
             renderSalesWholesalers(filtered);
         }
-
         async function openSalesProductModal(wholesalerId, wholesalerName, hbpId, hbpName, hqId, hqName) {
             const month = document.getElementById('salesMonth').value;
             const year = document.getElementById('salesYear').value;
 
+            // Set hidden fields
             document.getElementById('salesWholesalerId').value = wholesalerId;
             document.getElementById('salesHbpId').value = hbpId;
             document.getElementById('salesHqId').value = hqId;
             document.getElementById('salesMonthValue').value = month;
             document.getElementById('salesYearValue').value = year;
 
-            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            document.getElementById('salesModalSubtitle').innerText =
-                `${wholesalerName} • ${hbpName} • ${hqName} • ${monthNames[month - 1]} ${year}`;
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            // UPDATED: Minimal header structure showing only the requested info
+            document.getElementById('salesModalSubtitle').innerHTML = `
+        <div class="d-flex align-items-center flex-wrap gap-2 mt-1">
+            <span style="color: #3b82f6; font-weight: 700; font-size: 14px;">${wholesalerName}</span>
+            <span style="color: rgba(255,255,255,0.3);">|</span>
+            <span style="color: #ffffff; font-weight: 500;">${monthNames[month - 1]} ${year}</span>
+            <span style="color: rgba(255,255,255,0.3);">|</span>
+            <span style="color: #94a3b8;">${hbpName}</span>
+        </div>
+    `;
+
+            const tbody = document.getElementById('salesProductTableBody');
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+
+            salesProductModal.show();
 
             try {
-                const res = await axios.get(`${API}/products`);
-                const products = res.data.sort((a, b) => a.name.localeCompare(b.name));
+                const [prodRes, existingRes] = await Promise.all([
+                    axios.get(`${API}/products`),
+                    axios.get(`${API}/sales/existing-purchases`, {
+                        params: { wholesalerId, month, year }
+                    })
+                ]);
 
-                const tbody = document.getElementById('salesProductTableBody');
+                const products = prodRes.data.sort((a, b) => a.name.localeCompare(b.name));
+                const existingPurchases = existingRes.data;
+
                 tbody.innerHTML = products.map((prod, idx) => {
+                    const currentQty = existingPurchases[prod._id] || 0;
                     const packing = `${prod.quantity || ''} ${prod.measuredIn}`;
 
                     return `
-                    <tr>
-                        <td class="serial-col">${idx + 1}</td>
-                        <td class="product-details-cell">
-                            <div class="product-name">${prod.name}</div>
-                            <div class="product-meta">
-                                <span class="product-badge bg-info text-white me-1">${prod.type}</span>
-                                <span>${packing}</span>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-custom bg-info">${prod.type}</span></td>
-                        <td><strong>₹${prod.mrp}</strong></td>
-                        <td>
-                            <input type="number" 
-                                   class="sales-quantity-input" 
-                                   data-product-id="${prod._id}"
-                                   data-product-idx="${idx}"
-                                   data-price="${prod.mrp}"
-                                   value="0" 
-                                   min="0" 
-                                   placeholder="0"
-                                   onchange="updateSalesTotals()"
-                                   oninput="updateSalesTotals()"
-                                   onkeydown="handleSalesKeyboardNav(event, ${idx})"
-                                   onfocus="this.select()">
-                        </td>
-                        <td class="text-end"><strong id="sales-product-value-${idx}">₹0</strong></td>
-                    </tr>
-                    `;
+                <tr style="background: transparent;">
+                    <td class="text-center text-white-50" style="font-size: 12px; width: 40px;">${idx + 1}</td>
+                    <td>
+                        <div style="font-weight: 600; font-size: 13px; color: black;">${prod.name}</div>
+                        <div style="font-size: 11px; color: #64748b;">${prod.type} • ${packing}</div>
+                    </td>
+                    <td class="text-center" style="font-size: 13px; color: #94a3b8;">₹${prod.mrp}</td>
+                    <td class="text-center" style="width: 120px;">
+                        <input type="number" 
+                               class="sales-quantity-input" 
+                               data-product-id="${prod._id}" 
+                               data-product-idx="${idx}" 
+                               data-price="${prod.mrp}"
+                               value="${currentQty}" 
+                               onchange="updateSalesTotals()" 
+                               onkeydown="handleSalesKeyboardNav(event, ${idx})"
+                               onfocus="this.select()">
+                    </td>
+                    <td class="text-end fw-bold" style="font-size: 14px; width: 120px; color: #10b981;">
+                        <span id="sales-product-value-${idx}">₹0</span>
+                    </td>
+                </tr>`;
                 }).join('');
 
                 updateSalesTotals();
-                salesProductModal.show();
-
-                setTimeout(() => {
-                    const firstInput = document.querySelector('.sales-quantity-input[data-product-idx="0"]');
-                    if (firstInput) {
-                        firstInput.focus();
-                        firstInput.select();
-                    }
-                }, 300);
             } catch (error) {
-                console.error('Error loading products:', error);
-                alert('Failed to load products');
+                console.error('Error:', error);
+            }
+        }
+
+        // NEW: Improved keyboard navigation handler that prevents value changes
+        function handleSalesKeyboardNav(event, currentRow) {
+            const key = event.key;
+            const allInputs = document.querySelectorAll('.sales-quantity-input');
+            const totalProducts = allInputs.length;
+
+            // Ignore if modifier keys are pressed (Ctrl, Alt, Meta)
+            if (event.ctrlKey || event.altKey || event.metaKey) {
+                return;
+            }
+
+            let targetRow = currentRow;
+            let shouldNavigate = false;
+
+            switch (key) {
+                case 'Enter':
+                case 'ArrowDown':
+                    // Prevent default behavior (incrementing/decrementing value)
+                    event.preventDefault();
+                    if (currentRow < totalProducts - 1) {
+                        targetRow = currentRow + 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'ArrowUp':
+                    // Prevent default behavior
+                    event.preventDefault();
+                    if (currentRow > 0) {
+                        targetRow = currentRow - 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'Tab':
+                    // Tab navigation
+                    if (!event.shiftKey && currentRow < totalProducts - 1) {
+                        event.preventDefault();
+                        targetRow = currentRow + 1;
+                        shouldNavigate = true;
+                    } else if (event.shiftKey && currentRow > 0) {
+                        event.preventDefault();
+                        targetRow = currentRow - 1;
+                        shouldNavigate = true;
+                    }
+                    break;
+
+                case 'ArrowLeft':
+                case 'ArrowRight':
+                    // Allow left/right arrows for cursor movement within the input
+                    // Don't prevent default, let the cursor move
+                    break;
+
+                default:
+                    // For all other keys (numbers, backspace, etc.), allow normal behavior
+                    break;
+            }
+
+            if (shouldNavigate) {
+                // Navigate to the target input
+                const targetInput = document.querySelector(`.sales-quantity-input[data-product-idx="${targetRow}"]`);
+                if (targetInput) {
+                    targetInput.focus();
+                    targetInput.select();
+
+                    // Scroll into view if needed
+                    const scrollContainer = document.querySelector('.table-scroll-container');
+                    if (scrollContainer) {
+                        const inputRect = targetInput.getBoundingClientRect();
+                        const containerRect = scrollContainer.getBoundingClientRect();
+
+                        if (inputRect.top < containerRect.top || inputRect.bottom > containerRect.bottom) {
+                            targetInput.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'nearest',
+                                inline: 'nearest'
+                            });
+                        }
+                    }
+                }
             }
         }
 
@@ -3305,7 +3969,6 @@
                 tbody.innerHTML = allProductsForTarget.map((prod, idx) => {
                     const monthlyTargets = targetMap[prod._id] || {};
                     const packing = `${prod.quantity || ''} ${prod.measuredIn}`;
-
                     let monthCells = '';
                     let yearlyTotal = 0;
 
@@ -3313,43 +3976,34 @@
                         const value = monthlyTargets[month] || 0;
                         yearlyTotal += value;
                         monthCells += `
-            <td style="text-align: center; padding: 8px;">
+            <td style="text-align: center; padding: 8px; background: #2d3748;">
                 <input type="text" 
                        class="month-input" 
+                       style="background: #1e293b; color: white; border: 1px solid #4a5568; width: 50px; text-align: center; border-radius: 4px;"
                        data-product-id="${prod._id}"
                        data-product-idx="${idx}"
                        data-month="${month}"
                        data-price="${prod.mrp}"
                        value="${value}" 
-                       min="0" 
-                       placeholder="0"
                        onchange="updateMonthlyTotals()"
-                       oninput="updateMonthlyTotals()"
-                       onkeydown="handleKeyboardNavigation(event, ${idx}, ${month})"
                        onfocus="this.select()">
             </td>
         `;
                     }
 
                     return `
-        <tr>
-           <td class="product-info">
-    <div class="d-flex align-items-center">
-        <div class="me-2" style="background: #0f172a; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; font-size: 11px;">
-            ${idx + 1}
-        </div>
-        <div>
-            <div style="font-weight: 600; font-size: 11px; line-height: 1.2;">${prod.name}</div>
-            <div style="font-size: 9px; color: #64748b; line-height: 1.3;">
-                <span class="product-badge bg-info text-white">${prod.type}</span>
-                <span class="ms-1">${packing}</span>
-                <span class="ms-1 fw-semibold">₹${prod.mrp}</span>
-            </div>
-        </div>
-    </div>
-</td>
+        <tr style="background: ${idx % 2 === 0 ? '#1e293b' : '#2d3748'};">
+            <td class="product-info" style="background: ${idx % 2 === 0 ? '#1e293b' : '#2d3748'}; color: white; border-right: 1px solid #4a5568;">
+                <div class="d-flex align-items-center">
+                    <div class="me-2" style="background: #0f172a; color: #94a3b8; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 10px;">${idx + 1}</div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 11px;">${prod.name}</div>
+                        <div style="font-size: 9px; color: #94a3b8;">${prod.type} • ${packing}</div>
+                    </div>
+                </div>
+            </td>
             ${monthCells}
-            <td class="total-cell" id="product-total-${idx}">${yearlyTotal}</td>
+            <td class="total-cell" id="product-total-${idx}" style="background: #334155; color: white; font-weight: 700;">${yearlyTotal}</td>
         </tr>
     `;
                 }).join('');
@@ -3788,6 +4442,345 @@
                 console.error('Error deleting sales record:', error);
                 alert('❌ Failed to delete sales record: ' + (error.response?.data?.error || error.message));
             }
+        }
+
+
+        // Initialize modal when document loads
+        document.addEventListener('DOMContentLoaded', function () {
+            // ... your existing code ...
+            employeePerformanceModal = new bootstrap.Modal(document.getElementById('employeePerformanceModal'));
+        });
+
+        async function loadPerformanceDashboardSection() {
+            const now = new Date();
+            document.getElementById('perfMonth').value = now.getMonth() + 1;
+            document.getElementById('perfYear').value = now.getFullYear();
+
+            await loadHQsForDropdown('perfHQ');
+            await loadPerformanceDashboard();
+        }
+
+       async function loadPerformanceDashboard() {
+    const tbody = document.getElementById('performanceTableBody');
+    tbody.innerHTML = '<tr><td colspan="9" class="text-center py-5"><div class="spinner-border text-primary"></div></td></tr>';
+
+    try {
+        const month = document.getElementById('perfMonth').value;
+        const year = document.getElementById('perfYear').value;
+        const hqId = document.getElementById('perfHQ').value;
+
+        // Fetch all performance data for all employees in one view
+        // We use the overview endpoint first to get the list
+        const res = await axios.get(`${API}/targets/admin/overview`, { 
+            params: { year, hqId } 
+        });
+        
+        const employees = res.data.employees;
+
+        // Fetch summary performance for the specific month/year for the table
+        const performancePromises = employees.map(async (emp) => {
+            try {
+                const perfRes = await axios.get(`${API}/targets/performance/${emp.hbpId}`, {
+                    params: { month, year }
+                });
+                return {
+                    ...emp,
+                    employeeId: emp.hbpId,
+                    employeeName: emp.name,
+                    employeeRole: emp.role,
+                    hqName: emp.hq,
+                    summary: perfRes.data.summary
+                };
+            } catch (e) {
+                return {
+                    ...emp,
+                    employeeId: emp.hbpId,
+                    employeeName: emp.name,
+                    employeeRole: emp.role,
+                    hqName: emp.hq,
+                    summary: { totalTarget: 0, totalAchieved: 0, overallPercentage: 0 }
+                };
+            }
+        });
+
+        allPerformanceData = await Promise.all(performancePromises);
+        updatePerformanceSummary(allPerformanceData);
+        renderPerformanceTable(allPerformanceData);
+
+    } catch (error) {
+        console.error('Error loading performance dashboard:', error);
+        tbody.innerHTML = '<tr><td colspan="9" class="text-center py-4"><div class="alert alert-danger">Failed to load performance data</div></td></tr>';
+    }
+}
+
+        function updatePerformanceSummary(data) {
+            const totalEmployees = data.length;
+            const achievedCount = data.filter(d => d.summary.overallPercentage >= 100).length;
+            const belowCount = data.filter(d => d.summary.overallPercentage < 100 && d.summary.totalTarget > 0).length;
+
+            const totalPercentage = data.reduce((sum, d) => sum + (d.summary.overallPercentage || 0), 0);
+            const avgPercentage = totalEmployees > 0 ? (totalPercentage / totalEmployees).toFixed(1) : 0;
+
+            document.getElementById('perfTotalEmployees').innerText = totalEmployees;
+            document.getElementById('perfAchievedCount').innerText = achievedCount;
+            document.getElementById('perfBelowCount').innerText = belowCount;
+            document.getElementById('perfAvgPercentage').innerText = avgPercentage + '%';
+        }
+
+        function renderPerformanceTable(data) {
+            const tbody = document.getElementById('performanceTableBody');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center py-4 text-muted">No employees found</td></tr>';
+                return;
+            }
+
+            const sortedData = [...data].sort((a, b) => a.employeeName.localeCompare(b.employeeName));
+
+            let html = '';
+            sortedData.forEach((emp, idx) => {
+                const percentage = emp.summary.overallPercentage || 0;
+                let statusBadge = '';
+                let statusClass = '';
+
+                if (emp.summary.totalTarget === 0) {
+                    statusBadge = '<span class="badge bg-secondary">No Target</span>';
+                    statusClass = '';
+                } else if (percentage >= 100) {
+                    statusBadge = '<span class="badge bg-success">✓ Achieved</span>';
+                    statusClass = 'table-success';
+                } else if (percentage >= 75) {
+                    statusBadge = '<span class="badge bg-primary">On Track</span>';
+                    statusClass = 'table-primary';
+                } else if (percentage >= 50) {
+                    statusBadge = '<span class="badge bg-warning">Below Target</span>';
+                    statusClass = 'table-warning';
+                }
+
+                html += `
+            <tr class="${statusClass}" style="opacity: ${emp.summary.totalTarget === 0 ? 0.6 : 1}">
+                <td class="serial-col">${idx + 1}</td>
+                <td><strong>${emp.employeeName}</strong></td>
+                <td><span class="badge badge-custom bg-primary">${emp.employeeRole}</span></td>
+                <td>${emp.hqName}</td>
+                <td class="text-center"><strong>${emp.summary.totalTarget || 0}</strong></td>
+                <td class="text-center">
+                    <strong style="color: ${percentage >= 100 ? 'var(--success)' : percentage >= 75 ? 'var(--primary)' : 'var(--warning)'}">
+                        ${emp.summary.totalAchieved || 0}
+                    </strong>
+                </td>
+                <td class="text-center">
+                    <strong style="font-size: 16px;">${percentage.toFixed(1)}%</strong>
+                </td>
+                
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" 
+                            onclick="showEmployeePerformanceDetail('${emp.employeeId}')"
+                            ${emp.summary.totalTarget === 0 ? 'disabled' : ''}>
+                        <i class="bi bi-eye"></i> View
+                    </button>
+                </td>
+            </tr>
+        `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function filterPerformanceData() {
+            const query = document.getElementById('perfSearch').value.toLowerCase();
+
+            if (!query) {
+                renderPerformanceTable(allPerformanceData);
+                return;
+            }
+
+            const filtered = allPerformanceData.filter(emp =>
+                emp.employeeName.toLowerCase().includes(query) ||
+                emp.hqName.toLowerCase().includes(query) ||
+                emp.employeeRole.toLowerCase().includes(query)
+            );
+
+            renderPerformanceTable(filtered);
+        }
+
+        async function showEmployeePerformanceDetail(employeeId) {
+            const empData = allPerformanceData.find(e => e.employeeId === employeeId);
+            if (!empData) return;
+
+            const year = document.getElementById('perfYear').value;
+
+            // Set modal subtitle
+            document.getElementById('empPerfSubtitle').innerText =
+                `${empData.employeeName} • ${empData.employeeRole} • Year ${year}`;
+
+            // Show modal
+            employeePerformanceModal.show();
+
+            const tbody = document.getElementById('empPerfProductsBody');
+            tbody.innerHTML = '<tr style="background: #1e293b;"><td colspan="26" class="text-center py-5"><div class="spinner-border text-light"></div><p class="mt-2 text-light">Loading performance data...</p></td></tr>';
+
+            try {
+                console.log(`📊 Fetching performance for employee: ${employeeId}`);
+                const startTime = performance.now();
+
+                // ✅ ONE API CALL - Fetch everything at once!
+                const response = await axios.get(`${API}/targets/employee-yearly-performance/${employeeId}`, {
+                    params: { year }
+                });
+
+                const { products, monthlyTotals, summary } = response.data;
+
+                const endTime = performance.now();
+                console.log(`✅ Data loaded in ${(endTime - startTime).toFixed(0)}ms`);
+
+                if (products.length === 0) {
+                    tbody.innerHTML = `
+                <tr style="background: #1e293b;">
+                    <td colspan="26" class="text-center py-4" style="color: #94a3b8;">
+                        <i class="bi bi-inbox" style="font-size: 48px; opacity: 0.3;"></i>
+                        <p class="mb-0 mt-2">No products found</p>
+                    </td>
+                </tr>
+            `;
+                    return;
+                }
+
+                // Render table rows
+                let html = '';
+                products.forEach((product, idx) => {
+                    let monthCells = '';
+
+                    for (let month = 1; month <= 12; month++) {
+                        const target = product.monthlyData[month].target;
+                        const achieved = product.monthlyData[month].achieved;
+                        const percentage = product.monthlyData[month].percentage;
+
+                        let cellBg = '#2d3748'; // Dark gray for no target
+                        let targetColor = '#94a3b8';
+                        let achievedColor = '#94a3b8';
+
+                        if (target > 0) {
+                            if (percentage >= 100) {
+                                cellBg = '#065f46'; // Dark green
+                                achievedColor = '#10b981';
+                            } else if (percentage >= 75) {
+                                cellBg = '#1e40af'; // Dark blue
+                                achievedColor = '#3b82f6';
+                            } else if (percentage >= 50) {
+                                cellBg = '#92400e'; // Dark orange
+                                achievedColor = '#f59e0b';
+                            } else if (percentage > 0) {
+                                cellBg = '#991b1b'; // Dark red
+                                achievedColor = '#ef4444';
+                            }
+                        }
+
+                        monthCells += `
+                    <td style="text-align: center; padding: 8px; font-size: 11px; background: ${cellBg};">
+                        <div style="color: ${targetColor};">${target}</div>
+                    </td>
+                    <td style="text-align: center; padding: 8px; font-size: 11px; font-weight: 700; background: ${cellBg};">
+                        <div style="color: ${achievedColor};">${achieved}</div>
+                    </td>
+                `;
+                    }
+
+                    const yearlyPercent = product.yearlyPercentage;
+                    let yearlyColor = '#94a3b8';
+                    if (yearlyPercent >= 100) yearlyColor = '#10b981';
+                    else if (yearlyPercent >= 75) yearlyColor = '#3b82f6';
+                    else if (yearlyPercent > 0) yearlyColor = '#f59e0b';
+
+                    html += `
+                <tr style="background: ${idx % 2 === 0 ? '#1e293b' : '#2d3748'};">
+                    <td class="product-info" style="background: ${idx % 2 === 0 ? '#1e293b' : '#2d3748'};">
+                        <div class="d-flex align-items-center">
+                            <div class="me-2" style="background: #0f172a; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; font-size: 11px;">
+                                ${idx + 1}
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 11px; line-height: 1.2; color: white;">${product.productName}</div>
+                                <div style="font-size: 9px; color: #94a3b8; line-height: 1.3;">
+                                    <span class="product-badge bg-info text-white">${product.productType}</span>
+                                    <span class="ms-1">${product.productPacking}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    ${monthCells}
+                    <td class="total-cell" style="font-size: 11px; background: #334155;">
+                        <div style="color: #94a3b8;">T: ${product.yearlyTarget}</div>
+                        <div style="color: ${yearlyColor}; font-weight: 700;">A: ${product.yearlyAchieved}</div>
+                        ${product.yearlyTarget > 0 ? `<div style="color: ${yearlyColor}; font-size: 10px;">${yearlyPercent}%</div>` : ''}
+                    </td>
+                </tr>
+            `;
+                });
+
+                tbody.innerHTML = html;
+
+                // Update footer totals
+                for (let m = 1; m <= 12; m++) {
+                    document.getElementById(`perf-target-${m}`).innerText = monthlyTotals[m].target;
+                    document.getElementById(`perf-achieved-${m}`).innerText = monthlyTotals[m].achieved;
+                }
+
+                // Update yearly totals
+                document.getElementById('perf-yearly-target').innerText = summary.totalTarget;
+                document.getElementById('perf-yearly-achieved').innerText = summary.totalAchieved;
+
+                // Update summary banner
+                const overallPercent = summary.overallPercentage;
+                document.getElementById('empPerfTotalTarget').innerText = summary.totalTarget.toLocaleString();
+                document.getElementById('empPerfTotalAchieved').innerText = summary.totalAchieved.toLocaleString();
+                document.getElementById('empPerfOverallPercent').innerText = overallPercent + '%';
+
+                let statusEmoji = '⚠️ No Target';
+                if (summary.totalTarget > 0) {
+                    if (overallPercent >= 100) statusEmoji = '✅ Achieved';
+                    else if (overallPercent >= 75) statusEmoji = '✅ On Track';
+                    else if (overallPercent >= 50) statusEmoji = '⚡ Below Target';
+                    else statusEmoji = '🔴 Critical';
+                }
+                document.getElementById('empPerfStatus').innerText = statusEmoji;
+
+                console.log(`✅ Table rendered successfully`);
+
+            } catch (error) {
+                console.error('❌ Error loading employee performance:', error);
+                tbody.innerHTML = `
+            <tr style="background: #1e293b;">
+                <td colspan="26" class="text-center py-4">
+                    <div class="alert alert-danger m-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Failed to load performance data: ${error.response?.data?.error || error.message}
+                    </div>
+                </td>
+            </tr>
+        `;
+            }
+        }
+
+        // Update the showSection function to handle the new section
+        async function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(id).style.display = 'block';
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            if (id === 'dashboard') await loadDashboard();
+            if (id === 'hq') await loadHQSection();
+            if (id === 'employee') await loadEmployeeSection();
+            if (id === 'wholesaler') await loadWholesalerSection();
+            if (id === 'products') await loadProductsSection();
+            if (id === 'sales') await loadSalesSection();
+            if (id === 'sales-history') await loadSalesHistorySection();
+            if (id === 'target-assignment') await loadTargetAssignmentSection();
+            if (id === 'performance-dashboard') await loadPerformanceDashboardSection(); // NEW
         }
     </script>
 </body>
