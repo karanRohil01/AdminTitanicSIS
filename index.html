@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titanic Pharma | Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         :root {
@@ -34,6 +37,28 @@
             background: var(--gray-50);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--gray-900);
+        }
+
+        /* Export Dropdown Styling */
+        .dropdown-menu {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e2e8f0;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .dropdown-item i {
+            font-size: 16px;
         }
 
         .sidebar {
@@ -1572,8 +1597,15 @@
                                 Employee • Role • Year
                             </small>
                         </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            style="filter: brightness(0) invert(1);"></button>
+                        <!-- ✅ ADD THIS EXPORT BUTTON -->
+                        <div class="d-flex gap-2 align-items-center">
+                            <button class="btn btn-sm btn-success" onclick="exportEmployeePerformanceToExcel()"
+                                style="padding: 6px 14px;">
+                                <i class="bi bi-file-earmark-excel me-1"></i> Export Excel
+                            </button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                style="filter: brightness(0) invert(1);"></button>
+                        </div>
                     </div>
 
                     <div class="modal-body p-0"
@@ -1787,8 +1819,32 @@
                                 Wholesaler • Employee • Period
                             </small>
                         </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            style="filter: brightness(0) invert(1);"></button>
+                        <div class="d-flex gap-2 align-items-center">
+
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                    id="exportDropdownStock" data-bs-toggle="dropdown" aria-expanded="false"
+                                    style="padding: 6px 12px;">
+                                    <i class="bi bi-download me-1"></i> Export
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="exportDropdownStock">
+                                    <li>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="exportStockLedgerToExcel(); return false;">
+                                            <i class="bi bi-file-earmark-excel text-success me-2"></i> Export to Excel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#"
+                                            onclick="exportStockLedgerToPDF(); return false;">
+                                            <i class="bi bi-file-earmark-pdf text-danger me-2"></i> Export to PDF
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                style="filter: brightness(0) invert(1);"></button>
+                        </div>
                     </div>
 
                     <div class="modal-body p-0"
@@ -1823,6 +1879,10 @@
                                             style="width: 110px; background: #0f172a; color: white; text-align: center;">
                                             <i class="bi bi-cart-dash me-2"></i>sec Sale
                                         </th>
+                                        <th
+                                            style="width: 110px; background: #0f172a; color: white; text-align: center;">
+                                            <i class="bi bi-box me-2"></i>Closing
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody id="productStockDetailsBody">
@@ -1849,6 +1909,8 @@
                                             id="footer-total-total">0</td>
                                         <td style="background: #334155; color: #ef4444; text-align: center; font-weight: 700; padding: 14px 16px;"
                                             id="footer-total-sale">0</td>
+                                        <td style="background: #334155; color: #3b82f6; text-align: center; font-weight: 700; padding: 14px 16px;"
+                                            id="footer-total-closing">0</td>
                                     </tr>
                                     <!-- Total Amount Row -->
                                     <tr style="background: #1e3a8a;">
@@ -1865,6 +1927,8 @@
                                             id="footer-amount-total">₹0</td>
                                         <td style="background: #1e3a8a; color: #ef4444; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
                                             id="footer-amount-sale">₹0</td>
+                                        <td style="background: #1e3a8a; color: #3b82f6; text-align: center; font-weight: 700; padding: 16px; font-size: 14px;"
+                                            id="footer-amount-closing">₹0</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -2631,9 +2695,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const API = "https://titanicadminbackend.onrender.com/api";
+        // const API = "https://titanicadminbackend.onrender.com/api";
 
-        // const API = "http://192.168.2.106:5000/api";
+        const API = "http://192.168.2.102:5000/api";
 
         let allEmployeesForTarget = [];
         let allSalesWholesalers = [];
@@ -3362,19 +3426,16 @@
             if (!allProducts || allProducts.length === 0) {
                 tbody.innerHTML = `
             <tr style="background: #1e293b;">
-                <td colspan="7" class="text-center py-4" style="color: #94a3b8;">
+                <td colspan="8" class="text-center py-4" style="color: #94a3b8;">
                     <i class="bi bi-inbox" style="font-size: 48px; opacity: 0.3;"></i>
                     <p class="mb-0 mt-2">No products found</p>
                 </td>
             </tr>
         `;
-
-                // Reset all totals
                 resetTotals();
                 return;
             }
 
-            // Create a map of stock data by product ID for quick lookup
             const stockMap = {};
             stockData.forEach(stock => {
                 if (stock.productId && stock.productId._id) {
@@ -3382,20 +3443,19 @@
                 }
             });
 
-            // Sort products alphabetically
             const sortedProducts = [...allProducts].sort((a, b) => a.name.localeCompare(b.name));
 
-            // Totals for quantities
             let totalOpening = 0;
             let totalPurchase = 0;
             let totalTotal = 0;
             let totalSale = 0;
+            let totalClosing = 0;
 
-            // Totals for amounts (value)
             let totalOpeningAmount = 0;
             let totalPurchaseAmount = 0;
             let totalTotalAmount = 0;
             let totalSaleAmount = 0;
+            let totalClosingAmount = 0;
 
             let html = '';
             sortedProducts.forEach((product, idx) => {
@@ -3412,26 +3472,26 @@
                 const purchase = stock.totalPurchase || 0;
                 const total = opening + purchase;
                 const sale = stock.totalSales || 0;
+                const closing = stock.closingStock || 0;
 
-                // Calculate amounts for each column
                 const openingAmount = opening * product.mrp;
                 const purchaseAmount = purchase * product.mrp;
                 const totalAmount = total * product.mrp;
                 const saleAmount = sale * product.mrp;
+                const closingAmount = closing * product.mrp;
 
-                // Accumulate quantity totals
                 totalOpening += opening;
                 totalPurchase += purchase;
                 totalTotal += total;
                 totalSale += sale;
+                totalClosing += closing;
 
-                // Accumulate amount totals
                 totalOpeningAmount += openingAmount;
                 totalPurchaseAmount += purchaseAmount;
                 totalTotalAmount += totalAmount;
                 totalSaleAmount += saleAmount;
+                totalClosingAmount += closingAmount;
 
-                // Row background color alternating
                 const rowBg = idx % 2 === 0 ? '#1e293b' : '#2d3748';
 
                 html += `
@@ -3463,6 +3523,9 @@
                 <td style="text-align: center; padding: 12px 16px; font-weight: 700;">
                     <span style="color: ${sale > 0 ? '#ef4444' : '#64748b'};">${sale}</span>
                 </td>
+                <td style="text-align: center; padding: 12px 16px; font-weight: 700;">
+                    <span style="color: ${closing > 0 ? '#3b82f6' : '#64748b'};">${closing}</span>
+                </td>
             </tr>
         `;
             });
@@ -3474,12 +3537,14 @@
             document.getElementById('footer-total-purchase').innerText = totalPurchase.toLocaleString();
             document.getElementById('footer-total-total').innerText = totalTotal.toLocaleString();
             document.getElementById('footer-total-sale').innerText = totalSale.toLocaleString();
+            document.getElementById('footer-total-closing').innerText = totalClosing.toLocaleString();
 
             // Update footer totals (amounts)
             document.getElementById('footer-amount-opening').innerText = '₹' + totalOpeningAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
             document.getElementById('footer-amount-purchase').innerText = '₹' + totalPurchaseAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
             document.getElementById('footer-amount-total').innerText = '₹' + totalTotalAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
             document.getElementById('footer-amount-sale').innerText = '₹' + totalSaleAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+            document.getElementById('footer-amount-closing').innerText = '₹' + totalClosingAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 });
 
             // Update summary cards
             document.getElementById('detailTotalProducts').innerText = sortedProducts.length;
@@ -3494,6 +3559,13 @@
             document.getElementById('footer-total-purchase').innerText = '0';
             document.getElementById('footer-total-total').innerText = '0';
             document.getElementById('footer-total-sale').innerText = '0';
+            document.getElementById('footer-total-closing').innerText = '0';
+
+            document.getElementById('footer-amount-opening').innerText = '₹0';
+            document.getElementById('footer-amount-purchase').innerText = '₹0';
+            document.getElementById('footer-amount-total').innerText = '₹0';
+            document.getElementById('footer-amount-sale').innerText = '₹0';
+            document.getElementById('footer-amount-closing').innerText = '₹0';
 
             document.getElementById('detailTotalProducts').innerText = '0';
             document.getElementById('detailTotalPurchase').innerText = '0';
@@ -3626,7 +3698,7 @@
 
                     return `
                 <tr style="background: transparent;">
-                    <td class="text-center text-white-50" style="font-size: 12px; width: 40px;">${idx + 1}</td>
+                    <td class="text-center text-gray-50" style="font-size: 12px; width: 40px;color: ;">${idx + 1}</td>
                     <td>
                         <div style="font-weight: 600; font-size: 13px; color: black;">${prod.name}</div>
                         <div style="font-size: 11px; color: #64748b;">${prod.type} • ${packing}</div>
@@ -4726,11 +4798,10 @@
                     document.getElementById(`perf-achieved-${m}`).innerText = monthlyTotals[m].achieved;
                 }
 
-                // Update yearly totals
+
                 document.getElementById('perf-yearly-target').innerText = summary.totalTarget;
                 document.getElementById('perf-yearly-achieved').innerText = summary.totalAchieved;
 
-                // Update summary banner
                 const overallPercent = summary.overallPercentage;
                 document.getElementById('empPerfTotalTarget').innerText = summary.totalTarget.toLocaleString();
                 document.getElementById('empPerfTotalAchieved').innerText = summary.totalAchieved.toLocaleString();
@@ -4762,7 +4833,7 @@
             }
         }
 
-        // Update the showSection function to handle the new section
+
         async function showSection(id) {
             document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -4782,6 +4853,823 @@
             if (id === 'target-assignment') await loadTargetAssignmentSection();
             if (id === 'performance-dashboard') await loadPerformanceDashboardSection(); // NEW
         }
+
+        function exportStockLedgerToExcel() {
+            try {
+                console.log('📊 Starting Stock Ledger Excel export...');
+
+                // Get wholesaler info
+                const subtitle = document.getElementById('wholesalerDetailsSubtitle').innerText;
+                const tbody = document.getElementById('productStockDetailsBody');
+                const rows = tbody.querySelectorAll('tr.stock-detail-row');
+
+                if (rows.length === 0) {
+                    alert('No data available to export');
+                    return;
+                }
+
+                // Parse subtitle to get details
+                const parts = subtitle.split('|').map(p => p.trim());
+                const wholesalerName = parts[0] || 'N/A';
+                const period = parts[1] || 'N/A';
+                const employeeName = parts[2] || 'N/A';
+
+                // Get footer totals
+                const totalOpening = document.getElementById('footer-total-opening')?.innerText || '0';
+                const totalPurchase = document.getElementById('footer-total-purchase')?.innerText || '0';
+                const totalTotal = document.getElementById('footer-total-total')?.innerText || '0';
+                const totalSale = document.getElementById('footer-total-sale')?.innerText || '0';
+                const totalClosing = document.getElementById('footer-total-closing')?.innerText || '0';
+
+                const totalOpeningAmt = document.getElementById('footer-amount-opening')?.innerText.replace('₹', '').replace(/,/g, '') || '0';
+                const totalPurchaseAmt = document.getElementById('footer-amount-purchase')?.innerText.replace('₹', '').replace(/,/g, '') || '0';
+                const totalTotalAmt = document.getElementById('footer-amount-total')?.innerText.replace('₹', '').replace(/,/g, '') || '0';
+                const totalSaleAmt = document.getElementById('footer-amount-sale')?.innerText.replace('₹', '').replace(/,/g, '') || '0';
+                const totalClosingAmt = document.getElementById('footer-amount-closing')?.innerText.replace('₹', '').replace(/,/g, '') || '0';
+
+                // Create workbook
+                const wb = XLSX.utils.book_new();
+
+                // Prepare data array
+                const data = [];
+
+                // Company Header (Row 1)
+                data.push(['Titanic Pharmaceuticals']);
+                data.push([]);
+
+                // Report Title (Row 3)
+                data.push(['STOCK LEDGER REPORT']);
+                data.push([]);
+
+                // Report Details (Rows 5-7)
+                data.push(['Wholesaler:', wholesalerName]);
+                data.push(['Period:', period]);
+                data.push(['Employee:', employeeName]);
+                data.push(['Generated On:', new Date().toLocaleString('en-IN', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })]);
+                data.push([]);
+
+                // Table Headers (Row 9)
+                data.push(['Sr.', 'Product Name', 'Type', 'Packing', 'Rate (₹)', 'Opening Stock', 'Purchase', 'Total Stock', 'Secondary Sale', 'Closing Stock']);
+
+                // Product Data
+                rows.forEach((row, index) => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length >= 8) {
+                        const productNameDiv = cells[1].querySelector('.product-name-cell');
+                        const productMetaDiv = cells[1].querySelector('.product-meta-cell');
+
+                        const productName = productNameDiv ? productNameDiv.innerText.trim() : '';
+                        const productMeta = productMetaDiv ? productMetaDiv.innerText.trim() : '';
+
+                        const typeBadge = productMetaDiv?.querySelector('.product-badge');
+                        const productType = typeBadge ? typeBadge.innerText.trim() : '';
+                        const packingText = productMeta.replace(productType, '').trim();
+
+                        const rate = cells[2].innerText.replace('₹', '').trim();
+                        const opening = cells[3].innerText.trim();
+                        const purchase = cells[4].innerText.trim();
+                        const total = cells[5].innerText.trim();
+                        const sale = cells[6].innerText.trim();
+                        const closing = cells[7].innerText.trim();
+
+                        data.push([
+                            index + 1,
+                            productName,
+                            productType,
+                            packingText,
+                            parseFloat(rate) || 0,
+                            parseInt(opening) || 0,
+                            parseInt(purchase) || 0,
+                            parseInt(total) || 0,
+                            parseInt(sale) || 0,
+                            parseInt(closing) || 0
+                        ]);
+                    }
+                });
+
+                // Empty row
+                data.push([]);
+
+                // Total Units Row
+                data.push([
+                    '',
+                    'TOTAL UNITS',
+                    '',
+                    '',
+                    '',
+                    parseInt(totalOpening.replace(/,/g, '')) || 0,
+                    parseInt(totalPurchase.replace(/,/g, '')) || 0,
+                    parseInt(totalTotal.replace(/,/g, '')) || 0,
+                    parseInt(totalSale.replace(/,/g, '')) || 0,
+                    parseInt(totalClosing.replace(/,/g, '')) || 0
+                ]);
+
+                // Total Amount Row
+                data.push([
+                    '',
+                    'TOTAL AMOUNT (₹)',
+                    '',
+                    '',
+                    '',
+                    parseFloat(totalOpeningAmt) || 0,
+                    parseFloat(totalPurchaseAmt) || 0,
+                    parseFloat(totalTotalAmt) || 0,
+                    parseFloat(totalSaleAmt) || 0,
+                    parseFloat(totalClosingAmt) || 0
+                ]);
+
+                // Create worksheet
+                const ws = XLSX.utils.aoa_to_sheet(data);
+
+                // Set column widths
+                ws['!cols'] = [
+                    { wch: 6 },   // Sr.
+                    { wch: 35 },  // Product Name
+                    { wch: 12 },  // Type
+                    { wch: 15 },  // Packing
+                    { wch: 12 },  // Rate
+                    { wch: 15 },  // Opening Stock
+                    { wch: 12 },  // Purchase
+                    { wch: 14 },  // Total Stock
+                    { wch: 16 },  // Secondary Sale
+                    { wch: 15 }   // Closing Stock
+                ];
+
+                // Styling
+                const range = XLSX.utils.decode_range(ws['!ref']);
+
+                // Style Company Name (A1)
+                if (ws['A1']) {
+                    ws['A1'].s = {
+                        font: { name: 'Calibri', sz: 18, bold: true, color: { rgb: "0F172A" } },
+                        alignment: { horizontal: 'center', vertical: 'center' }
+                    };
+                }
+
+                // Merge cells for company name
+                if (!ws['!merges']) ws['!merges'] = [];
+                ws['!merges'].push({ s: { r: 0, c: 0 }, e: { r: 0, c: 9 } });
+
+                // Style Report Title (A3)
+                if (ws['A3']) {
+                    ws['A3'].s = {
+                        font: { name: 'Calibri', sz: 14, bold: true, color: { rgb: "1E40AF" } },
+                        alignment: { horizontal: 'center', vertical: 'center' }
+                    };
+                }
+                ws['!merges'].push({ s: { r: 2, c: 0 }, e: { r: 2, c: 9 } });
+
+                // Style Report Details (Rows 5-8)
+                for (let row = 4; row <= 7; row++) {
+                    const cellA = ws[XLSX.utils.encode_cell({ r: row, c: 0 })];
+                    const cellB = ws[XLSX.utils.encode_cell({ r: row, c: 1 })];
+
+                    if (cellA) {
+                        cellA.s = {
+                            font: { bold: true, sz: 11 },
+                            alignment: { horizontal: 'right' }
+                        };
+                    }
+                    if (cellB) {
+                        cellB.s = {
+                            font: { sz: 11 },
+                            alignment: { horizontal: 'left' }
+                        };
+                    }
+                }
+
+                // Style Table Headers (Row 9)
+                const headerRow = 9;
+                for (let col = 0; col <= 9; col++) {
+                    const cell = ws[XLSX.utils.encode_cell({ r: headerRow, c: col })];
+                    if (cell) {
+                        cell.s = {
+                            font: { bold: true, sz: 11, color: { rgb: "FFFFFF" } },
+                            fill: { fgColor: { rgb: "0F172A" } },
+                            alignment: { horizontal: 'center', vertical: 'center' },
+                            border: {
+                                top: { style: 'thin', color: { rgb: "000000" } },
+                                bottom: { style: 'thin', color: { rgb: "000000" } },
+                                left: { style: 'thin', color: { rgb: "000000" } },
+                                right: { style: 'thin', color: { rgb: "000000" } }
+                            }
+                        };
+                    }
+                }
+
+                // Style Data Rows - Alternating colors
+                const dataStartRow = 10;
+                const dataEndRow = dataStartRow + rows.length - 1;
+
+                for (let row = dataStartRow; row <= dataEndRow; row++) {
+                    const isEven = (row - dataStartRow) % 2 === 0;
+                    for (let col = 0; col <= 9; col++) {
+                        const cell = ws[XLSX.utils.encode_cell({ r: row, c: col })];
+                        if (cell) {
+                            cell.s = {
+                                fill: { fgColor: { rgb: isEven ? "F8FAFC" : "FFFFFF" } },
+                                alignment: {
+                                    horizontal: col === 1 || col === 2 || col === 3 ? 'left' : col === 0 ? 'center' : 'right',
+                                    vertical: 'center'
+                                },
+                                border: {
+                                    top: { style: 'thin', color: { rgb: "E2E8F0" } },
+                                    bottom: { style: 'thin', color: { rgb: "E2E8F0" } },
+                                    left: { style: 'thin', color: { rgb: "E2E8F0" } },
+                                    right: { style: 'thin', color: { rgb: "E2E8F0" } }
+                                }
+                            };
+
+                            // Number formatting for currency and quantities
+                            if (col === 4) {
+                                cell.z = '₹#,##0.00';
+                            } else if (col >= 5 && col <= 9) {
+                                cell.z = '#,##0';
+                            }
+                        }
+                    }
+                }
+
+                // Style Total Rows
+                const totalUnitsRow = dataEndRow + 2;
+                const totalAmountRow = dataEndRow + 3;
+
+                for (let row of [totalUnitsRow, totalAmountRow]) {
+                    for (let col = 0; col <= 9; col++) {
+                        const cell = ws[XLSX.utils.encode_cell({ r: row, c: col })];
+                        if (cell) {
+                            cell.s = {
+                                font: { bold: true, sz: 11, color: { rgb: row === totalUnitsRow ? "1E40AF" : "059669" } },
+                                fill: { fgColor: { rgb: row === totalUnitsRow ? "DBEAFE" : "D1FAE5" } },
+                                alignment: { horizontal: col <= 1 ? 'left' : 'right', vertical: 'center' },
+                                border: {
+                                    top: { style: 'medium', color: { rgb: "000000" } },
+                                    bottom: { style: 'medium', color: { rgb: "000000" } },
+                                    left: { style: 'thin', color: { rgb: "000000" } },
+                                    right: { style: 'thin', color: { rgb: "000000" } }
+                                }
+                            };
+
+                            if (col >= 5 && col <= 9) {
+                                cell.z = row === totalAmountRow ? '₹#,##0.00' : '#,##0';
+                            }
+                        }
+                    }
+                }
+
+                // Add worksheet to workbook
+                XLSX.utils.book_append_sheet(wb, ws, 'Stock Ledger');
+
+                // Generate filename
+                const timestamp = new Date().toISOString().slice(0, 10);
+                const filename = `Stock_Ledger_${wholesalerName.replace(/\s+/g, '_')}_${timestamp}.xlsx`;
+
+                // Save file
+                XLSX.writeFile(wb, filename);
+
+                console.log('✅ Stock Ledger Excel exported successfully');
+                alert('✅ Stock Ledger exported successfully!');
+
+            } catch (error) {
+                console.error('❌ Stock Ledger Excel export error:', error);
+                alert('Failed to export Stock Ledger: ' + error.message);
+            }
+        }
+
+function exportEmployeePerformanceToExcel() {
+    try {
+        console.log('📊 Starting Employee Performance Excel export...');
+
+        // Get employee info
+        const subtitle = document.getElementById('empPerfSubtitle').innerText;
+        const parts = subtitle.split('•').map(p => p.trim());
+        const employeeName = parts[0] || 'N/A';
+        const employeeRole = parts[1] || 'N/A';
+        const year = parts[2]?.replace('Year ', '') || new Date().getFullYear();
+
+        // Get summary data
+        const totalTarget = document.getElementById('empPerfTotalTarget')?.innerText || '0';
+        const totalAchieved = document.getElementById('empPerfTotalAchieved')?.innerText || '0';
+        const overallPercent = document.getElementById('empPerfOverallPercent')?.innerText || '0%';
+
+        // Get table data
+        const tbody = document.getElementById('empPerfProductsBody');
+        const productRows = tbody.querySelectorAll('tr');
+        
+        if (productRows.length === 0) {
+            alert('No performance data available to export');
+            return;
+        }
+
+        console.log(`Found ${productRows.length} product rows`);
+
+        // Create workbook
+        const wb = XLSX.utils.book_new();
+        const data = [];
+        
+        // Company Header (Row 1)
+        data.push(['Titanic Pharmaceuticals']);
+        data.push([]);
+        
+        // Report Title (Row 3)
+        data.push(['EMPLOYEE PERFORMANCE ANALYSIS']);
+        data.push([]);
+        
+        // Report Details (Rows 5-9)
+        data.push(['Employee Name:', employeeName]);
+        data.push(['Role:', employeeRole]);
+        data.push(['Year:', year]);
+        data.push(['Overall Achievement:', `${totalAchieved} / ${totalTarget} (${overallPercent})`]);
+        data.push(['Generated On:', new Date().toLocaleString('en-IN', { 
+            day: '2-digit', 
+            month: 'short', 
+            year: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        })]);
+        data.push([]);
+        
+        // Table Headers - Row 1: Month Names (Row 11)
+        const monthNames = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+        const monthHeaderRow = ['Sr.', 'Product Name', 'Packing'];
+        monthNames.forEach(month => {
+            monthHeaderRow.push(month);
+            monthHeaderRow.push(''); // Placeholder for merge
+        });
+        monthHeaderRow.push('YEARLY TOTAL');
+        monthHeaderRow.push('');
+        monthHeaderRow.push('');
+        data.push(monthHeaderRow);
+        
+        // Table Headers - Row 2: Target/Achievement (Row 12)
+        const subHeaderRow = ['', '', ''];
+        for (let i = 0; i < 12; i++) {
+            subHeaderRow.push('Tgt.');
+            subHeaderRow.push('Ach.');
+        }
+        subHeaderRow.push('Target');
+        subHeaderRow.push('Achieved');
+        subHeaderRow.push('%');
+        data.push(subHeaderRow);
+        
+        // Product Data
+        let productIndex = 1;
+        productRows.forEach((row) => {
+            const cells = row.querySelectorAll('td');
+            
+            console.log(`Processing row with ${cells.length} cells`);
+            
+            // Skip if not enough cells (should have 26 cells total)
+            if (cells.length < 26) {
+                console.log('Skipping row - not enough cells');
+                return;
+            }
+            
+            // Get product info from first cell (index 0)
+            const productInfoCell = cells[0];
+            
+            // Find the nested divs within the product-info cell
+            const allDivs = productInfoCell.querySelectorAll('div');
+            let productName = '';
+            let packingText = '';
+            
+            // The structure has nested divs, we need to find the right ones
+            allDivs.forEach(div => {
+                const text = div.innerText?.trim() || '';
+                const classes = div.className || '';
+                
+                // Product name is in a div without specific identifying class but has the product name
+                // It's usually the first significant text
+                if (text && !classes.includes('product-badge') && !classes.includes('product-meta') && !productName) {
+                    // Check if this looks like a product name (not a number)
+                    if (isNaN(text.charAt(0))) {
+                        productName = text;
+                    }
+                }
+                
+                // Packing info - look for patterns like "4 ml" or similar
+                if (text && text.match(/\d+\s*(ml|l|mg|gram|kg|piece)/i)) {
+                    packingText = text.replace(/^[•\s]+/, '').trim();
+                }
+            });
+            
+            // Fallback: try to get text content directly
+            if (!productName) {
+                const textContent = productInfoCell.textContent || '';
+                const lines = textContent.split('\n').map(l => l.trim()).filter(l => l);
+                if (lines.length > 0) {
+                    productName = lines[0];
+                    if (lines.length > 1) {
+                        // Find line with packing info
+                        for (let i = 1; i < lines.length; i++) {
+                            if (lines[i].match(/\d+\s*(ml|l|mg|gram|kg|piece)/i)) {
+                                packingText = lines[i].replace(/^[•\s]+/, '').trim();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            console.log(`Product: ${productName}, Packing: ${packingText}`);
+            
+            if (!productName) {
+                console.log('Skipping row - no product name found');
+                return; // Skip rows without product names
+            }
+            
+            const rowData = [
+                productIndex++,
+                productName,
+                packingText || '-'
+            ];
+            
+            // Add monthly data (cells 1-24 contain the monthly target/achievement pairs)
+            for (let i = 1; i <= 24; i++) {
+                const cellValue = cells[i]?.innerText?.trim() || '0';
+                const numValue = parseInt(cellValue.replace(/,/g, '')) || 0;
+                rowData.push(numValue);
+            }
+            
+            // Get yearly total from cell 25
+            const yearlyTotalCell = cells[25];
+            let yearlyTarget = 0;
+            let yearlyAchieved = 0;
+            let yearlyPercent = '0';
+            
+            if (yearlyTotalCell) {
+                const yearlyText = yearlyTotalCell.innerText?.trim() || '';
+                console.log(`Yearly text: ${yearlyText}`);
+                
+                // Parse the format: "T: 165\nA: 695\n421%"
+                const lines = yearlyText.split('\n').map(l => l.trim());
+                
+                lines.forEach(line => {
+                    if (line.startsWith('T:')) {
+                        yearlyTarget = parseInt(line.replace('T:', '').replace(/,/g, '').trim()) || 0;
+                    } else if (line.startsWith('A:')) {
+                        yearlyAchieved = parseInt(line.replace('A:', '').replace(/,/g, '').trim()) || 0;
+                    } else if (line.includes('%')) {
+                        yearlyPercent = line.replace('%', '').trim();
+                    }
+                });
+            }
+            
+            console.log(`Yearly - Target: ${yearlyTarget}, Achieved: ${yearlyAchieved}, %: ${yearlyPercent}`);
+            
+            // Add yearly totals
+            rowData.push(yearlyTarget);
+            rowData.push(yearlyAchieved);
+            rowData.push(yearlyPercent + '%');
+            
+            data.push(rowData);
+        });
+        
+        console.log(`Total products added: ${productIndex - 1}`);
+        
+        if (productIndex === 1) {
+            alert('No product data found to export');
+            return;
+        }
+        
+        // Add empty row
+        data.push([]);
+        
+        // Add monthly totals row
+        const monthlyTotalsRow = ['', 'MONTHLY TOTALS', ''];
+        for (let month = 1; month <= 12; month++) {
+            const targetCell = document.getElementById(`perf-target-${month}`);
+            const achievedCell = document.getElementById(`perf-achieved-${month}`);
+            
+            const targetVal = parseInt(targetCell?.innerText.replace(/,/g, '') || '0');
+            const achievedVal = parseInt(achievedCell?.innerText.replace(/,/g, '') || '0');
+            
+            monthlyTotalsRow.push(targetVal);
+            monthlyTotalsRow.push(achievedVal);
+        }
+        
+        const yearlyTargetVal = document.getElementById('perf-yearly-target')?.innerText || '0';
+        const yearlyAchievedVal = document.getElementById('perf-yearly-achieved')?.innerText || '0';
+        
+        monthlyTotalsRow.push(parseInt(yearlyTargetVal.replace(/,/g, '')) || 0);
+        monthlyTotalsRow.push(parseInt(yearlyAchievedVal.replace(/,/g, '')) || 0);
+        monthlyTotalsRow.push(overallPercent);
+        
+        data.push(monthlyTotalsRow);
+
+        console.log(`Total rows in Excel: ${data.length}`);
+
+        // Create worksheet
+        const ws = XLSX.utils.aoa_to_sheet(data);
+
+        // Set column widths
+        const colWidths = [
+            { wch: 5 },   // Sr.
+            { wch: 35 },  // Product Name
+            { wch: 18 }   // Packing
+        ];
+        
+        // Add widths for monthly columns (Tgt/Ach pairs) - 24 columns
+        for (let i = 0; i < 24; i++) {
+            colWidths.push({ wch: 8 });
+        }
+        
+        // Add widths for yearly columns
+        colWidths.push({ wch: 12 }); // Yearly Target
+        colWidths.push({ wch: 12 }); // Yearly Achieved
+        colWidths.push({ wch: 10 }); // Achievement %
+        
+        ws['!cols'] = colWidths;
+
+        // Set row heights - ENHANCED
+        if (!ws['!rows']) ws['!rows'] = [];
+        ws['!rows'][0] = { hpt: 30 };  // Company name - taller
+        ws['!rows'][2] = { hpt: 28 };  // Report title - taller
+        ws['!rows'][10] = { hpt: 22 }; // Month header - taller
+        ws['!rows'][11] = { hpt: 20 }; // Sub header
+
+        // Merge cells setup
+        if (!ws['!merges']) ws['!merges'] = [];
+        
+        // Merge Company Name (A1 to AC1)
+        ws['!merges'].push({ s: { r: 0, c: 0 }, e: { r: 0, c: 28 } });
+        
+        // Merge Report Title (A3 to AC3)
+        ws['!merges'].push({ s: { r: 2, c: 0 }, e: { r: 2, c: 28 } });
+        
+        // Merge Sr. column for both header rows (A11:A12)
+        ws['!merges'].push({ s: { r: 10, c: 0 }, e: { r: 11, c: 0 } });
+        
+        // Merge Product Name column for both header rows (B11:B12)
+        ws['!merges'].push({ s: { r: 10, c: 1 }, e: { r: 11, c: 1 } });
+        
+        // Merge Packing column for both header rows (C11:C12)
+        ws['!merges'].push({ s: { r: 10, c: 2 }, e: { r: 11, c: 2 } });
+        
+        // Merge month names (each month spans 2 columns)
+        for (let i = 0; i < 12; i++) {
+            const startCol = 3 + (i * 2);
+            ws['!merges'].push({ s: { r: 10, c: startCol }, e: { r: 10, c: startCol + 1 } });
+        }
+        
+        // Merge Yearly Total header (spans 3 columns)
+        ws['!merges'].push({ s: { r: 10, c: 27 }, e: { r: 10, c: 29 } });
+
+        // ============================================================
+        // ENHANCED STYLING SECTION
+        // ============================================================
+        
+        // Style Company Name (A1) - ENHANCED
+        if (ws['A1']) {
+            ws['A1'].s = {
+                font: { 
+                    name: 'Calibri', 
+                    sz: 20,  // Larger
+                    bold: true, 
+                    color: { rgb: "1E293B" } 
+                },
+                alignment: { horizontal: 'center', vertical: 'center' },
+                fill: { fgColor: { rgb: "E0F2FE" } },  // Light blue background
+                border: {
+                    bottom: { style: 'thick', color: { rgb: "0284C7" } }
+                }
+            };
+        }
+        
+        // Style Report Title (A3) - ENHANCED
+        if (ws['A3']) {
+            ws['A3'].s = {
+                font: { 
+                    name: 'Calibri', 
+                    sz: 16,  // Larger
+                    bold: true, 
+                    color: { rgb: "FFFFFF" } 
+                },
+                alignment: { horizontal: 'center', vertical: 'center' },
+                fill: { fgColor: { rgb: "2563EB" } },  // Solid blue background
+                border: {
+                    top: { style: 'thin', color: { rgb: "1E40AF" } },
+                    bottom: { style: 'thin', color: { rgb: "1E40AF" } }
+                }
+            };
+        }
+        
+        // Style Report Details (Rows 5-9) - ENHANCED
+        for (let row = 4; row <= 8; row++) {
+            const cellA = ws[XLSX.utils.encode_cell({ r: row, c: 0 })];
+            const cellB = ws[XLSX.utils.encode_cell({ r: row, c: 1 })];
+            
+            if (cellA) {
+                cellA.s = {
+                    font: { 
+                        name: 'Calibri',
+                        bold: true, 
+                        sz: 11,
+                        color: { rgb: "475569" }
+                    },
+                    alignment: { horizontal: 'right', vertical: 'center' },
+                    fill: { fgColor: { rgb: "F1F5F9" } }
+                };
+            }
+            if (cellB) {
+                cellB.s = {
+                    font: { 
+                        name: 'Calibri',
+                        sz: 11,
+                        bold: row === 7,  // Bold for "Overall Achievement"
+                        color: { rgb: row === 7 ? "1E40AF" : "1E293B" }
+                    },
+                    alignment: { horizontal: 'left', vertical: 'center' },
+                    fill: { fgColor: { rgb: "FFFFFF" } }
+                };
+            }
+        }
+        
+        // Style Month Header Row (Row 11) - ENHANCED WITH VIBRANT COLORS
+        const monthColors = [
+            'EF4444', 'F97316', 'F59E0B', 'EAB308', '84CC16', '22C55E',
+            '10B981', '14B8A6', '06B6D4', '3B82F6', '6366F1', '8B5CF6'
+        ];
+        
+        for (let col = 0; col <= 29; col++) {
+            const cell = ws[XLSX.utils.encode_cell({ r: 10, c: col })];
+            if (cell) {
+                let bgColor = '1E293B'; // Darker blue for Sr., Product, Packing
+                
+                // Assign vibrant month colors
+                if (col >= 3 && col <= 26) {
+                    const monthIndex = Math.floor((col - 3) / 2);
+                    bgColor = monthColors[monthIndex];
+                } else if (col >= 27) {
+                    bgColor = '7C3AED'; // Purple for Yearly Total
+                }
+                
+                cell.s = {
+                    font: { 
+                        name: 'Calibri',
+                        bold: true, 
+                        sz: 11,  // Larger font
+                        color: { rgb: "FFFFFF" } 
+                    },
+                    fill: { fgColor: { rgb: bgColor } },
+                    alignment: { 
+                        horizontal: 'center',  // CENTER ALIGNED
+                        vertical: 'center',
+                        wrapText: false
+                    },
+                    border: {
+                        top: { style: 'medium', color: { rgb: "000000" } },
+                        bottom: { style: 'thin', color: { rgb: "FFFFFF" } },
+                        left: { style: 'thin', color: { rgb: "FFFFFF" } },
+                        right: { style: 'thin', color: { rgb: "FFFFFF" } }
+                    }
+                };
+            }
+        }
+        
+        // Style Sub-Header Row (Row 12 - Tgt./Ach.) - ENHANCED
+        for (let col = 0; col <= 29; col++) {
+            const cell = ws[XLSX.utils.encode_cell({ r: 11, c: col })];
+            if (cell) {
+                let bgColor = '334155'; // Slate gray for first columns
+                
+                // Assign slightly darker shades for sub-headers
+                if (col >= 3 && col <= 26) {
+                    const monthIndex = Math.floor((col - 3) / 2);
+                    const darkColors = [
+                        'DC2626', 'EA580C', 'D97706', 'CA8A04', '65A30D', '16A34A',
+                        '059669', '0D9488', '0891B2', '0284C7', '2563EB', '7C3AED'
+                    ];
+                    bgColor = darkColors[monthIndex];
+                } else if (col >= 27) {
+                    bgColor = '6D28D9'; // Darker purple
+                }
+                
+                cell.s = {
+                    font: { 
+                        name: 'Calibri',
+                        bold: true, 
+                        sz: 10,
+                        color: { rgb: "FFFFFF" } 
+                    },
+                    fill: { fgColor: { rgb: bgColor } },
+                    alignment: { 
+                        horizontal: 'center',  // CENTER ALIGNED
+                        vertical: 'center' 
+                    },
+                    border: {
+                        top: { style: 'thin', color: { rgb: "FFFFFF" } },
+                        bottom: { style: 'medium', color: { rgb: "000000" } },
+                        left: { style: 'thin', color: { rgb: "FFFFFF" } },
+                        right: { style: 'thin', color: { rgb: "FFFFFF" } }
+                    }
+                };
+            }
+        }
+        
+        // Style Data Rows - ENHANCED
+        const dataStartRow = 12;
+        const dataEndRow = 12 + (productIndex - 2);
+        
+        // Make data rows taller for better readability
+        for (let i = dataStartRow; i <= dataEndRow; i++) {
+            ws['!rows'][i] = { hpt: 18 };
+        }
+        
+        for (let row = dataStartRow; row <= dataEndRow; row++) {
+            const isEven = (row - dataStartRow) % 2 === 0;
+            for (let col = 0; col <= 29; col++) {
+                const cell = ws[XLSX.utils.encode_cell({ r: row, c: col })];
+                if (cell) {
+                    // Background colors with better contrast
+                    let bgColor = isEven ? "F8FAFC" : "FFFFFF";
+                    
+                    cell.s = {
+                        font: {
+                            name: 'Calibri',
+                            sz: col <= 2 ? 10 : 9,  // Larger for product info
+                            bold: col === 1,  // Bold product names
+                            color: { rgb: col === 1 ? "0F172A" : "334155" }
+                        },
+                        fill: { fgColor: { rgb: bgColor } },
+                        alignment: { 
+                            horizontal: col === 0 ? 'center' : col <= 2 ? 'left' : col === 29 ? 'center' : 'right',
+                            vertical: 'center',
+                            wrapText: col === 1  // Wrap product names
+                        },
+                        border: {
+                            top: { style: 'thin', color: { rgb: "E2E8F0" } },
+                            bottom: { style: 'thin', color: { rgb: "E2E8F0" } },
+                            left: { style: 'thin', color: { rgb: "E2E8F0" } },
+                            right: { style: 'thin', color: { rgb: "E2E8F0" } }
+                        }
+                    };
+                    
+                    // Number formatting for numeric columns
+                    if (col >= 3 && col <= 28) {
+                        cell.z = '#,##0';
+                    }
+                }
+            }
+        }
+        
+        // Style Monthly Totals Row - ENHANCED
+        const totalRow = dataEndRow + 2;
+        for (let col = 0; col <= 29; col++) {
+            const cell = ws[XLSX.utils.encode_cell({ r: totalRow, c: col })];
+            if (cell) {
+                cell.s = {
+                    font: { 
+                        name: 'Calibri',
+                        bold: true, 
+                        sz: 11, 
+                        color: { rgb: "FFFFFF" } 
+                    },
+                    fill: { fgColor: { rgb: "1E40AF" } },
+                    alignment: { 
+                        horizontal: col <= 2 ? 'left' : col === 29 ? 'center' : 'right', 
+                        vertical: 'center' 
+                    },
+                    border: {
+                        top: { style: 'medium', color: { rgb: "000000" } },
+                        bottom: { style: 'medium', color: { rgb: "000000" } },
+                        left: { style: 'thin', color: { rgb: "000000" } },
+                        right: { style: 'thin', color: { rgb: "000000" } }
+                    }
+                };
+                
+                if (col >= 3 && col <= 28) {
+                    cell.z = '#,##0';
+                }
+            }
+        }
+
+        // Add worksheet to workbook
+        XLSX.utils.book_append_sheet(wb, ws, 'Performance Analysis');
+
+        // Generate filename
+        const timestamp = new Date().toISOString().slice(0, 10);
+        const filename = `Employee_Performance_${employeeName.replace(/\s+/g, '_')}_${year}_${timestamp}.xlsx`;
+
+        // Save file
+        XLSX.writeFile(wb, filename);
+
+        console.log('✅ Employee Performance Excel exported successfully');
+        alert('✅ Employee Performance exported successfully!');
+
+    } catch (error) {
+        console.error('❌ Employee Performance Excel export error:', error);
+        console.error('Stack:', error.stack);
+        alert('Failed to export Employee Performance: ' + error.message);
+    }
+}
+
     </script>
 </body>
 
